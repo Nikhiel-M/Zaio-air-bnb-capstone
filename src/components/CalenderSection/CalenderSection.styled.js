@@ -56,9 +56,7 @@ flex-direction: column;
 export const CalendarModal = styled.div`
 position: absolute;
 z-index: 1000;
-top: 100%;
 left: 0;
-margin-top: 10px;
 width: max-content;
 min-width: 350px;
 `;

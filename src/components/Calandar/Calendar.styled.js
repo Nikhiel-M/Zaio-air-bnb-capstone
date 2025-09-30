@@ -5,7 +5,7 @@ export const CalendarSection = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  margin-top: 8rem;
+  margin-top: 2rem;
 
 button {
 	font: inherit;

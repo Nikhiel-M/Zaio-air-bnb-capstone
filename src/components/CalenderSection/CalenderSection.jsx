@@ -148,29 +148,34 @@ const CalenderSection = () => {
           <h2 className="subtitle">Select a location</h2> 
         </DateContainer>
         
-        <DateContainer onClick={toggleCheckinCalendar}> 
+        <DateContainer> 
           <h1 className="calender-title" > Check-in </h1> 
-          <h2 className="subtitle" >
+          <h2 className="subtitle" onClick={toggleCheckinCalendar}>
             {formatDate(checkinDate)}
           </h2>
           
-          {/* Check-in calendar positioned below this container */}
           {isCalendarOpen && (
-            <CalendarModal ref={calendarRef}>
+            <CalendarModal 
+              ref={calendarRef}
+              onClick={(e) => e.stopPropagation()}
+            >
               <CalendarComponent onDateSelect={handleCheckinDateSelect} />
             </CalendarModal>
           )}
         </DateContainer>
         
-        <DateContainer onClick={toggleCheckoutCalendar}> 
+        <DateContainer> 
           <h1 className="calender-title" > Check-out </h1> 
-          <h2 className="subtitle" >
+          <h2 className="subtitle" onClick={toggleCheckoutCalendar}>
             {formatDate(checkoutDate)}
           </h2>
           
           {/* Check-out calendar positioned below this container */}
           {isCheckoutCalendarOpen && (
-            <CalendarModal ref={checkoutCalendarRef}>
+            <CalendarModal 
+              ref={checkoutCalendarRef}
+              onClick={(e) => e.stopPropagation()}
+            >
               <CalendarComponent 
                 onDateSelect={handleCheckoutDateSelect} 
                 minDate={checkinDate}
@@ -180,14 +185,17 @@ const CalenderSection = () => {
           )}
         </DateContainer>
         
-        <DateContainer onClick={toggleGuestDropdown}> 
+        <DateContainer> 
           <h1 className="calender-title"> Guests </h1> 
-          <h2 className="subtitle" >
+          <h2 className="subtitle" onClick={toggleGuestDropdown}>
             {getGuestText()}
           </h2>
           
           {isGuestDropdownOpen && (
-            <GuestDropdownModal ref={guestDropdownRef}>
+            <GuestDropdownModal 
+              ref={guestDropdownRef}
+              onClick={(e) => e.stopPropagation()}
+            >
               <GuestSection>
                 <GuestRow>
                   <GuestInfo>
@@ -196,12 +204,18 @@ const CalenderSection = () => {
                   </GuestInfo>
                   <GuestControls>
                     <GuestButton 
-                      onClick={() => updateGuestCount('adults', 'decrement')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateGuestCount('adults', 'decrement');
+                      }}
                       disabled={guests.adults <= 1}
                     >-</GuestButton>
                     <GuestCount>{guests.adults}</GuestCount>
                     <GuestButton 
-                      onClick={() => updateGuestCount('adults', 'increment')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateGuestCount('adults', 'increment');
+                      }}
                       disabled={guests.adults >= 16}
                     >+</GuestButton>
                   </GuestControls>
@@ -216,12 +230,18 @@ const CalenderSection = () => {
                   </GuestInfo>
                   <GuestControls>
                     <GuestButton 
-                      onClick={() => updateGuestCount('children', 'decrement')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateGuestCount('children', 'decrement');
+                      }}
                       disabled={guests.children <= 0}
                     >-</GuestButton>
                     <GuestCount>{guests.children}</GuestCount>
                     <GuestButton 
-                      onClick={() => updateGuestCount('children', 'increment')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateGuestCount('children', 'increment');
+                      }}
                       disabled={guests.children >= 5}
                     >+</GuestButton>
                   </GuestControls>
@@ -236,12 +256,18 @@ const CalenderSection = () => {
                   </GuestInfo>
                   <GuestControls>
                     <GuestButton 
-                      onClick={() => updateGuestCount('infants', 'decrement')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateGuestCount('infants', 'decrement');
+                      }}
                       disabled={guests.infants <= 0}
                     >-</GuestButton>
                     <GuestCount>{guests.infants}</GuestCount>
                     <GuestButton 
-                      onClick={() => updateGuestCount('infants', 'increment')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateGuestCount('infants', 'increment');
+                      }}
                       disabled={guests.infants >= 5}
                     >+</GuestButton>
                   </GuestControls>
@@ -249,7 +275,10 @@ const CalenderSection = () => {
               </GuestSection>
               
               <DoneButtonContainer>
-                <DoneButton onClick={toggleGuestDropdown}>
+                <DoneButton onClick={(e) => {
+                  e.stopPropagation();
+                  toggleGuestDropdown();
+                }}>
                   Done
                 </DoneButton>
               </DoneButtonContainer>
