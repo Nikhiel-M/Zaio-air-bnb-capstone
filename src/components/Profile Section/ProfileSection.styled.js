@@ -2,8 +2,12 @@ import styled from "styled-components";
 
 
 export const ProfileSectionContainer = styled.div`
-.profile-section{
-    
+.host-title{
+    font-size: 1.3rem;
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
 }
 `
 

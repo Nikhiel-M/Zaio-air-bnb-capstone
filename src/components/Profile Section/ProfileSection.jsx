@@ -21,7 +21,7 @@ const ProfileSection = () => {
   return (
     <ProfileSectionContainer>
       <Container className="profile-section">
-        <h2>Become a host</h2>
+        <h2 className="host-title">Become a host</h2>
 
         <WorldIconContainer>
           <TbWorld className="world-icon" />
