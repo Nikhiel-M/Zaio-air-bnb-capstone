@@ -1,6 +1,19 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { CalenderContainer, DateContainer } from "./CalenderSection.styled";
+import { 
+  CalenderContainer, 
+  DateContainer, 
+  CalendarModal, 
+  GuestDropdownModal,
+  GuestSection,
+  GuestRow,
+  GuestInfo,
+  GuestControls,
+  GuestButton,
+  GuestCount,
+  DoneButton,
+  DoneButtonContainer
+} from "./CalenderSection.styled";
 import { FaSearch } from 'react-icons/fa';
 import CalendarComponent from '../Calandar/Calendar';
 
@@ -44,10 +57,8 @@ const CalenderSection = () => {
         }
       };
 
-      // Add event listener
       document.addEventListener('mousedown', handleClickOutside);
       
-      // Cleanup
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
@@ -55,40 +66,39 @@ const CalenderSection = () => {
     
     const toggleCheckinCalendar = () => {
       setIsCalendarOpen(!isCalendarOpen);
-      // Close other dropdowns
+
       if (isCheckoutCalendarOpen) setIsCheckoutCalendarOpen(false);
       if (isGuestDropdownOpen) setIsGuestDropdownOpen(false);
     }
     
     const toggleCheckoutCalendar = () => {
       setIsCheckoutCalendarOpen(!isCheckoutCalendarOpen);
-      // Close other dropdowns
+
       if (isCalendarOpen) setIsCalendarOpen(false);
       if (isGuestDropdownOpen) setIsGuestDropdownOpen(false);
     }
     
     const toggleGuestDropdown = () => {
       setIsGuestDropdownOpen(!isGuestDropdownOpen);
-      // Close other dropdowns
+
       if (isCalendarOpen) setIsCalendarOpen(false);
       if (isCheckoutCalendarOpen) setIsCheckoutCalendarOpen(false);
     }
     
     const handleCheckinDateSelect = (date) => {
       setCheckinDate(date);
-      setIsCalendarOpen(false); // Close calendar after selection
+      setIsCalendarOpen(false);
       
-      // If checkout date is before checkin date, clear it
       if (checkoutDate && new Date(checkoutDate) <= new Date(date)) {
         setCheckoutDate(null);
       }
     }
     
     const handleCheckoutDateSelect = (date) => {
-      // Only allow checkout dates after checkin date
+
       if (checkinDate && new Date(date) > new Date(checkinDate)) {
         setCheckoutDate(date);
-        setIsCheckoutCalendarOpen(false); // Close calendar after selection
+        setIsCheckoutCalendarOpen(false);
       }
     }
     
@@ -138,207 +148,117 @@ const CalenderSection = () => {
           <h2 className="subtitle">Select a location</h2> 
         </DateContainer>
         
-        <DateContainer> 
-          <h1 className="calender-title"> Check-in </h1> 
-          <h2 className="subtitle" onClick={toggleCheckinCalendar} style={{cursor: 'pointer'}}>
+        <DateContainer onClick={toggleCheckinCalendar}> 
+          <h1 className="calender-title" > Check-in </h1> 
+          <h2 className="subtitle" >
             {formatDate(checkinDate)}
-          </h2> 
+          </h2>
+          
+          {/* Check-in calendar positioned below this container */}
+          {isCalendarOpen && (
+            <CalendarModal ref={calendarRef}>
+              <CalendarComponent onDateSelect={handleCheckinDateSelect} />
+            </CalendarModal>
+          )}
         </DateContainer>
         
-        <DateContainer> 
-          <h1 className="calender-title"> Check-out </h1> 
-          <h2 className="subtitle" onClick={toggleCheckoutCalendar} style={{cursor: 'pointer'}}>
+        <DateContainer onClick={toggleCheckoutCalendar}> 
+          <h1 className="calender-title" > Check-out </h1> 
+          <h2 className="subtitle" >
             {formatDate(checkoutDate)}
-          </h2> 
+          </h2>
+          
+          {/* Check-out calendar positioned below this container */}
+          {isCheckoutCalendarOpen && (
+            <CalendarModal ref={checkoutCalendarRef}>
+              <CalendarComponent 
+                onDateSelect={handleCheckoutDateSelect} 
+                minDate={checkinDate}
+                isCheckout={true}
+              />
+            </CalendarModal>
+          )}
         </DateContainer>
         
-        <DateContainer> 
+        <DateContainer onClick={toggleGuestDropdown}> 
           <h1 className="calender-title"> Guests </h1> 
-          <h2 className="subtitle" onClick={toggleGuestDropdown} style={{cursor: 'pointer'}}>
+          <h2 className="subtitle" >
             {getGuestText()}
           </h2>
+          
+          {isGuestDropdownOpen && (
+            <GuestDropdownModal ref={guestDropdownRef}>
+              <GuestSection>
+                <GuestRow>
+                  <GuestInfo>
+                    <h3>Adults</h3>
+                    <p>Ages 13 or above</p>
+                  </GuestInfo>
+                  <GuestControls>
+                    <GuestButton 
+                      onClick={() => updateGuestCount('adults', 'decrement')}
+                      disabled={guests.adults <= 1}
+                    >-</GuestButton>
+                    <GuestCount>{guests.adults}</GuestCount>
+                    <GuestButton 
+                      onClick={() => updateGuestCount('adults', 'increment')}
+                      disabled={guests.adults >= 16}
+                    >+</GuestButton>
+                  </GuestControls>
+                </GuestRow>
+              </GuestSection>
+              
+              <GuestSection>
+                <GuestRow>
+                  <GuestInfo>
+                    <h3>Children</h3>
+                    <p>Ages 2-12</p>
+                  </GuestInfo>
+                  <GuestControls>
+                    <GuestButton 
+                      onClick={() => updateGuestCount('children', 'decrement')}
+                      disabled={guests.children <= 0}
+                    >-</GuestButton>
+                    <GuestCount>{guests.children}</GuestCount>
+                    <GuestButton 
+                      onClick={() => updateGuestCount('children', 'increment')}
+                      disabled={guests.children >= 5}
+                    >+</GuestButton>
+                  </GuestControls>
+                </GuestRow>
+              </GuestSection>
+              
+              <GuestSection>
+                <GuestRow>
+                  <GuestInfo>
+                    <h3>Infants</h3>
+                    <p>Under 2</p>
+                  </GuestInfo>
+                  <GuestControls>
+                    <GuestButton 
+                      onClick={() => updateGuestCount('infants', 'decrement')}
+                      disabled={guests.infants <= 0}
+                    >-</GuestButton>
+                    <GuestCount>{guests.infants}</GuestCount>
+                    <GuestButton 
+                      onClick={() => updateGuestCount('infants', 'increment')}
+                      disabled={guests.infants >= 5}
+                    >+</GuestButton>
+                  </GuestControls>
+                </GuestRow>
+              </GuestSection>
+              
+              <DoneButtonContainer>
+                <DoneButton onClick={toggleGuestDropdown}>
+                  Done
+                </DoneButton>
+              </DoneButtonContainer>
+            </GuestDropdownModal>
+          )}
         </DateContainer>
         
         <FaSearch className="search-icon" />
       </CalenderContainer>
-      
-      {/* Show calendar when check-in is clicked */}
-      {isCalendarOpen && (
-        <div 
-          ref={calendarRef}
-          style={{
-            position: 'absolute', 
-            zIndex: 1000, 
-            top: '100%', 
-            left: '50%', 
-            transform: 'translateX(-50%)',
-            marginTop: '10px'
-          }}
-        >
-          <CalendarComponent onDateSelect={handleCheckinDateSelect} />
-        </div>
-      )}
-      
-      {/* Show calendar when check-out is clicked */}
-      {isCheckoutCalendarOpen && (
-        <div 
-          ref={checkoutCalendarRef}
-          style={{
-            position: 'absolute', 
-            zIndex: 1000, 
-            top: '100%', 
-            left: '50%', 
-            transform: 'translateX(-50%)',
-            marginTop: '10px'
-          }}
-        >
-          <CalendarComponent 
-            onDateSelect={handleCheckoutDateSelect} 
-            minDate={checkinDate}
-            isCheckout={true}
-          />
-        </div>
-      )}
-      
-      {/* Guest dropdown */}
-      {isGuestDropdownOpen && (
-        <div 
-          ref={guestDropdownRef}
-          style={{
-            position: 'absolute', 
-            zIndex: 1000, 
-            top: '100%', 
-            right: '60px',
-            marginTop: '10px',
-            backgroundColor: 'white',
-            borderRadius: '16px',
-            padding: '24px',
-            boxShadow: '0 2px 16px rgba(0, 0, 0, 0.15)',
-            minWidth: '320px'
-          }}
-        >
-          <div style={{marginBottom: '20px'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
-              <div>
-                <h3 style={{margin: '0', fontSize: '16px', fontWeight: '600', color: '#222'}}>Adults</h3>
-                <p style={{margin: '0', fontSize: '14px', color: '#717171'}}>Ages 13 or above</p>
-              </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-                <button 
-                  onClick={() => updateGuestCount('adults', 'decrement')}
-                  disabled={guests.adults <= 1}
-                  style={{
-                    width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ddd',
-                    backgroundColor: guests.adults <= 1 ? '#f7f7f7' : 'white',
-                    color: guests.adults <= 1 ? '#ccc' : '#222',
-                    cursor: guests.adults <= 1 ? 'not-allowed' : 'pointer',
-                    fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >-</button>
-                <span style={{minWidth: '20px', textAlign: 'center', fontSize: '16px'}}>{guests.adults}</span>
-                <button 
-                  onClick={() => updateGuestCount('adults', 'increment')}
-                  disabled={guests.adults >= 16}
-                  style={{
-                    width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ddd',
-                    backgroundColor: guests.adults >= 16 ? '#f7f7f7' : 'white',
-                    color: guests.adults >= 16 ? '#ccc' : '#222',
-                    cursor: guests.adults >= 16 ? 'not-allowed' : 'pointer',
-                    fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >+</button>
-              </div>
-            </div>
-          </div>
-          
-          <div style={{marginBottom: '20px'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
-              <div>
-                <h3 style={{margin: '0', fontSize: '16px', fontWeight: '600', color: '#222'}}>Children</h3>
-                <p style={{margin: '0', fontSize: '14px', color: '#717171'}}>Ages 2-12</p>
-              </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-                <button 
-                  onClick={() => updateGuestCount('children', 'decrement')}
-                  disabled={guests.children <= 0}
-                  style={{
-                    width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ddd',
-                    backgroundColor: guests.children <= 0 ? '#f7f7f7' : 'white',
-                    color: guests.children <= 0 ? '#ccc' : '#222',
-                    cursor: guests.children <= 0 ? 'not-allowed' : 'pointer',
-                    fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >-</button>
-                <span style={{minWidth: '20px', textAlign: 'center', fontSize: '16px'}}>{guests.children}</span>
-                <button 
-                  onClick={() => updateGuestCount('children', 'increment')}
-                  disabled={guests.children >= 5}
-                  style={{
-                    width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ddd',
-                    backgroundColor: guests.children >= 5 ? '#f7f7f7' : 'white',
-                    color: guests.children >= 5 ? '#ccc' : '#222',
-                    cursor: guests.children >= 5 ? 'not-allowed' : 'pointer',
-                    fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >+</button>
-              </div>
-            </div>
-          </div>
-          
-          <div style={{marginBottom: '20px'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
-              <div>
-                <h3 style={{margin: '0', fontSize: '16px', fontWeight: '600', color: '#222'}}>Infants</h3>
-                <p style={{margin: '0', fontSize: '14px', color: '#717171'}}>Under 2</p>
-              </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-                <button 
-                  onClick={() => updateGuestCount('infants', 'decrement')}
-                  disabled={guests.infants <= 0}
-                  style={{
-                    width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ddd',
-                    backgroundColor: guests.infants <= 0 ? '#f7f7f7' : 'white',
-                    color: guests.infants <= 0 ? '#ccc' : '#222',
-                    cursor: guests.infants <= 0 ? 'not-allowed' : 'pointer',
-                    fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >-</button>
-                <span style={{minWidth: '20px', textAlign: 'center', fontSize: '16px'}}>{guests.infants}</span>
-                <button 
-                  onClick={() => updateGuestCount('infants', 'increment')}
-                  disabled={guests.infants >= 5}
-                  style={{
-                    width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ddd',
-                    backgroundColor: guests.infants >= 5 ? '#f7f7f7' : 'white',
-                    color: guests.infants >= 5 ? '#ccc' : '#222',
-                    cursor: guests.infants >= 5 ? 'not-allowed' : 'pointer',
-                    fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >+</button>
-              </div>
-            </div>
-          </div>
-          
-          <div style={{borderTop: '1px solid #ddd', paddingTop: '16px'}}>
-            <button 
-              onClick={toggleGuestDropdown}
-              style={{
-                width: '100%',
-                padding: '12px',
-                backgroundColor: '#222',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
-            >
-              Done
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 };
