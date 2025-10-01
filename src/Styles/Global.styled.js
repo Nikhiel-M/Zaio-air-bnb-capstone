@@ -10,10 +10,6 @@ import { createGlobalStyle } from "styled-components";
    font-style: normal;
  }
 
- body {
-   background-color: black;
-   color: white;
- }
 
 `;
  

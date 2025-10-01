@@ -3,13 +3,12 @@ import styled from "styled-components";
 export const FooterContainer = styled.footer`
 bottom: 0;
 width: 100%;
-position: fixed;
+position: relative;
 background-color: #f9fafb;
 color: black;
 display: flex;
 flex-direction: row;
-border-bottom: 1px solid lightgray;
-padding: 3rem 3rem;
+padding: 3rem 3rem 1rem 3rem;
 
 `
 
@@ -19,6 +18,7 @@ color: black;
 display: flex;
 flex-direction: column;
 border-bottom: 1px solid lightgray;
+padding-bottom: 1rem;
 `
 export const FooterTitle = styled.h2`
 font-weight: 500;
@@ -32,7 +32,7 @@ font-size: 1rem;
 `
 export const Kicker = styled.div`
 width: 100%;
-position: absolute;
+position: relative;
 bottom: 0;
 background-color: #f9fafb;
 display: flex;

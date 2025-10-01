@@ -7,9 +7,10 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: hsla(0, 0%, 0%, 0.28);
-  position: fixed;
+  position:relative;
   top: 0;
+  background-color: black;
+  color: white;
   
   .logo {
     margin-top: 1%;

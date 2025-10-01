@@ -6,10 +6,10 @@ import {
   FooterSubtitle,
   Kicker,
 } from "./Footer.styled";
-import { TbWorld } from 'react-icons/tb';
-import { FiDollarSign } from 'react-icons/fi';
-import { BsFacebook, BsTwitterX } from 'react-icons/bs';
-import { FaInstagram } from 'react-icons/fa';
+import { TbWorld } from "react-icons/tb";
+import { FiDollarSign } from "react-icons/fi";
+import { BsFacebook, BsTwitterX } from "react-icons/bs";
+import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
@@ -52,8 +52,13 @@ const Footer = () => {
         </FooterSection>
       </FooterContainer>
       <Kicker>
-       <div className="left"> © 2022 Airbnb, Inc. Privacy Terms Sitemap </div>
-       <div className="right"> <TbWorld className="icon" /> English  <FiDollarSign className="icon" /> USD  <BsFacebook className="icon" /> <BsTwitterX className="icon" /> <FaInstagram className="icon" /> </div>
+        <div className="left"> © 2022 Airbnb, Inc. Privacy Terms Sitemap </div>
+        <div className="right">
+          {" "}
+          <TbWorld className="icon" /> English <FiDollarSign className="icon" />{" "}
+          USD <BsFacebook className="icon" /> <BsTwitterX className="icon" />{" "}
+          <FaInstagram className="icon" />{" "}
+        </div>
       </Kicker>
     </>
   );
