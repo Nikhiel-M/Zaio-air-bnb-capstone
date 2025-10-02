@@ -8,9 +8,11 @@ import {
   CardBody
 } from "../Cards/Cards.styled";
 import { Title } from "../../Styles/General.styled";
+import LargeCards from './LargeCards';
 
 const Cards = () => {
   return (
+    <>
     <CardBody>
       <Title className='card-title'>Inspiration for your next trip </Title>
       <div className="cards">
@@ -67,6 +69,9 @@ const Cards = () => {
           </CardContainer>
         </div>
       </CardBody>
+       
+      <LargeCards />
+      </>
 )
 }
 
