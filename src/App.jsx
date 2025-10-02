@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import {GiftCards} from './components/Cards/GiftCards'
 import {HostingSection} from './components//HostingSection/HostingSection'
+import { FutureGetaway } from './components/FutureGetaways/FutureGetaway'
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     <Cards />
     <GiftCards />
     <HostingSection />
-
+    <FutureGetaway />
     <Footer />
     </>
   )
