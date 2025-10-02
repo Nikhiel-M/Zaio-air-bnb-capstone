@@ -21,7 +21,7 @@ justify-content: center;
 
 .body-image{
     width: 100%;
-    height: 100%;
+    height: 90%;
     border-radius: 12px;
 }
 `;
@@ -52,3 +52,4 @@ gap: 1rem;
     margin-top: 0.5rem;
 }
 `;
+

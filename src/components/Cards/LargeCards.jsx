@@ -40,6 +40,7 @@ const LargeCards = () => {
         </TitleOverlay>
       </ImageWrapper>
       </LargeCardsContainer>
+
     </CardOrganizer>
   );
 };
