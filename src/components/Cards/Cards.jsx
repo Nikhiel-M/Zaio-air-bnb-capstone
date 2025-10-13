@@ -35,7 +35,7 @@ const Cards = () => {
               alt="Card Image"
             />
             <CardContent>
-              <CardTitle>1-Bed Loft Apartment </CardTitle>
+              <CardTitle>Loft Apartment </CardTitle>
               <CardDescription>
                 Entire loft in Johannesburg, South Africa
               </CardDescription>

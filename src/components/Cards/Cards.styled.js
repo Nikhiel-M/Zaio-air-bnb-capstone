@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardBody = styled.p`
+export const CardBody = styled.div`
  
  .cards{
     display: flex;
@@ -27,6 +27,7 @@ export const CardContainer = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 3rem;
   max-width: 400px;
+  background-color: #f23030ff;
 `;
 
 export const CardImage = styled.img`
@@ -43,11 +44,12 @@ export const CardContent = styled.div`
 export const CardTitle = styled.h2`
   font-size: 1.5rem;
   margin: 0 0 8px;
+  color: white;
 `;
 
 export const CardDescription = styled.p`
   font-size: 1rem;
-  color: #666;
+  color: white;
 `;
 
 
