@@ -28,11 +28,13 @@ const authRoutes = require('./routes/auth');
 const propertyRoutes = require('./routes/properties');
 const bookingRoutes = require('./routes/bookings');
 const userRoutes = require('./routes/users');
+const locationRoutes = require('./routes/Locations')
 
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/locations', locationRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

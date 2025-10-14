@@ -28,10 +28,11 @@ export const GetawayHeader = styled.h1`
   color: gray;
   padding: 1rem 1rem 0.5rem 1rem;
   cursor: pointer;
+  transition: all 0.2s ease;
 
-  &:hover{
+  &:hover, &.active {
     color: black;
-    border-bottom: 1px solid #e74a4aff;
+    border-bottom: 2px solid #e74a4aff;
   }
 `;
 
