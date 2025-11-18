@@ -22,7 +22,6 @@ router.get('/properties/all', async (req, res) => {
   }
 });
 
-
 // GET locations for a specific country
 router.get('/country/:country', async (req, res) => {
   try {

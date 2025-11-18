@@ -24,7 +24,7 @@ A RESTful API backend for an Airbnb clone built with Node.js, Express.js, and Mo
 - `PUT /api/users/profile` - Update user profile
 - `PUT /api/users/change-password` - Change password
 - `PATCH /api/users/become-host` - Become a host
-- `GET /api/users/:id/public` - Get public user profile
+<!-- - `GET /api/users/:id/public` - Get public user profile -->
 
 ### Properties
 - `GET /api/properties` - Get all properties (with filtering)
