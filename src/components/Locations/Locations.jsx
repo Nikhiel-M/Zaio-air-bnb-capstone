@@ -10,12 +10,13 @@ import {
   LocationReview
 } from "./Locations.styled";
 import { FaStar } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 
 const Locations = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Replace direct process.env access with a safe getter for Vite (import.meta.env) or CRA (process.env)
   const getApiBase = () => {
@@ -77,7 +78,11 @@ const Locations = () => {
         ].filter(Boolean).join(" · ");
 
         return (
-          <LocationsCard key={p._id || p.id || p.title}>
+          <LocationsCard
+            key={p._id || p.id || p.title}
+            onClick={() => navigate(`/booking/${p._id}`)}
+            style={{ cursor: "pointer" }}
+          >
             <LocationsInformationContainer>
               <LocationImage src={img} />
               <LocationDetails>

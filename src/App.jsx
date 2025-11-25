@@ -21,7 +21,6 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/locations" element={<Locations />} />
-        <Route path="/booking" element={<BookingPage />} />
         <Route path="/booking/:propertyId" element={<BookingPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
