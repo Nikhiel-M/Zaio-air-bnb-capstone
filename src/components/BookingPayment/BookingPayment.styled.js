@@ -1,4 +1,19 @@
 import styled from "styled-components";
+import { Title, Subtitle } from "../../Styles/General.styled";
+
+export const BookingTitle = styled(Title)`
+    color: black;
+    padding-right: 5rem;
+    font-size: 2rem;
+`;
+
+export const BookingSubtitle = styled(Subtitle)`
+    font-size: 1rem;
+    color: gray;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+`;
 
 export const BookingPaymentContainer = styled.div`
 display: flex;
@@ -9,6 +24,29 @@ width: fit-content;
 border-radius: 8px;
 border: 1px solid lightgray;
 
+.reserve-button{
+  margin: 0 1rem 1rem 15%;
+  background-color: #e74a4aff;
+  color: white;
+  width: 70%;
+
+  &:hover{
+    transform: 0;
+  }
+  &:active{
+    transform: 0;
+  }
+
+  &:hover{
+  background-color:  #f33d3dff;
+
+};}
+
+.guests-subtitle{
+display: flex;
+justify-content: center;
+font-size: 0.8rem;
+}
 
 `;
 export const BookingPaymentHeader = styled.div`
@@ -17,20 +55,6 @@ font-size: 1.5rem;
 justify-content: space-between;
 padding: 1rem;
 
-
-.title{
-    color: black;
-    padding-right: 5rem;
-    font-size: 2rem;
-}
-
-.subtitle{
-    font-size: 1rem;
-    color: gray;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
 `;
 
 export const BookingContainer = styled.div`
@@ -39,6 +63,7 @@ flex-direction: column;
 border: 1px solid lightgray;
 border-radius: 8px;
 margin: 1rem;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 `;
 
@@ -73,47 +98,7 @@ export const GuestsDropdown = styled.div`
   display: flex;
   width: 220px;
   margin-top: 8px;
-`;
 
-/* Button that shows current selection */
-export const DropdownButton = styled.button`
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid lightgray;
-  background: white;
-  text-align: left;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-`;
 
-/* The absolute list shown when open */
-export const DropdownList = styled.div`
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  background: #fff;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  border-radius: 6px;
-  z-index: 20;
-  min-width: 160px;
-  padding: 8px;
-`;
-
-/* Individual item */
-export const DropdownItem = styled.div`
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  color: #111;
-  &:hover {
-    background: #f1f5f9;
-  }
-  &.active {
-    background: #eef2ff;
-    font-weight: 600;
-  }
 `;
 

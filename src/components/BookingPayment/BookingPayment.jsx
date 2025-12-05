@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from "react";
 import {
   BookingContainer,
   BookingCalendarContainer,
@@ -8,15 +8,13 @@ import {
   BookingCheckOut,
   BookingGuests,
   GuestsDropdown,
-  DropdownButton,
-  DropdownList,
-  DropdownItem
-} from './BookingPayment.styled'
-import { Title, Subtitle } from '../../Styles/General.styled'
+  BookingTitle,
+  BookingSubtitle,
+} from "./BookingPayment.styled";
 import { GoStarFill } from "react-icons/go";
-import GuestsSelector from '../GeneralComponents/GuestsSelector/GuestsSelector';
-
-
+import GuestsSelector from "../GeneralComponents/GuestsSelector/GuestsSelector";
+import { PillButton } from "../Buttons/PillButton.styled";
+import GuestsPayment from "../GeneralComponents/GuestsPayment/GuestsPayment";
 
 const BookingPayment = ({ property }) => {
   if (!property) return null;
@@ -27,25 +25,46 @@ const BookingPayment = ({ property }) => {
   return (
     <BookingPaymentContainer>
       <BookingPaymentHeader>
-        <Title className='title'>$ {property.pricePerNight ?? 0} / night </Title>
-        <Subtitle className='subtitle'><GoStarFill /> {property.rating?.average ?? 0} ({property.rating?.count ?? 0} reviews) - {property.address?.state || ''} </Subtitle>
+        <BookingTitle className="title">
+          $ {property.pricePerNight ?? 0} / night{" "}
+        </BookingTitle>
+        <BookingSubtitle>
+          <GoStarFill /> {property.rating?.average ?? 0} (
+          {property.rating?.count ?? 0} ){" "}
+        </BookingSubtitle>
       </BookingPaymentHeader>
 
       <BookingContainer>
         <BookingCalendarContainer>
-          <BookingCheckIn>CHECK-IN</BookingCheckIn>
-          <BookingCheckOut>CHECK-OUT</BookingCheckOut>
+          <BookingCheckIn>
+            CHECK-IN <br />
+             01/02/2003
+          </BookingCheckIn>
+
+          <BookingCheckOut>
+            CHECK-OUT <br />
+             01/02/2004
+          </BookingCheckOut>
         </BookingCalendarContainer>
 
         <BookingGuests>
           GUESTS
           <GuestsDropdown>
-            <GuestsSelector max={maxGuests} value={guests} onChange={setGuests} />
+            <GuestsSelector
+              max={maxGuests}
+              value={guests}
+              onChange={setGuests}
+            />
           </GuestsDropdown>
         </BookingGuests>
       </BookingContainer>
+      <PillButton className="reserve-button">Reserve</PillButton>
+      <BookingSubtitle className="guests-subtitle">
+        you won't be charged yet
+      </BookingSubtitle>
+      <GuestsPayment property={property} />
     </BookingPaymentContainer>
-  )
-}
+  );
+};
 
-export default BookingPayment
+export default BookingPayment;

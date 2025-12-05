@@ -10,6 +10,10 @@ const propertySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+    long_description: {
+    type: String,
+    required: true
+  },
   propertyType: {
     type: String,
     required: true,

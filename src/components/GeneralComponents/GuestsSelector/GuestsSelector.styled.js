@@ -25,4 +25,5 @@ export const GuestButton = styled.button`
   width: 100%;
   padding: 10px;
   cursor: pointer;
+
 `;
