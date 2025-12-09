@@ -16,6 +16,7 @@ import {
   OffersContainer,
   OffersGrid,
   CalendarContainer,
+  ReviewSection
 } from "./BookingPage.styled";
 import { GiShare } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa6";
@@ -27,6 +28,7 @@ import { MdOutlineDoorFront } from "react-icons/md";
 import { FaRegCalendar } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
 import CalendarComponent from "../Calandar/Calendar";
+import ProgressBar from "../GeneralComponents/ProgressBar/ProgressBar";
 
 const API_BASE = import.meta.env?.VITE_API_URL || "http://localhost:5000";
 
@@ -174,8 +176,34 @@ const BookingPage = () => {
             <CalendarComponent />
             </div>
             </CalendarContainer>
-
           </InformationFooter>
+            <ReviewSection>
+              <div className="reviewContainer">
+                Cleanliness
+                <ProgressBar value={80}  ariaLabel="cleanliness" className="progressBar"/> 
+              </div>
+              <div className="reviewContainer">
+                Communication
+                <ProgressBar value={75} ariaLabel="commmunication" className="progressBar"/>
+              </div>
+              <div className="reviewContainer">
+                Check-in
+                <ProgressBar value={55}  ariaLabel="check-in" className="progressBar" />
+              </div>
+
+                <div className="reviewContainer">
+                Accuracy
+                <ProgressBar value={80}  ariaLabel="Accuracy" className="progressBar"/>
+              </div>
+              <div className="reviewContainer">
+                Location
+                <ProgressBar value={75} ariaLabel="Location" className="progressBar"/>
+              </div>
+              <div className="reviewContainer">
+                Value
+                <ProgressBar value={55}  ariaLabel="Value" className="progressBar" />
+              </div>
+            </ReviewSection>
         </InformationContainer>
       </PaymentContainer>
     </BookingPageContainer>

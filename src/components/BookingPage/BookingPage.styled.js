@@ -140,7 +140,9 @@ export const OffersGrid = styled.div`
  }
 `
 export const CalendarContainer = styled.div`
-
+border-bottom: 1px solid lightgray;
+width: 100%;
+padding-bottom: 3rem;
 
 .Calendars{
     display: flex;
@@ -151,5 +153,12 @@ export const CalendarContainer = styled.div`
 `
 
 export const ReviewSection = styled.div`
+display: grid;
+grid-template-columns: auto auto;
+padding: 3rem 0 0 0 ;
+
+.reviewContainer{
+
+}
 
 `
