@@ -72,6 +72,11 @@ display: flex;
 flex-direction: row;
 justify-content: space-around;
 
+.check{
+  display: flex;
+  justify-content: center;
+}
+
 `;
 
 export const BookingCheckIn = styled.div`

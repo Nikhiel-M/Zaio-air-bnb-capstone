@@ -15,6 +15,7 @@ import { GoStarFill } from "react-icons/go";
 import GuestsSelector from "../GeneralComponents/GuestsSelector/GuestsSelector";
 import { PillButton } from "../Buttons/PillButton.styled";
 import GuestsPayment from "../GeneralComponents/GuestsPayment/GuestsPayment";
+import { Form } from "react-bootstrap";
 
 const BookingPayment = ({ property }) => {
   if (!property) return null;
@@ -37,13 +38,13 @@ const BookingPayment = ({ property }) => {
       <BookingContainer>
         <BookingCalendarContainer>
           <BookingCheckIn>
-            CHECK-IN <br />
-             01/02/2003
+            <h5 className="check">CHECK-IN</h5> <br />
+            <Form.Control type="date" />
           </BookingCheckIn>
 
           <BookingCheckOut>
-            CHECK-OUT <br />
-             01/02/2004
+            <h5 className="check">CHECK-OUT </h5> <br />
+            <Form.Control type="date" />
           </BookingCheckOut>
         </BookingCalendarContainer>
 

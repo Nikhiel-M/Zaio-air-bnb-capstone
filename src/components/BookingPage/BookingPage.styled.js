@@ -157,8 +157,84 @@ display: grid;
 grid-template-columns: auto auto;
 padding: 3rem 0 0 0 ;
 
-.reviewContainer{
+`
+export const ReviewProfiles = styled.div`
+padding:  4rem 0 4rem 0 ;
+display: grid;
+grid-template-columns: auto auto;
+gap: 2rem;
+border-bottom: 1px solid lightgray;
 
+`
+export const HostContainer = styled.div`
+display: flex;
+flex-direction: column;
+padding: 2rem 0 2rem 0 ;
+border-bottom: 1px solid lightgray;
+
+
+.header{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
 }
 
+.host-profile-pic{
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.host-title{
+    font-size: 2rem;
+}
+
+.host-subtitle{
+    font-size: 1rem;
+    color: gray;
+}
+
+.title-list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.list-subtitle{
+    font-size: 1rem;
+    color: black;
+}
+
+.icon{
+font-size: 1rem;
+color: #ea3939ff;
+margin: 0 0 0.5rem 0;
+}
+
+.body-title{
+    color: black;
+    font-size: 1.5rem;
+}
+
+.body-subtitle{
+    font-size: 1.5rem;
+}
+
+.body-btn{
+    margin-top: 4rem;
+}
+`
+export const RulesSubtitle = styled(Subtitle)`
+color: black;
+font-size: 1rem;
+padding: 0.2rem;
+`
+
+export const RulesAndSafety = styled.div`
+display: grid;
+grid-template-columns: auto auto auto;
 `
