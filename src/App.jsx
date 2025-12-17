@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import BookingPage from "./components/BookingPage/BookingPage";
 import HomePage from "./components/HomePage/HomePage";
 import Locations from "./components/Locations/Locations";
-import LoginPage from "./components/Login/LoginPage";
+import LoginPage from "./components/LoginPage/LoginPage"; 
 
 function AppContent() {
   const location = useLocation();
