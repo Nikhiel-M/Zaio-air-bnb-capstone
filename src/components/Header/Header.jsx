@@ -7,11 +7,13 @@ const Header = () => {
 
   return (
     <HeaderContainer>
+      <a href="/">
       <img
         className="logo"
         src="https://cdn.brandfetch.io/idkuvXnjOH/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1717146469893"
         alt="logo"
       />
+      </a>
       <div className="calender-titles">
 
         <div className="header-titles">

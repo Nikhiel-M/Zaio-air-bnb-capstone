@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Subtitle, Title } from "../../Styles/General.styled";
-import { PillButton } from "../Buttons/PillButton.styled";
+import { PillButton } from "../../components/Buttons/PillButton.styled";
 
 export const LoginConatiner = styled.div`
 display: flex;

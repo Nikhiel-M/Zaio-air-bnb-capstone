@@ -51,17 +51,27 @@ display: flex;
 flex-direction: column;
 position: relative;
 
-.dropdown-menu {
+.dropdown-a-tag{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 100%;
-    right: 0;
-    background-color: white;
-    color: black;
+}
+
+.dropdown-login{
+    position: absolute;
+    top: 100%;
+    background-color: #ffffffff;
+    color: grey;
     padding: 0.8rem 1rem;
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    min-width: 100px;
+    min-width: 50px;
     z-index: 1000;
+    border: 1px solid #ddd;
+    font-size: 1rem;
 }
 `

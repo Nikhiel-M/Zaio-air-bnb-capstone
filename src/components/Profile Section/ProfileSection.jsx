@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Title, Subtitle } from "../../Styles/General.styled";
 import { Container } from "../../Styles/General.styled";
 import {
   ProfileContainer,
@@ -16,7 +15,7 @@ const ProfileSection = () => {
 
   const handleDropDown = () => {
     setIsDropDownOpen(!isDropDownOpen);
-  }
+  };
 
   return (
     <ProfileSectionContainer>
@@ -31,10 +30,12 @@ const ProfileSection = () => {
           <ProfileContainer onClick={handleDropDown}>
             <PiList className="list-icon" />
             <CgProfile className="profile-icon" />
+            {isDropDownOpen && (
+              <a href="/login" className="dropdown-a-tag">
+                <div className="dropdown-login">Login</div>
+              </a>
+            )}
           </ProfileContainer>
-          {isDropDownOpen && (
-            <div className="dropdown-menu">Login</div>
-          )}
         </DropDown>
       </Container>
     </ProfileSectionContainer>

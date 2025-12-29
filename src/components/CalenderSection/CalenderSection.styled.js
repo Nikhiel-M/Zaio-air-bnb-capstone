@@ -51,6 +51,10 @@ flex-direction: column;
         color: #333;
     }
 }
+
+.locations{
+  text-decoration: none;
+}
 `;
 
 export const CalendarModal = styled.div`

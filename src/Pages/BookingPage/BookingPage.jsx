@@ -25,16 +25,16 @@ import {
 import { GiShare } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa6";
 import { GoStarFill } from "react-icons/go";
-import BookingPayment from "../BookingPayment/BookingPayment";
+import BookingPayment from "../../components/BookingPayment/BookingPayment";
 import { LuHouse } from "react-icons/lu";
 import { WiStars } from "react-icons/wi";
 import { MdOutlineDoorFront } from "react-icons/md";
 import { FaRegCalendar, FaCheckCircle, FaMedal } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
-import CalendarComponent from "../Calandar/Calendar";
-import ProgressBar from "../GeneralComponents/ProgressBar/ProgressBar";
-import ReviewProfile from "../GeneralComponents/ReviewProfile/ReviewProfile";
-import { PillButton } from "../Buttons/PillButton.styled";
+import CalendarComponent from "../../components/Calandar/Calendar";
+import ProgressBar from "../../components/GeneralComponents/ProgressBar/ProgressBar";
+import ReviewProfile from "../../components/GeneralComponents/ReviewProfile/ReviewProfile";
+import { PillButton } from "../../components/Buttons/PillButton.styled";
 
 
 const API_BASE = import.meta.env?.VITE_API_URL || "http://localhost:5000";

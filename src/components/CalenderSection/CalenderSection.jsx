@@ -152,7 +152,7 @@ const CalenderSection = () => {
       <CalenderContainer ref={containerRef}>
         <DateContainer>
           <h3 className="calender-title"> Locations </h3>
-          <h2 className="subtitle">Select a location</h2>
+          <a href="/locations" className="locations"><h2 className="subtitle">Select a location</h2></a>
         </DateContainer>
 
         <DateContainer>
