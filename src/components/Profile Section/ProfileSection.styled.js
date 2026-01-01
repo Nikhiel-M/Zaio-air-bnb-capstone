@@ -35,14 +35,17 @@ flex-direction: row;
     cursor: pointer;
 }
 
+
 `
 export const WorldIconContainer = styled.div`
+
 .world-icon{
     margin: 0.5rem 1rem 0rem 5rem;
     padding: 0.1rem;
     height: 2.3rem;
     font-size: 4rem;
     cursor: pointer;
+
 }
 `
 

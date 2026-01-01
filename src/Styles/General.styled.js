@@ -7,6 +7,11 @@ import styled from "styled-components";
   padding: 0 2rem;
   text-align: center;
 
+  .host-link{
+    text-decoration: none;
+    color: white;
+    padding: 1rem 0 0 0;
+}
   `
 
 

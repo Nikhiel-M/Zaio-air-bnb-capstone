@@ -41,14 +41,18 @@ const apiRequest = async (endpoint, options = {}) => {
   }
 };
 
-// Authentication API
 export const authAPI = {
-  // Register new user
   register: async (userData) => {
-    return apiRequest('/auth/register', {
+    const response = await apiRequest('/auth/register', {
       method: 'POST',
       body: JSON.stringify(userData),
     });
+    
+    if (response.token) {
+      localStorage.setItem('token', response.token);
+    }
+    
+    return response;
   },
 
   // Login user

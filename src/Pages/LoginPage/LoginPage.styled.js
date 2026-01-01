@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Subtitle, Title } from "../../Styles/General.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 
-export const LoginConatiner = styled.div`
+export const LoginContainer = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
@@ -37,7 +37,7 @@ width: 15vw;
 export const LoginForm = styled.input`
 border: 1px black solid;
 border-radius: 6px;
-width: 100%;
+width: 28rem;
 height: 2rem;
 `
 

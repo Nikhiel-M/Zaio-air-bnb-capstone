@@ -10,9 +10,11 @@ import {
   LoginTitle,
   LoginSubtitle,
   LoginButton,
-} from "./LoginPage.styled";
+} from "../LoginPage/LoginPage.styled";
 
-const LoginPage = () => {
+const RegisterPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,10 +27,10 @@ const LoginPage = () => {
     setError("");
 
     try {
-      await authAPI.login({ email, password });
+      await authAPI.register({ firstName, lastName, email, password});
       navigate("/");
     } catch (err) {
-      setError(err.message || "Login failed");
+      setError(err.message || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -38,12 +40,32 @@ const LoginPage = () => {
     <LoginContainer>
       <LoginHeader>
         <LoginHeader>
-          <LoginTitle>Login</LoginTitle>
+          <LoginTitle>Register</LoginTitle>
         </LoginHeader>
       </LoginHeader>
 
       <form onSubmit={handleSubmit}>
         <LoginBody>
+          <div className="form-container">
+            <LoginSubtitle>First Name</LoginSubtitle>
+            <LoginForm
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-container">
+            <LoginSubtitle>Last Name</LoginSubtitle>
+            <LoginForm
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+
           <div className="form-container">
             <LoginSubtitle>Email</LoginSubtitle>
             <LoginForm
@@ -68,15 +90,9 @@ const LoginPage = () => {
         </LoginBody>
 
         <LoginFooter>
-          <LoginSubtitle className="forgot-password">
-            <a href="forgotPassword" className="a-tag">Forgot password?</a>
-          </LoginSubtitle>
-          <LoginSubtitle className="forgot-password">
-            <a href="register" className="a-tag">Register here</a>
-          </LoginSubtitle>
 
           <LoginButton type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Registering..." : "Register"}
           </LoginButton>
         </LoginFooter>
       </form>
@@ -84,4 +100,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
