@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/', auth, async (req, res) => {
   try {
-    const { propertyId, checkInDate, checkOutDate, numberOfGuests } = req.body;
+    const { propertyId, checkInDate, checkOutDate, numberOfGuests, totalPrice } = req.body;
 
     // Find the property
     const property = await Property.findById(propertyId).populate('host');
@@ -42,9 +42,6 @@ router.post('/', auth, async (req, res) => {
         message: 'Property is not available for the selected dates' 
       });
     }
-
-    const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-    const totalPrice = nights * property.pricePerNight;
 
     const booking = new Booking({
       property: propertyId,
@@ -86,7 +83,8 @@ router.get('/my-bookings', auth, async (req, res) => {
 
     const bookings = await Booking.find(filter)
       .populate('property', 'title address images pricePerNight')
-      .populate('host', 'firstName lastName email profilePicture')
+      .populate('guest', 'firstName lastName email ')
+      .populate('host', 'firstName lastName email ')
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(Number(limit));

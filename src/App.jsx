@@ -9,6 +9,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import Locations from "./components/Locations/Locations";
 import LoginPage from "./Pages/LoginPage/LoginPage"; 
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
+import ReservationsPage from "./Pages/ReservationsPage/ReservationsPage";
 
 function AppContent() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function AppContent() {
         <Route path="/booking/:propertyId" element={<BookingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/reservations" element={<ReservationsPage />} />
       </Routes>
       {!hideLayout && <Footer />}
     </>

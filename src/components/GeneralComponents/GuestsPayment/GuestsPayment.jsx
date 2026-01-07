@@ -1,32 +1,33 @@
 import React from 'react'
 import { GuestsPaymentContainer, GuestsTitle, Pricing, PaymentRow } from './GuestsPayment.styled'
 
-const GuestsPayment = ({ property }) => {
-  return (
+const GuestsPayment = ({ nights, pricePerNight, guests }) => {
+  const subtotal = nights * pricePerNight;
+  const cleaningFee = 50; 
+  const serviceFee = Math.round(subtotal * 0.03);
+  const taxes = Math.round(subtotal * 0.1);
+  const total = subtotal + cleaningFee + serviceFee + taxes;
 
+  return (
     <GuestsPaymentContainer>
         <PaymentRow>
-        <GuestsTitle>$400 x 5 nights</GuestsTitle> <Pricing> $7098</Pricing>
+        <GuestsTitle>${pricePerNight} x {nights} nights</GuestsTitle> <Pricing> ${subtotal}</Pricing>
         </PaymentRow>
 
         <PaymentRow>
-        <GuestsTitle>Weekly discount</GuestsTitle> <Pricing>$7098</Pricing>
-        </PaymentRow>
-
-        <PaymentRow>
-        <GuestsTitle>Cleaning fee</GuestsTitle> <Pricing>$7098</Pricing>
+        <GuestsTitle>Cleaning fee</GuestsTitle> <Pricing>${cleaningFee}</Pricing>
         </PaymentRow>
         
         <PaymentRow>
-        <GuestsTitle>Service fee</GuestsTitle> <Pricing>$7098</Pricing>
+        <GuestsTitle>Service fee</GuestsTitle> <Pricing>${serviceFee}</Pricing>
         </PaymentRow>
 
         <PaymentRow className='last'>
-        <GuestsTitle >Occupancy taxes and fees</GuestsTitle> <Pricing>$7098</Pricing>
+        <GuestsTitle >Occupancy taxes and fees</GuestsTitle> <Pricing>${taxes}</Pricing>
         </PaymentRow>
 
         <PaymentRow>
-        <GuestsTitle className='total'>Total</GuestsTitle> <Pricing className='total'>$100000</Pricing>
+        <GuestsTitle className='total'>Total</GuestsTitle> <Pricing className='total'>${total}</Pricing>
         </PaymentRow>
     </GuestsPaymentContainer>
     )

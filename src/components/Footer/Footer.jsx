@@ -5,6 +5,7 @@ import {
   FooterTitle,
   FooterSubtitle,
   Kicker,
+  FooterWrapper,
 } from "./Footer.styled";
 import { TbWorld } from "react-icons/tb";
 import { FiDollarSign } from "react-icons/fi";
@@ -12,7 +13,7 @@ import { BsFacebook, BsTwitterX } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
-    <>
+    <FooterWrapper>
       <FooterContainer>
         <FooterSection>
           <FooterTitle>Support</FooterTitle>
@@ -60,7 +61,7 @@ const Footer = () => {
           <FaInstagram className="icon" />{" "}
         </div>
       </Kicker>
-    </>
+    </FooterWrapper>
   );
 };
 
