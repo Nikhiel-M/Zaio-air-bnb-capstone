@@ -56,15 +56,27 @@ position: relative;
 
 .dropdown-a-tag{
     text-decoration: none;
+   
+}
+
+.dropdown-r-tag{
+    text-decoration: none;
+    
+}
+
+.dropdown-login{
+ color: grey;
+  padding:  0.5rem 0;
+
+}
+`
+export const DropDownContainer = styled.div`
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 100%;
-}
-
-.dropdown-login{
-    position: absolute;
+    flex-direction: column;
     top: 100%;
     background-color: #ffffffff;
     color: grey;
@@ -76,5 +88,4 @@ position: relative;
     z-index: 1000;
     border: 1px solid #ddd;
     font-size: 1rem;
-}
 `

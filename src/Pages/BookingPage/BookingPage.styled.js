@@ -6,6 +6,7 @@ color: black;
 `
 export const BookingSubtitle = styled(Subtitle)`
 color: lightgray;
+padding: 0.5rem 0;
 `
 
 export const BookingPageContainer = styled.div`
@@ -36,6 +37,8 @@ border-bottom: 1px lightgray solid;
 
 .alignmentBox{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 `
 export const InformationHeader = styled.div`
@@ -46,7 +49,7 @@ flex-direction: column;
 
 export const InformationBody = styled.div`
 display: flex;
-padding: 3rem 0 2rem 0 ;
+padding: 0 5rem 2rem 0 ;
 flex-direction: row;
 border-bottom: 1px solid lightgray;
 
@@ -230,8 +233,9 @@ margin: 0 0 0.5rem 0;
 `
 export const RulesSubtitle = styled(Subtitle)`
 color: black;
-font-size: 1rem;
-padding: 0.2rem;
+font-size: 1.5rem;
+overflow-wrap: break-word ;
+padding: 0.7rem;
 `
 
 export const RulesAndSafety = styled.div`

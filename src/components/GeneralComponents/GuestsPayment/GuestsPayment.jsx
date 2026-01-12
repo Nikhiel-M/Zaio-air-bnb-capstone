@@ -1,8 +1,8 @@
 import React from 'react'
 import { GuestsPaymentContainer, GuestsTitle, Pricing, PaymentRow } from './GuestsPayment.styled'
 
-const GuestsPayment = ({ nights, pricePerNight, guests }) => {
-  const subtotal = nights * pricePerNight;
+const GuestsPayment = ({ nights, pricePerNight, guests = 1 }) => {
+  const subtotal = nights * pricePerNight * guests;
   const cleaningFee = 50; 
   const serviceFee = Math.round(subtotal * 0.03);
   const taxes = Math.round(subtotal * 0.1);
@@ -11,7 +11,7 @@ const GuestsPayment = ({ nights, pricePerNight, guests }) => {
   return (
     <GuestsPaymentContainer>
         <PaymentRow>
-        <GuestsTitle>${pricePerNight} x {nights} nights</GuestsTitle> <Pricing> ${subtotal}</Pricing>
+        <GuestsTitle>${pricePerNight} x {nights} nights x {guests} guests</GuestsTitle> <Pricing> ${subtotal}</Pricing>
         </PaymentRow>
 
         <PaymentRow>

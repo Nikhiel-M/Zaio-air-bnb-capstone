@@ -1,8 +1,8 @@
+import React from "react";
 import "./App.css";
 import { GlobalStyles } from "./Styles/Global.styled";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import BookingPage from "./Pages/BookingPage/BookingPage";
 import HomePage from "./Pages/HomePage/HomePage";

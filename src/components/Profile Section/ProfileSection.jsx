@@ -5,6 +5,7 @@ import {
   WorldIconContainer,
   ProfileSectionContainer,
   DropDown,
+  DropDownContainer,
 } from "./ProfileSection.styled";
 import { TbWorld } from "react-icons/tb";
 import { PiList } from "react-icons/pi";
@@ -72,7 +73,7 @@ const ProfileSection = () => {
             className="host-title"
             onClick={handleBecomeHost}
             disabled={isBecomingHost}
-            style={{ cursor: isBecomingHost ? 'not-allowed' : 'pointer' }}
+            style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
           >
             {isBecomingHost ? "Becoming a host..." : "Become a host"}
           </h2>
@@ -89,9 +90,14 @@ const ProfileSection = () => {
             <PiList className="list-icon" />
             <CgProfile className="profile-icon" />
             {isDropDownOpen && (
-              <a href="/login" className="dropdown-a-tag">
-                <div className="dropdown-login">Login</div>
-              </a>
+              <DropDownContainer>
+                <a href="/login" className="dropdown-a-tag">
+                  <div className="dropdown-login">Login</div>
+                </a>
+                <a href="/reservations" className="dropdown-r-tag">
+                  <div className="dropdown-login">View reservations</div>
+                </a>
+              </DropDownContainer>
             )}
           </ProfileContainer>
         </DropDown>
