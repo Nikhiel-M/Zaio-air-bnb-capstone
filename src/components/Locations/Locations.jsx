@@ -66,7 +66,7 @@ const Locations = () => {
   return (
     <LocationsContainer>
       {properties.map((p) => {
-        const img = p.images?.[0]?.url || p.images?.[0] || "https://via.placeholder.com/400x250";
+            const img = p.images?.[0]?.url || p.images?.[0] || "https://via.placeholder.com/400x250";
         const roomLabel =
           p.roomType === "entire_place" ? "Entire place" :
           p.roomType === "private_room" ? "Private room" : "Shared room";
@@ -84,7 +84,7 @@ const Locations = () => {
             style={{ cursor: "pointer" }}
           >
             <LocationsInformationContainer>
-              <LocationImage src={img} />
+              <LocationImage src={img || null} />
               <LocationDetails>
                 <LocationSubtitle>{roomLabel}</LocationSubtitle>
                 <LocationTitle>{p.title || p.address?.city || "Unknown location"}</LocationTitle>

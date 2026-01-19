@@ -10,10 +10,11 @@ import Locations from "./components/Locations/Locations";
 import LoginPage from "./Pages/LoginPage/LoginPage"; 
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ReservationsPage from "./Pages/ReservationsPage/ReservationsPage";
+import PostBookingPage from "./Pages/PostBookingPage/PostBookingPage";
 
 function AppContent() {
   const location = useLocation();
-  const hiddenPaths = ["/login", "/register"];
+  const hiddenPaths = ["/login", "/register", "/post-booking"];
   const hideLayout = hiddenPaths.some((p) => location.pathname === p || location.pathname.startsWith(p + "/"));
 
   return (
@@ -27,6 +28,7 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/reservations" element={<ReservationsPage />} />
+        <Route path="/post-booking" element={<PostBookingPage />} />
       </Routes>
       {!hideLayout && <Footer />}
     </>

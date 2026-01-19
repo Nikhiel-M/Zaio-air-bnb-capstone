@@ -73,6 +73,8 @@ const BookingPage = () => {
 
   if (loading) return <div>Loading booking page...</div>;
 
+  
+
   return (
     <BookingPageContainer>
       <HeaderContainer>
@@ -95,28 +97,28 @@ const BookingPage = () => {
 
       <ImageContainer>
         <img
-          src={property.images[0].url}
+          src={property.images?.[0]?.url || null}
           alt={property.title}
           className="main-image"
         />
         <SubImageContainer>
           <img
-            src={property.images[1].url}
+            src={property.images?.[1]?.url || null}
             alt={property.title}
             className="sub-image"
           />
           <img
-            src={property.images[1].url}
+            src={property.images?.[1]?.url || null}
             alt={property.title}
             className="sub-image"
           />
           <img
-            src={property.images[1].url}
+            src={property.images?.[2]?.url || null}
             alt={property.title}
             className="sub-image"
           />
           <img
-            src={property.images[1].url}
+            src={property.images?.[3]?.url || null}
             alt={property.title}
             className="sub-image"
           />
@@ -303,7 +305,7 @@ const BookingPage = () => {
 
           <HostContainer>
             <div className="header">
-              <img src={property.host.profilePicture} alt="host profile picture" className="host-profile-pic" />
+              <img src={property.host?.profilePicture || null} alt="host profile picture" className="host-profile-pic" />
               <div className="host-titles">
               <BookingTitle className="host-title">Hosted by {property.host.firstName}</BookingTitle>
               <BookingSubtitle className="host-subtitle">Joined january 2025</BookingSubtitle>

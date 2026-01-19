@@ -7,7 +7,7 @@ const ReviewProfile = ({img ,reviewName, reviewDate ,reviewTxt }) => {
     <ReviewProfileContainer>
       <ReviewProfileHeader>
         <div>
-          <img src={img} alt='Profile' className="profile-picture" />
+          <img src={img || null} alt='Profile' className="profile-picture" />
           </div>
           <div className="name">
             <ReviewProfileTitle>{reviewName}</ReviewProfileTitle>

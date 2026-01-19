@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const path = require('path');
+
+// serve static uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const connectDB = async () => {
   try {

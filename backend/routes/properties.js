@@ -1,6 +1,7 @@
 const express = require('express');
 const Property = require('../models/Property');
 const auth = require('../middleware/auth');
+const upload = require('../middleware/multer');
 const router = express.Router();
 
 // Get all properties with filtering and pagination
@@ -86,12 +87,35 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new property (requires authentication)
-router.post('/', auth, async (req, res) => {
+// Accept up to 10 images under the 'images' field
+router.post('/', auth, upload.array('images', 10), async (req, res) => {
   try {
     const propertyData = {
       ...req.body,
       host: req.userId
     };
+
+    // If addr was sent as JSON string (from multipart form), parse it
+    if (propertyData.address && typeof propertyData.address === 'string') {
+      try {
+        propertyData.address = JSON.parse(propertyData.address);
+      } catch (e) {
+        // leave as-is if parsing fails
+      }
+    }
+
+    // coerce numeric fields
+    ['bedrooms','bathrooms','beds','maxGuests','pricePerNight'].forEach(k => {
+      if (propertyData[k] !== undefined) {
+        const n = Number(propertyData[k]);
+        if (!Number.isNaN(n)) propertyData[k] = n;
+      }
+    });
+
+    // If files were uploaded, map them to the images array expected by the schema
+    if (req.files && req.files.length) {
+      propertyData.images = req.files.map((f) => ({ url: `/uploads/${f.filename}` }));
+    }
 
     const property = new Property(propertyData);
     await property.save();
