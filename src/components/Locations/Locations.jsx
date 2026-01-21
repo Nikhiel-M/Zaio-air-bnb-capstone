@@ -12,6 +12,8 @@ import {
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = 'http://localhost:5000';
+
 const Locations = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -66,7 +68,7 @@ const Locations = () => {
   return (
     <LocationsContainer>
       {properties.map((p) => {
-            const img = p.images?.[0]?.url || p.images?.[0] || "https://via.placeholder.com/400x250";
+            const img = p.images?.[0]?.url ? `${BACKEND_URL}${p.images[0].url}` : "https://via.placeholder.com/400x250";
         const roomLabel =
           p.roomType === "entire_place" ? "Entire place" :
           p.roomType === "private_room" ? "Private room" : "Shared room";

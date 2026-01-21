@@ -87,8 +87,8 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new property (requires authentication)
-// Accept up to 10 images under the 'images' field
-router.post('/', auth, upload.array('images', 10), async (req, res) => {
+// Accept up to 5 images under the 'images' field
+router.post('/', auth, upload.array('images', 5), async (req, res) => {
   try {
     const propertyData = {
       ...req.body,
