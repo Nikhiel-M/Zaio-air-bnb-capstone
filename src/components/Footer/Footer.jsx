@@ -13,7 +13,7 @@ import { BsFacebook, BsTwitterX } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
-    <FooterWrapper>
+    <FooterWrapper >
       <FooterContainer>
         <FooterSection>
           <FooterTitle>Support</FooterTitle>
@@ -53,7 +53,7 @@ const Footer = () => {
         </FooterSection>
       </FooterContainer>
       <Kicker>
-        <div className="left"> © 2022 Airbnb, Inc. Privacy Terms Sitemap </div>
+        <div className="left"> © 2026 Airbnb, Inc. Privacy Terms Sitemap </div>
         <div className="right">
           {" "}
           <TbWorld className="icon" /> English <FiDollarSign className="icon" />{" "}

@@ -18,20 +18,22 @@ function AppContent() {
   const hideLayout = hiddenPaths.some((p) => location.pathname === p || location.pathname.startsWith(p + "/"));
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <GlobalStyles />
       {!hideLayout && <Header />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/locations" element={<Locations />} />
-        <Route path="/booking/:propertyId" element={<BookingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/reservations" element={<ReservationsPage />} />
-        <Route path="/post-booking" element={<PostBookingPage />} />
-      </Routes>
+      <div style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/locations" element={<Locations />} />
+          <Route path="/booking/:propertyId" element={<BookingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/reservations" element={<ReservationsPage />} />
+          <Route path="/post-booking" element={<PostBookingPage />} />
+        </Routes>
+      </div>
       {!hideLayout && <Footer />}
-    </>
+    </div>
   );
 }
 

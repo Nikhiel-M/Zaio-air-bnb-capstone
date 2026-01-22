@@ -218,7 +218,7 @@ const PostBookingPage = () => {
 
       </PostBookingFormContainer>
 
-      {error && <div style={{ color: "red", margin: "8px 0" }}>{error}</div>}
+      {error && <div style={{ margin: "8px 0" }}>{error}</div>}
       <PillButton className="post-btn" onClick={handleSubmit} disabled={loading}>
         {loading ? "Submitting..." : "Submit"}
       </PillButton>

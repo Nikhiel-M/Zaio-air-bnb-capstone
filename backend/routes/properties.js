@@ -114,7 +114,7 @@ router.post('/', auth, upload.array('images', 5), async (req, res) => {
 
     // If files were uploaded, map them to the images array expected by the schema
     if (req.files && req.files.length) {
-      propertyData.images = req.files.map((f) => ({ url: `/uploads/${f.filename}` }));
+      propertyData.images = req.files.map((f) => ({ url: `data:${f.mimetype};base64,${f.buffer.toString('base64')}` }));
     }
 
     const property = new Property(propertyData);

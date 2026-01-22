@@ -10,7 +10,20 @@ import { createGlobalStyle } from "styled-components";
    font-style: normal;
  }
 
+ html, body {
+   height: 100%;
+ }
 
+ body {
+   display: flex;
+   flex-direction: column;
+ }
+
+ #root {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+ }
 `;
  
 

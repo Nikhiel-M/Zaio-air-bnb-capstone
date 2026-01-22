@@ -36,10 +36,9 @@ import ProgressBar from "../../components/GeneralComponents/ProgressBar/Progress
 import ReviewProfile from "../../components/GeneralComponents/ReviewProfile/ReviewProfile";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 
-
 const API_BASE = import.meta.env?.VITE_API_URL || "http://localhost:5000";
 
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = import.meta.env?.VITE_BACKEND_URL || 'http://localhost:5000';
 
 const BookingPage = () => {
   const { propertyId } = useParams();
@@ -99,28 +98,28 @@ const BookingPage = () => {
 
       <ImageContainer>
         <img
-          src={property.images?.[0]?.url ? `${BACKEND_URL}${property.images[0].url}` : null}
+          src={property.images?.[0]?.url || null}
           alt={property.title}
           className="main-image"
         />
         <SubImageContainer>
           <img
-            src={property.images?.[1]?.url ? `${BACKEND_URL}${property.images[1].url}` : null}
+            src={property.images?.[1]?.url || null}
             alt={property.title}
             className="sub-image"
           />
           <img
-            src={property.images?.[1]?.url ? `${BACKEND_URL}${property.images[1].url}` : null}
+            src={property.images?.[2]?.url || null}
             alt={property.title}
             className="sub-image"
           />
           <img
-            src={property.images?.[2]?.url ? `${BACKEND_URL}${property.images[2].url}` : null}
+            src={property.images?.[3]?.url || null}
             alt={property.title}
             className="sub-image"
           />
           <img
-            src={property.images?.[3]?.url ? `${BACKEND_URL}${property.images[3].url}` : null}
+            src={property.images?.[4]?.url || null}
             alt={property.title}
             className="sub-image"
           />
@@ -175,9 +174,11 @@ const BookingPage = () => {
             </div>
             <BookingPayment property={property} />
           </div>
+
           <BookingSubtitle className="longDescription">
             {property.long_description}
           </BookingSubtitle>
+
           <OffersContainer>
             <BookingSubtitle className="offersHeader">
               What this place offers
@@ -191,6 +192,7 @@ const BookingPage = () => {
               ))}
             </OffersGrid>
           </OffersContainer>
+
           <InformationFooter>
             <CalendarContainer>
               <BookingSubtitle>
@@ -203,6 +205,7 @@ const BookingPage = () => {
               </div>
             </CalendarContainer>
           </InformationFooter>
+
           <BookingTitle>Reviews</BookingTitle>
           <ReviewSection>
             <div className="reviewContainer">
@@ -254,6 +257,7 @@ const BookingPage = () => {
               />
             </div>
           </ReviewSection>
+
           <ReviewProfiles>
           <ReviewProfile
             img={
