@@ -8,6 +8,16 @@ export const ProfileSectionContainer = styled.div`
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
+    cursor: pointer;
+    padding-top: 0.5rem;
+}
+.host-title-booking{
+    font-size: 1.3rem;
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
 }
 `
 

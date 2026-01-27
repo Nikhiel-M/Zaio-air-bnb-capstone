@@ -18,11 +18,18 @@ const ProfileSection = () => {
   const [hostMessage, setHostMessage] = useState("");
   const [isHost, setIsHost] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkUserStatus = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
       try {
         const response = await authAPI.getCurrentUser();
+        setUser(response.user);
         setIsHost(response.user.isHost);
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -39,11 +46,15 @@ const ProfileSection = () => {
   };
 
   const handleBecomeHost = async () => {
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
     setIsBecomingHost(true);
     setHostMessage("");
     try {
       const response = await usersAPI.becomeHost();
-      setHostMessage("Successfully became a host!");
+      alert("Successfully became a host!");
       setIsHost(true);
     } catch (error) {
       setHostMessage("Failed to become a host. Please try again.");
@@ -52,6 +63,15 @@ const ProfileSection = () => {
       setIsBecomingHost(false);
     }
   };
+
+    const handleLogout = () => {
+    authAPI.logout();
+    window.location.href = "/";
+  };
+
+  const handleBookingRoute = () => {
+    window.location.href = "/post-booking";
+  }
 
   if (loading) {
     return (
@@ -66,8 +86,8 @@ const ProfileSection = () => {
   return (
     <ProfileSectionContainer>
       <Container className="profile-section">
-        {isHost ? (
-          <h2 className="host-title">Welcome host!</h2>
+        {user && isHost ? (
+          <h2 className="host-title-booking" onClick={handleBookingRoute} > Welcome {user?.firstName} <br /> Post your homes Here!</h2>
         ) : (
           <h2
             className="host-title"
@@ -75,8 +95,9 @@ const ProfileSection = () => {
             disabled={isBecomingHost}
             style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
           >
-            {isBecomingHost ? "Becoming a host..." : "Become a host"}
+            {!user ? <>Welcome guest <br /> please sign in</> : <>Welcome {user?.firstName} <br /> Click here to become a host </>}
           </h2>
+
         )}
 
         {hostMessage && <div className="host-message">{hostMessage}</div>}
@@ -91,12 +112,20 @@ const ProfileSection = () => {
             <CgProfile className="profile-icon" />
             {isDropDownOpen && (
               <DropDownContainer>
-                <a href="/login" className="dropdown-a-tag">
-                  <div className="dropdown-login">Login</div>
-                </a>
-                <a href="/reservations" className="dropdown-r-tag">
-                  <div className="dropdown-login">View reservations</div>
-                </a>
+                {!user ? (
+                  <a href="/login" className="dropdown-a-tag">
+                    <div className="dropdown-login">Login</div>
+                  </a>
+                ) : (
+                  <>
+                    <a href="/reservations" className="dropdown-r-tag">
+                      <div className="dropdown-login">View reservations</div>
+                    </a>
+                    <span className="dropdown-r-tag">
+                      <div className="dropdown-login" onClick={handleLogout}>Logout</div>
+                    </span>
+                  </>
+                )}
               </DropDownContainer>
             )}
           </ProfileContainer>

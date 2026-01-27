@@ -311,7 +311,7 @@ const BookingPage = () => {
 
           <HostContainer>
             <div className="header">
-              <img src={property.host?.profilePicture ? `${BACKEND_URL}${property.host.profilePicture}` : null} alt="host profile picture" className="host-profile-pic" />
+              <img src={property.host?.profilePicture ? `${BACKEND_URL}${property.host.profilePicture}` : src= "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" } alt="host profile picture" className="host-profile-pic" />
               <div className="host-titles">
               <BookingTitle className="host-title">Hosted by {property.host.firstName}</BookingTitle>
               <BookingSubtitle className="host-subtitle">Joined january 2025</BookingSubtitle>

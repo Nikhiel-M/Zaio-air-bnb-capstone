@@ -20,7 +20,6 @@ const Locations = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Replace direct process.env access with a safe getter for Vite (import.meta.env) or CRA (process.env)
   const getApiBase = () => {
     try {
       // Vite: use VITE_API_URL
