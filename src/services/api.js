@@ -213,3 +213,18 @@ export const usersAPI = {
     return apiRequest(`/users/${id}/public`);
   },
 };
+
+// Locations API
+export const locationsAPI = {
+  // Get all unique locations
+  getAllLocations: async () => {
+    return apiRequest('/locations');
+  },
+
+  // Get locations by country
+  getLocationsByCountry: async (country) => {
+    return apiRequest(`/locations/country/${country}`);
+  },
+};
+
+export { API_BASE_URL };

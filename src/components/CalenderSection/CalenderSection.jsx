@@ -16,23 +16,31 @@ import {
 } from "./CalenderSection.styled";
 import { FaSearch } from "react-icons/fa";
 import CalendarComponent from "../Calandar/Calendar";
+import { locationsAPI } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const CalenderSection = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isCheckoutCalendarOpen, setIsCheckoutCalendarOpen] = useState(false);
   const [isGuestDropdownOpen, setIsGuestDropdownOpen] = useState(false);
+  const [isLocationDropdownOpen, setIsLocationDropdownOpen] = useState(false);
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState("All countries");
+  const [countries, setCountries] = useState([]);
   const [guests, setGuests] = useState({
     adults: 1,
     children: 0,
     infants: 0,
   });
 
+  const navigate = useNavigate();
+
   // Refs for detecting clicks outside
   const calendarRef = useRef(null);
   const checkoutCalendarRef = useRef(null);
   const guestDropdownRef = useRef(null);
+  const locationDropdownRef = useRef(null);
   const containerRef = useRef(null);
 
   // Close modals when clicking outside
@@ -52,6 +60,9 @@ const CalenderSection = () => {
         const isOutsideGuestDropdown =
           guestDropdownRef.current &&
           !guestDropdownRef.current.contains(event.target);
+        const isOutsideLocationDropdown =
+          locationDropdownRef.current &&
+          !locationDropdownRef.current.contains(event.target);
 
         if (isCalendarOpen && isOutsideCheckinCalendar) {
           setIsCalendarOpen(false);
@@ -62,6 +73,9 @@ const CalenderSection = () => {
         if (isGuestDropdownOpen && isOutsideGuestDropdown) {
           setIsGuestDropdownOpen(false);
         }
+        if (isLocationDropdownOpen && isOutsideLocationDropdown) {
+          setIsLocationDropdownOpen(false);
+        }
       }
     };
 
@@ -70,7 +84,21 @@ const CalenderSection = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isCalendarOpen, isCheckoutCalendarOpen, isGuestDropdownOpen]);
+  }, [isCalendarOpen, isCheckoutCalendarOpen, isGuestDropdownOpen, isLocationDropdownOpen]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await locationsAPI.getAllLocations();
+        const uniqueCountries = [...new Set(response.data.map(location => location.country))].sort();
+        setCountries(uniqueCountries);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
 
   const toggleCheckinCalendar = () => {
     setIsCalendarOpen(!isCalendarOpen);
@@ -91,6 +119,15 @@ const CalenderSection = () => {
 
     if (isCalendarOpen) setIsCalendarOpen(false);
     if (isCheckoutCalendarOpen) setIsCheckoutCalendarOpen(false);
+    if (isLocationDropdownOpen) setIsLocationDropdownOpen(false);
+  };
+
+  const toggleLocationDropdown = () => {
+    setIsLocationDropdownOpen(!isLocationDropdownOpen);
+
+    if (isCalendarOpen) setIsCalendarOpen(false);
+    if (isCheckoutCalendarOpen) setIsCheckoutCalendarOpen(false);
+    if (isGuestDropdownOpen) setIsGuestDropdownOpen(false);
   };
 
   const handleCheckinDateSelect = (date) => {
@@ -147,12 +184,49 @@ const CalenderSection = () => {
     });
   };
 
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setIsLocationDropdownOpen(false);
+    if (country === "All countries") {
+      navigate("/locations");
+    } else {
+      navigate(`/locations?country=${encodeURIComponent(country)}`);
+    }
+  };
+
   return (
     <>
       <CalenderContainer ref={containerRef}>
         <DateContainer>
           <h3 className="calender-title"> Locations </h3>
-          <a href="/locations" className="locations"><h2 className="subtitle">Select a location</h2></a>
+          <h2 className="subtitle" onClick={toggleLocationDropdown}>
+            {selectedCountry}
+          </h2>
+
+          {isLocationDropdownOpen && (
+            <GuestDropdownModal
+              ref={locationDropdownRef}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ padding: "10px" }}>
+                <div
+                  style={{ padding: "10px", cursor: "pointer", borderBottom: "1px solid #ddd" }}
+                  onClick={() => handleCountrySelect("All countries")}
+                >
+                  All countries
+                </div>
+                {countries.map((country) => (
+                  <div
+                    key={country}
+                    style={{ padding: "10px", cursor: "pointer", borderBottom: "1px solid #ddd" }}
+                    onClick={() => handleCountrySelect(country)}
+                  >
+                    {country}
+                  </div>
+                ))}
+              </div>
+            </GuestDropdownModal>
+          )}
         </DateContainer>
 
         <DateContainer>

@@ -8,7 +8,7 @@ export const GetawayContainer = styled.div`
   .Getaway-title{
     color: black;
     font-size: 2rem;
-    padding: 1rem;
+    padding:  1rem ;
     white-space: nowrap;
   }
 
@@ -29,6 +29,7 @@ export const GetawayHeader = styled.h1`
   padding: 1rem 1rem 0.5rem 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin: 0;
 
   &:hover, &.active {
     color: black;

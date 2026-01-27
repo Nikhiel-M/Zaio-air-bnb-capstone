@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../services/api";
 import {
   BookingPageContainer,
   HeaderContainer,
@@ -36,9 +37,9 @@ import ProgressBar from "../../components/GeneralComponents/ProgressBar/Progress
 import ReviewProfile from "../../components/GeneralComponents/ReviewProfile/ReviewProfile";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 
-const API_BASE = import.meta.env?.VITE_API_URL || "http://localhost:5000";
+const API_BASE = import.meta.env?.VITE_API_URL;
 
-const BACKEND_URL = import.meta.env?.VITE_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = API_BASE_URL.replace('/api', '');
 
 const BookingPage = () => {
   const { propertyId } = useParams();
@@ -311,7 +312,7 @@ const BookingPage = () => {
 
           <HostContainer>
             <div className="header">
-              <img src={property.host?.profilePicture ? `${BACKEND_URL}${property.host.profilePicture}` : src= "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" } alt="host profile picture" className="host-profile-pic" />
+              <img src={property.host?.profilePicture ? `${BACKEND_URL}${property.host.profilePicture}` : "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"} alt="host profile picture" className="host-profile-pic" />
               <div className="host-titles">
               <BookingTitle className="host-title">Hosted by {property.host.firstName}</BookingTitle>
               <BookingSubtitle className="host-subtitle">Joined january 2025</BookingSubtitle>

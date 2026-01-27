@@ -22,21 +22,17 @@ const Locations = () => {
 
   const getApiBase = () => {
     try {
-      // Vite: use VITE_API_URL
       if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL) {
         return String(import.meta.env.VITE_API_URL).replace(/\/$/, "");
       }
     } catch (e) {
-      // ignore
     }
-    // CRA or other bundlers that expose process.env
     if (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) {
       return String(process.env.REACT_APP_API_URL).replace(/\/$/, "");
     }
     return "";
   };
 
-  // compute endpoint from env (Vite: VITE_API_URL, CRA: REACT_APP_API_URL)
   const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
 
   useEffect(() => {
