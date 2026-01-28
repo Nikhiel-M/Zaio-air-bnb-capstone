@@ -12,7 +12,6 @@ import {
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const BACKEND_URL = 'http://localhost:5000';
 
 const Locations = () => {
   const [properties, setProperties] = useState([]);
@@ -20,20 +19,22 @@ const Locations = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const getApiBase = () => {
-    try {
-      if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL) {
-        return String(import.meta.env.VITE_API_URL).replace(/\/$/, "");
-      }
-    } catch (e) {
-    }
-    if (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) {
-      return String(process.env.REACT_APP_API_URL).replace(/\/$/, "");
-    }
-    return "";
-  };
+  // const getApiBase = () => {
+  //   try {
+  //     if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL) {
+  //       return String(import.meta.env.VITE_API_URL).replace(/\/$/, "");
+  //     }
+  //   } catch (e) {
+  //   }
+  //   if (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) {
+  //     return String(process.env.REACT_APP_API_URL).replace(/\/$/, "");
+  //   }
+  //   return "";
+  // };
 
-  const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
+  // const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
+
+   const ENDPOINT = `http://localhost:5000/api/properties`;
 
   useEffect(() => {
     let mounted = true;
@@ -55,8 +56,7 @@ const Locations = () => {
 
     fetchProps();
     return () => { mounted = false; };
-  }, []); // ENDPOINT used inside effect
-
+  }, []); 
   if (loading) return <LocationsContainer>Loading...</LocationsContainer>;
   if (error) return <LocationsContainer>{error}</LocationsContainer>;
 
@@ -85,6 +85,8 @@ const Locations = () => {
               <LocationDetails>
                 <LocationSubtitle>{roomLabel}</LocationSubtitle>
                 <LocationTitle>{p.title || p.address?.city || "Unknown location"}</LocationTitle>
+                <LocationSubtitle>{p.description}</LocationSubtitle>
+                <LocationSubtitle>{p.address.country}</LocationSubtitle>
                 <LocationSubtitle>{details}</LocationSubtitle>
                 <LocationReview>
                   <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} ({p.rating?.count ?? 0} reviews)

@@ -54,8 +54,10 @@ export const LocationDetails = styled.div`
 `;
 
 export const LocationImage = styled.img`
+  min-width: 15rem;
   max-width: 15rem;
-  height: 13rem;
+  min-height: 13rem;
+  max-height: 13rem;
   object-fit: cover;
   border-radius: 8px;
 

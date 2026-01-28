@@ -356,6 +356,7 @@ const BookingPage = () => {
               <RulesSubtitle>• Free cancellation</RulesSubtitle>
             </div>
           </RulesAndSafety>
+          u
         </InformationContainer>
       </PaymentContainer>
     </BookingPageContainer>
