@@ -22,5 +22,6 @@ margin:  1rem 0;
 export const ProgressFill = styled.div`
 height: 100%;
 width: ${({width}) => (typeof width === "number" ? `${width}%` : width || "0%")};
-background-color: #838383;
+background-color: #ff5a5f;
 `
+// #838383
