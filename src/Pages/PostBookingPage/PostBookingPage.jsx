@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   PostBookingContainer,
@@ -9,6 +9,10 @@ import {
   PostBookingSelector,
   HiddenFileInput,
   ImagePickerButton,
+  AmenityWrapper,
+  AmenityToggle,
+  AmenityMenu,
+  AmenityItem,
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 
@@ -24,14 +28,39 @@ const PostBookingPage = () => {
   const [images, setImages] = useState(null);
 
   const [country, setCountry] = useState("");
-  const [amenaties, setAmenaties] = useState([]);
-  const [average, setAverage] = useState(0);
-  const [count, setCount] = useState(0);
-  const [bedrooms, setBedrooms] = useState(1);
-  const [bathooms, setBathrooms] = useState(1);
+  const [amenities, setAmenities] = useState([]);
+  const [average, setAverage] = useState();
+  const [count, setCount] = useState();
+  const [bedrooms, setBedrooms] = useState();
+  const [bathrooms, setBathrooms] = useState();
+  const [amenitiesOpen, setAmenitiesOpen] = useState(false);
+  const amenityRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Amenities options (match backend Schema)
+  const amenityOptions = [
+    "wifi",
+    "kitchen",
+    "parking",
+    "pool",
+    "gym",
+    "air_conditioning",
+    "heating",
+    "tv",
+    "washer",
+    "dryer",
+    "pets_allowed",
+    "smoking_allowed",
+  ];
+
+  const toggleAmenity = (name) => {
+    setAmenities((prev) => {
+      if (prev.includes(name)) return prev.filter((a) => a !== name);
+      return [...prev, name];
+    });
+  };
   const navigate = useNavigate();
 
   const fileInputRef = useRef(null);
@@ -40,9 +69,29 @@ const PostBookingPage = () => {
     fileInputRef.current.click();
   };
 
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (
+        amenitiesOpen &&
+        amenityRef.current &&
+        !amenityRef.current.contains(e.target)
+      ) {
+        setAmenitiesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [amenitiesOpen]);
+
   const handleChange = (e) => {
-    setImages(e.target.files);
-    console.log(e.target.files);
+    const files = e.target.files ? Array.from(e.target.files) : [];
+    const limited = files.slice(0, 5);
+    setImages(limited);
+  };
+
+  const handleAmenitiesChange = (e) => {
+    const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
+    setAmenities(selected);
   };
 
   const handleSubmit = async (e) => {
@@ -58,41 +107,29 @@ const PostBookingPage = () => {
       return;
     }
 
-    const propertyTypeMap = {
-      home: "House",
-      apartment: "Apartment",
-      condo: "Condo",
-    };
-    const roomTypeMap = {
-      house: "Entire place",
-      apartment: "Entire place",
-      condo: "Entire place",
-      "private room": "Private room",
-    };
-
+    // Select values now match backend enums directly
     const payload = {
       title,
       description,
       long_description,
-      propertyType: propertyTypeMap[propertyType] || propertyType || "other",
-      roomType:
-        roomTypeMap[roomType] ||
-        (roomType === "private_room" ? "private_room" : "entire_place"),
+      propertyType: propertyType || "Other",
+      roomType: roomType || "Entire place",
       address: {
         city: address,
-        country: "Unknown",
+        country: country || "Unknown",
       },
-      bedrooms: Math.max(
-        1,
-        Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1,
-      ),
-      bathrooms: 1,
+      bedrooms:
+        Number(bedrooms) ||
+        Math.max(1, Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1),
+      bathrooms: Number(bathrooms) || 1,
       beds: Math.max(
         1,
         Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1,
       ),
       maxGuests: Number(maxGuests) || 1,
       pricePerNight: Number(pricePerNight) || 0,
+      amenities,
+      rating: { average: Number(average) || 0, count: Number(count) || 0 },
     };
 
     setLoading(true);
@@ -112,6 +149,14 @@ const PostBookingPage = () => {
       formData.append("beds", String(payload.beds));
       formData.append("maxGuests", String(payload.maxGuests));
       formData.append("pricePerNight", String(payload.pricePerNight));
+
+      if (amenities && amenities.length) {
+        formData.append("amenities", JSON.stringify(amenities));
+      }
+
+      if (payload.rating) {
+        formData.append("rating", JSON.stringify(payload.rating));
+      }
 
       if (images && images.length) {
         Array.from(images).forEach((file) => {
@@ -176,9 +221,14 @@ const PostBookingPage = () => {
           placeholder="Type of property"
         >
           <option value="">Select property type</option>
-          <option value="home">Home</option>
-          <option value="apartment">Apartment</option>
-          <option value="condo">Condo</option>
+          <option value="House">House</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Condo">Condo</option>
+          <option value="Villa">Villa</option>
+          <option value="Cabin">Cabin</option>
+          <option value="Loft">Loft</option>
+          <option value="Townhouse">Townhouse</option>
+          <option value="Other">Other</option>
         </PostBookingSelector>
 
         <PostBookingSelector
@@ -189,10 +239,9 @@ const PostBookingPage = () => {
           placeholder="Type of room"
         >
           <option value="">Select room type</option>
-          <option value="house">Entire home</option>
-          <option value="apartment">Entire apartment</option>
-          <option value="condo">Entire condo</option>
-          <option value="private room">Private room</option>
+          <option value="Entire place">Entire place</option>
+          <option value="Private room">Private room</option>
+          <option value="Shared room">Shared room</option>
         </PostBookingSelector>
 
         <PostBookingForm
@@ -216,6 +265,95 @@ const PostBookingPage = () => {
           required
           placeholder="Price per night"
         />
+
+        <PostBookingForm
+          type="text"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          placeholder="Country"
+        />
+
+        <PostBookingForm
+          type="number"
+          value={bedrooms}
+          onChange={(e) => setBedrooms(Number(e.target.value) || 1)}
+          min={1}
+          placeholder="Bedrooms"
+        />
+
+        <PostBookingForm
+          type="number"
+          value={bathrooms}
+          onChange={(e) => setBathrooms(Number(e.target.value) || 1)}
+          min={1}
+          placeholder="Bathrooms"
+        />
+
+          <div>
+            <AmenityWrapper>
+              <AmenityToggle
+                type="button"
+                onClick={() => setAmenitiesOpen((v) => !v)}
+                aria-expanded={amenitiesOpen}
+                aria-haspopup="listbox"
+              >
+                {amenities.length
+                  ? `${amenities.length} selected`
+                  : "Select amenities"}
+              </AmenityToggle>
+
+              {amenitiesOpen && (
+                <AmenityMenu role="listbox" aria-multiselectable="true">
+                  {amenityOptions.map((opt) => (
+                    <AmenityItem key={opt}>
+                      <input
+                        id={`amen-${opt}`}
+                        type="checkbox"
+                        checked={amenities.includes(opt)}
+                        onChange={() => {
+                          // toggle
+                          setAmenities((prev) =>
+                            prev.includes(opt)
+                              ? prev.filter((a) => a !== opt)
+                              : [...prev, opt],
+                          );
+                        }}
+                      />
+                      <label
+                        htmlFor={`amen-${opt}`}
+                        style={{
+                          marginLeft: "0.5rem",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {opt.replace("_", " ")}
+                      </label>
+                    </AmenityItem>
+                  ))}
+                </AmenityMenu>
+              )}
+            </AmenityWrapper>
+          </div>
+  
+
+        <PostBookingForm
+          type="number"
+          value={average}
+          onChange={(e) => setAverage(Number(e.target.value) || 0)}
+          min={0}
+          max={5}
+          step={0.1}
+          placeholder="Stars (0-5)"
+        />
+
+        <PostBookingForm
+          type="number"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value) || 0)}
+          min={0}
+          placeholder="Reviews"
+        />
+
         <HiddenFileInput
           type="file"
           ref={fileInputRef}
@@ -231,12 +369,12 @@ const PostBookingPage = () => {
           title={
             images && images.length
               ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
-              : "Click to select images"
+              : "Click to select 5 images"
           }
         >
           {images && images.length > 0
             ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
-            : "Click to select images"}
+            : "Click to select 5 images"}
         </ImagePickerButton>
       </PostBookingFormContainer>
 
