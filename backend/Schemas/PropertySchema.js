@@ -17,12 +17,12 @@ const propertySchema = new mongoose.Schema({
   propertyType: {
     type: String,
     required: true,
-    enum: ['house', 'apartment', 'condo', 'villa', 'cabin', 'loft', 'townhouse', 'other']
+    enum: ['House', 'Apartment', 'Condo', 'Villa', 'Cabin', 'Loft', 'Townhouse', 'Other']
   },
   roomType: {
     type: String,
     required: true,
-    enum: ['entire_place', 'private_room', 'shared_room']
+    enum: ['Entire place', 'Private room', 'Shared room']
   },
   address: {
     street: String,

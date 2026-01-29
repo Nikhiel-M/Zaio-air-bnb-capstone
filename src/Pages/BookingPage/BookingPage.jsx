@@ -7,7 +7,7 @@ import {
   ImageContainer,
   InformationBody,
   InformationContainer,
-  InformationFooter,
+  // InformationFooter,ws
   InformationHeader,
   PaymentContainer,
   SubheaderContainer,
@@ -16,7 +16,12 @@ import {
   BookingSubtitle,
   OffersContainer,
   OffersGrid,
-  CalendarContainer,
+  // CalendarContainer,
+  ModalOverlay,
+  ModalContent,
+  ModalImage,
+  ModalClose,
+  ModalNav,
 } from "./BookingPage.styled";
 import { GiShare } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa6";
@@ -27,15 +32,15 @@ import { WiStars } from "react-icons/wi";
 import { MdOutlineDoorFront } from "react-icons/md";
 import { FaRegCalendar, FaCheckCircle, FaMedal } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
-import CalendarComponent from "../../components/Calandar/Calendar";
+// import CalendarComponent from "../../components/Calandar/Calendar";
 import ReviewBarSection from "./BookingPageComponents/ReviewSection/ReviewSection";
 import ReviewProfiles from "./BookingPageComponents/ReviewProfiles/ReviewProfiles";
 import HostDisplayContainer from "./HostContainer/HostContainer";
-import  RulesAndSafetyContainer  from "./BookingPageComponents/Rules&Safety/RulesAndSafety"; 
+import RulesAndSafetyContainer from "./BookingPageComponents/Rules&Safety/RulesAndSafety";
 
 const API_BASE = import.meta.env?.VITE_API_URL;
 
-const BACKEND_URL = API_BASE_URL.replace('/api', '');
+const BACKEND_URL = API_BASE_URL.replace("/api", "");
 
 const BookingPage = () => {
   const { propertyId } = useParams();
@@ -69,10 +74,36 @@ const BookingPage = () => {
     }
   }, [propertyId, navigate]);
 
-  if (loading) return <div>Loading booking page...</div>;
+  const images = property?.images?.map((img) => img.url).filter(Boolean) || [];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const openImage = (index) => {
+    if (!images.length) return;
+    setSelectedIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
+
+  const showPrev = () => setSelectedIndex((i) => (i - 1 + images.length) % images.length);
+  const showNext = () => setSelectedIndex((i) => (i + 1) % images.length);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isModalOpen, images.length]);
+
+  if (loading) return <div>Loading booking page...</div>; 
+
 
   
-
   return (
     <BookingPageContainer>
       <HeaderContainer>
@@ -98,40 +129,72 @@ const BookingPage = () => {
           src={property.images?.[0]?.url || null}
           alt={property.title}
           className="main-image"
+          onClick={() => openImage(0)}
+          style={{ cursor: "pointer" }}
         />
         <SubImageContainer>
-          <img
-            src={property.images?.[1]?.url || null}
-            alt={property.title}
-            className="sub-image"
-          />
-          <img
-            src={property.images?.[2]?.url || null}
-            alt={property.title}
-            className="sub-image"
-          />
-          <img
-            src={property.images?.[3]?.url || null}
-            alt={property.title}
-            className="sub-image"
-          />
-          <img
-            src={property.images?.[4]?.url || null}
-            alt={property.title}
-            className="sub-image"
-          />
+          {property.images?.slice(1, 5).map((img, idx) => (
+            <img
+              key={idx}
+              src={img?.url || null}
+              alt={property.title}
+              className="sub-image"
+              onClick={() => openImage(idx + 1)}
+              style={{ cursor: "pointer" }}
+            />
+          ))}
         </SubImageContainer>
       </ImageContainer>
+
+      {isModalOpen && (
+        <ModalOverlay onClick={closeModal}>
+          <ModalContent onClick={(e) => e.stopPropagation()}>
+            <ModalImage
+              src={images[selectedIndex]}
+              alt={`${property.title} - image ${selectedIndex + 1}`}
+            />
+            <ModalClose onClick={closeModal} aria-label="Close image">
+              ×
+            </ModalClose>
+
+            {images.length > 1 && (
+              <>
+                <ModalNav
+                  className="left"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showPrev();
+                  }}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </ModalNav>
+
+                <ModalNav
+                  className="right"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showNext();
+                  }}
+                  aria-label="Next image"
+                >
+                  ›
+                </ModalNav>
+              </>
+            )}
+          </ModalContent>
+        </ModalOverlay>
+      )}
 
       <PaymentContainer>
         <InformationContainer>
           <div className="alignmentBox">
             <div className="informationBox">
               <InformationHeader>
-                <BookingTitle>
+                <BookingTitle className="information-header-title">
                   {property.propertyType} hosted by {property.host.firstName}
                 </BookingTitle>
-                <BookingSubtitle>
+                <BookingSubtitle className="information-header-subtitle">
                   {property.maxGuests} Guests • {property.propertyType} •{" "}
                   {property.bedrooms} Bedrooms •{" "}
                   {((property) => {
@@ -141,31 +204,37 @@ const BookingPage = () => {
                   })(property)}
                 </BookingSubtitle>
               </InformationHeader>
+
               <InformationBody>
                 <div className="titles-container">
-                  <BookingTitle>
+                  <BookingTitle className="information-body-title">
                     <LuHouse /> {property.roomType}
                   </BookingTitle>
-                  <BookingSubtitle>{property.description}</BookingSubtitle>
+                  <BookingSubtitle className="information-body-subtitle">
+                    {property.description}
+                  </BookingSubtitle>
 
-                  <BookingTitle>
+                  <BookingTitle className="information-body-title">
                     <WiStars /> Enhanced Cleaning:
                   </BookingTitle>
-                  <BookingSubtitle>
+                  <BookingSubtitle className="information-body-subtitle">
                     The host commited to Airbnb's 5-step enhanced cleaning
                     process.
                   </BookingSubtitle>
 
-                  <BookingTitle>
+                  <BookingTitle className="information-body-title">
                     <MdOutlineDoorFront /> Self Check-in
                   </BookingTitle>
-                  <BookingSubtitle>
+                  <BookingSubtitle className="information-body-subtitle">
                     Check in yourself with the keypad.
                   </BookingSubtitle>
 
-                  <BookingTitle>
-                    <FaRegCalendar /> Flexible Cancellation
+                  <BookingTitle className="information-body-title">
+                    <FaRegCalendar /> Cancellation Policy
                   </BookingTitle>
+                  <BookingSubtitle className="information-body-subtitle">
+                    Flexible Cancellation
+                  </BookingSubtitle>
                 </div>
               </InformationBody>
             </div>
@@ -180,6 +249,7 @@ const BookingPage = () => {
             <BookingSubtitle className="offersHeader">
               What this place offers
             </BookingSubtitle>
+
             <OffersGrid>
               {property.amenities.map((amenity) => (
                 <BookingSubtitle className="amenity" key={amenity}>
@@ -190,7 +260,7 @@ const BookingPage = () => {
             </OffersGrid>
           </OffersContainer>
 
-          <InformationFooter>
+          {/* <InformationFooter>
             <CalendarContainer>
               <BookingSubtitle>
                 {" "}
@@ -201,9 +271,9 @@ const BookingPage = () => {
                 <CalendarComponent />
               </div>
             </CalendarContainer>
-          </InformationFooter>
+          </InformationFooter> */}
 
-          <BookingTitle>Reviews</BookingTitle>
+          <BookingTitle className="review-title">Reviews</BookingTitle>
 
           <ReviewBarSection />
 
@@ -212,7 +282,6 @@ const BookingPage = () => {
           <HostDisplayContainer property={property} />
 
           <RulesAndSafetyContainer />
-
         </InformationContainer>
       </PaymentContainer>
     </BookingPageContainer>
