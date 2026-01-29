@@ -61,17 +61,18 @@ const ReviewProfiles = () => {
       reviewName: "Kevin Brown",
       reviewDate: "January 2025",
       reviewTxt: "Perfect location and very peaceful. The home had everything we needed for a comfortable stay. Great value for money and the bed was incredibly comfortable."
-    },    {
-      img: "https://photos.peopleimages.com/picture/202404/3054599-portrait-selfie-and-sky-with-clouds-for-black-man-happy-and-pov-for-smile-photography-profile-picture-and-social-media-for-male-person-on-holiday-in-nature-face-and-influencer-and-joyful-travel-fit_400_400.jpg",
-      reviewName: "Alex Jhonson",
-      reviewDate: "January 2026",
-      reviewTxt: "Nice and clean space with a modern feel. A few small things could be improved, but overall we had a great experience and would recommend it."
-    },    {
-      img: "https://t3.ftcdn.net/jpg/03/67/46/48/360_F_367464887_f0w1JrL8PddfuH3P2jSPlIGjKU2BI0rn.jpg",
-      reviewName: "Sophie Lee",
-      reviewDate: "December 2023",
-      reviewTxt: "Fantastic stay from start to finish. Easy check-in, great amenities, and a beautiful space. Perfect for a weekend getaway."
     },
+    //     {
+    //   img: "https://photos.peopleimages.com/picture/202404/3054599-portrait-selfie-and-sky-with-clouds-for-black-man-happy-and-pov-for-smile-photography-profile-picture-and-social-media-for-male-person-on-holiday-in-nature-face-and-influencer-and-joyful-travel-fit_400_400.jpg",
+    //   reviewName: "Alex Jhonson",
+    //   reviewDate: "January 2026",
+    //   reviewTxt: "Nice and clean space with a modern feel. A few small things could be improved, but overall we had a great experience and would recommend it."
+    // },    {
+    //   img: "https://t3.ftcdn.net/jpg/03/67/46/48/360_F_367464887_f0w1JrL8PddfuH3P2jSPlIGjKU2BI0rn.jpg",
+    //   reviewName: "Sophie Lee",
+    //   reviewDate: "December 2023",
+    //   reviewTxt: "Fantastic stay from start to finish. Easy check-in, great amenities, and a beautiful space. Perfect for a weekend getaway."
+    // },
   ]
 
   return (
