@@ -104,6 +104,25 @@ router.post('/', auth, upload.array('images', 5), async (req, res) => {
       }
     }
 
+    // If amenities were sent as a JSON string, parse into array
+    if (propertyData.amenities && typeof propertyData.amenities === 'string') {
+      try {
+        propertyData.amenities = JSON.parse(propertyData.amenities);
+      } catch (e) {
+        // If not JSON, try to split by comma
+        propertyData.amenities = propertyData.amenities.split(',').map(a => a.trim()).filter(Boolean);
+      }
+    }
+
+    // If rating was sent as JSON string, parse it into an object
+    if (propertyData.rating && typeof propertyData.rating === 'string') {
+      try {
+        propertyData.rating = JSON.parse(propertyData.rating);
+      } catch (e) {
+        // leave as-is if parsing fails
+      }
+    }
+
     // coerce numeric fields
     ['bedrooms','bathrooms','beds','maxGuests','pricePerNight'].forEach(k => {
       if (propertyData[k] !== undefined) {

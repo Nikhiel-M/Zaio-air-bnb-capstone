@@ -8,7 +8,7 @@ import {
   PostBookingForm,
   PostBookingSelector,
   HiddenFileInput,
-  ImagePickerButton
+  ImagePickerButton,
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 
@@ -21,14 +21,22 @@ const PostBookingPage = () => {
   const [address, setAddress] = useState("");
   const [maxGuests, setMaxGuests] = useState("");
   const [pricePerNight, setPricePerNight] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState(null);
+
+  const [country, setCountry] = useState("");
+  const [amenaties, setAmenaties] = useState([]);
+  const [average, setAverage] = useState(0);
+  const [count, setCount] = useState(0);
+  const [bedrooms, setBedrooms] = useState(1);
+  const [bathooms, setBathrooms] = useState(1);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-   const fileInputRef = useRef(null);
-  
-   const handleClick = () => {
+  const fileInputRef = useRef(null);
+
+  const handleClick = () => {
     fileInputRef.current.click();
   };
 
@@ -44,38 +52,47 @@ const PostBookingPage = () => {
 
     // basic validation for required fields
     if (!title || !description || !address || !pricePerNight) {
-      setError("Please fill required fields: title, description, address, price");
+      setError(
+        "Please fill required fields: title, description, address, price",
+      );
       return;
     }
 
-    // Map frontend values to backend schema expectations
     const propertyTypeMap = {
-      home: 'house',
-      apartment: 'apartment',
-      condo: 'condo'
+      home: "House",
+      apartment: "Apartment",
+      condo: "Condo",
     };
     const roomTypeMap = {
-      house: 'entire_place',
-      apartment: 'entire_place',
-      condo: 'entire_place',
-      'private room': 'private_room'
+      house: "Entire place",
+      apartment: "Entire place",
+      condo: "Entire place",
+      "private room": "Private room",
     };
 
     const payload = {
       title,
       description,
       long_description,
-      propertyType: propertyTypeMap[propertyType] || propertyType || 'other',
-      roomType: roomTypeMap[roomType] || (roomType === 'private_room' ? 'private_room' : 'entire_place'),
+      propertyType: propertyTypeMap[propertyType] || propertyType || "other",
+      roomType:
+        roomTypeMap[roomType] ||
+        (roomType === "private_room" ? "private_room" : "entire_place"),
       address: {
         city: address,
-        country: 'Unknown'
+        country: "Unknown",
       },
-      bedrooms: Math.max(1, Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1),
+      bedrooms: Math.max(
+        1,
+        Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1,
+      ),
       bathrooms: 1,
-      beds: Math.max(1, Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1),
+      beds: Math.max(
+        1,
+        Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1,
+      ),
       maxGuests: Number(maxGuests) || 1,
-      pricePerNight: Number(pricePerNight) || 0
+      pricePerNight: Number(pricePerNight) || 0,
     };
 
     setLoading(true);
@@ -84,30 +101,28 @@ const PostBookingPage = () => {
 
       // Build multipart/form-data
       const formData = new FormData();
-      formData.append('title', payload.title);
-      formData.append('description', payload.description);
-      formData.append('long_description', payload.long_description);
-      formData.append('propertyType', payload.propertyType);
-      formData.append('roomType', payload.roomType);
-      // send address as JSON string so server can parse it
-      formData.append('address', JSON.stringify(payload.address));
-      formData.append('bedrooms', String(payload.bedrooms));
-      formData.append('bathrooms', String(payload.bathrooms));
-      formData.append('beds', String(payload.beds));
-      formData.append('maxGuests', String(payload.maxGuests));
-      formData.append('pricePerNight', String(payload.pricePerNight));
+      formData.append("title", payload.title);
+      formData.append("description", payload.description);
+      formData.append("long_description", payload.long_description);
+      formData.append("propertyType", payload.propertyType);
+      formData.append("roomType", payload.roomType);
+      formData.append("address", JSON.stringify(payload.address));
+      formData.append("bedrooms", String(payload.bedrooms));
+      formData.append("bathrooms", String(payload.bathrooms));
+      formData.append("beds", String(payload.beds));
+      formData.append("maxGuests", String(payload.maxGuests));
+      formData.append("pricePerNight", String(payload.pricePerNight));
 
       if (images && images.length) {
         Array.from(images).forEach((file) => {
-          formData.append('images', file);
+          formData.append("images", file);
         });
       }
 
       const res = await fetch("http://localhost:5000/api/properties", {
         method: "POST",
         headers: {
-          ...(token ? { Authorization: `Bearer ${token}` } : {})
-          // NOTE: do NOT set Content-Type; browser will set multipart boundary
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: formData,
       });
@@ -166,9 +181,7 @@ const PostBookingPage = () => {
           <option value="condo">Condo</option>
         </PostBookingSelector>
 
-
-
-                <PostBookingSelector
+        <PostBookingSelector
           type="text"
           value={roomType}
           onChange={(e) => setRoomType(e.target.value)}
@@ -180,7 +193,6 @@ const PostBookingPage = () => {
           <option value="apartment">Entire apartment</option>
           <option value="condo">Entire condo</option>
           <option value="private room">Private room</option>
-
         </PostBookingSelector>
 
         <PostBookingForm
@@ -204,22 +216,36 @@ const PostBookingPage = () => {
           required
           placeholder="Price per night"
         />
-      <HiddenFileInput
-        type="file"
-        ref={fileInputRef}
-        multiple
-        accept="image/*"
-        onChange={handleChange}
-      />
-      
-      <ImagePickerButton type="button" onClick={handleClick}>
-        Click to select images
-      </ImagePickerButton>
+        <HiddenFileInput
+          type="file"
+          ref={fileInputRef}
+          multiple
+          accept="image/*"
+          onChange={handleChange}
+        />
 
+        <ImagePickerButton
+          type="button"
+          onClick={handleClick}
+          aria-live="polite"
+          title={
+            images && images.length
+              ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
+              : "Click to select images"
+          }
+        >
+          {images && images.length > 0
+            ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
+            : "Click to select images"}
+        </ImagePickerButton>
       </PostBookingFormContainer>
 
-      {error && <div style={{ margin: "8px 0" }}>{error}</div>}
-      <PillButton className="post-btn" onClick={handleSubmit} disabled={loading}>
+      {error && <div className="error-msg">{error}</div>}
+      <PillButton
+        className="post-btn"
+        onClick={handleSubmit}
+        disabled={loading}
+      >
         {loading ? "Submitting..." : "Submit"}
       </PillButton>
     </PostBookingContainer>

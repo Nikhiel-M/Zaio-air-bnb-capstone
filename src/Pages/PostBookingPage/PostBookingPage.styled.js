@@ -22,6 +22,11 @@ padding: 3rem;
         color: white;
     }
 }
+
+.error-msg{
+  color: red;
+  padding-top: 1rem;
+}
 `;
 
 export const PostBookingFormContainer = styled.div`
