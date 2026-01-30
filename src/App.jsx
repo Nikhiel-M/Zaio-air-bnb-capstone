@@ -18,10 +18,10 @@ function AppContent() {
   const hideLayout = hiddenPaths.some((p) => location.pathname === p || location.pathname.startsWith(p + "/"));
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div className="app-container">
       <GlobalStyles />
       {!hideLayout && <Header />}
-      <div style={{ flex: 1 }}>
+      <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/locations" element={<Locations />} />

@@ -26,7 +26,6 @@ const PostBookingPage = () => {
   const [maxGuests, setMaxGuests] = useState("");
   const [pricePerNight, setPricePerNight] = useState("");
   const [images, setImages] = useState(null);
-
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [average, setAverage] = useState();
