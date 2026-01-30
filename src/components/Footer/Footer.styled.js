@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const FooterWrapper = styled.div`
 width: 100%;
+position: relative;
+margin-top: auto;
+background-color: #f7f7f7;
 `
 
 export const FooterContainer = styled.footer`
@@ -11,11 +14,10 @@ color: black;
 display: flex;
 flex-direction: row;
 padding: 3rem 3rem 1rem 3rem;
-
 `
 
 export const FooterSection = styled.div`
-bottom: 0;
+
 width: 25%;
 color: black;
 display: flex;

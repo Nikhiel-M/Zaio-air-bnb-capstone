@@ -1,11 +1,11 @@
 import React from "react";
 import {
+  FooterWrapper,
   FooterContainer,
   FooterSection,
   FooterTitle,
   FooterSubtitle,
   Kicker,
-  FooterWrapper,
 } from "./Footer.styled";
 import { TbWorld } from "react-icons/tb";
 import { FiDollarSign } from "react-icons/fi";
