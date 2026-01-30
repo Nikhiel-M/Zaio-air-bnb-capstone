@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   LocationsContainer,
   LocationsCard,
@@ -18,6 +19,7 @@ const Locations = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // const getApiBase = () => {
   //   try {
@@ -60,13 +62,22 @@ const Locations = () => {
   if (loading) return <LocationsContainer>Loading...</LocationsContainer>;
   if (error) return <LocationsContainer>{error}</LocationsContainer>;
 
+  const searchParams = new URLSearchParams(location.search);
+  const countryParam = searchParams.get("country");
+
+  const displayedProperties = countryParam
+    ? properties.filter((p) => {
+        const propCountry = (p?.address?.country || "").toString().toLowerCase().trim();
+        const queryCountry = (countryParam || "").toString().toLowerCase().trim();
+        return propCountry === queryCountry;
+      })
+    : properties;
+
   return (
     <LocationsContainer>
-      {properties.map((p) => {
+      {displayedProperties.map((p) => {
             const img = p.images?.[0]?.url || "https://via.placeholder.com/400x250";
-        const roomLabel =
-          p.roomType === "entire_place" ? "Entire place" :
-          p.roomType === "private_room" ? "Private room" : "Shared room";
+          
         const details = [
           p.maxGuests ? `${p.maxGuests} guests` : null,
           p.bedrooms !== undefined ? `${p.bedrooms} bedrooms` : null,
@@ -83,7 +94,7 @@ const Locations = () => {
             <LocationsInformationContainer>
               <LocationImage src={img || null} />
               <LocationDetails>
-                <LocationSubtitle>{roomLabel}</LocationSubtitle>
+
                 <LocationTitle>{p.title || p.address?.city || "Unknown location"}</LocationTitle>
                 <LocationSubtitle>{p.description}</LocationSubtitle>
                 <LocationSubtitle>{p.address.country}</LocationSubtitle>

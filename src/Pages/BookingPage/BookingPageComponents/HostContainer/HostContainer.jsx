@@ -1,10 +1,10 @@
 import React from 'react'
 import { HostContainer} from './HostContainer.styled'
-import { BookingTitle, BookingSubtitle } from '../BookingPage.styled';
+import { BookingTitle, BookingSubtitle } from '../../BookingPage.styled';
 import { GoStarFill } from "react-icons/go";
 import { FaCheckCircle, FaMedal } from "react-icons/fa";
-import { PillButton } from '../../../components/Buttons/PillButton.styled';
-import { API_BASE_URL } from '../../../services/api';
+import { PillButton } from '../../../../components/Buttons/PillButton.styled';
+import { API_BASE_URL } from '../../../../services/api';
 
 const BACKEND_URL = API_BASE_URL.replace('/api', '');
 

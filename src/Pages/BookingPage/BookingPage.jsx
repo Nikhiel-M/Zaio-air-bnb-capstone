@@ -35,7 +35,7 @@ import { BsDot } from "react-icons/bs";
 // import CalendarComponent from "../../components/Calandar/Calendar";
 import ReviewBarSection from "./BookingPageComponents/ReviewSection/ReviewSection";
 import ReviewProfiles from "./BookingPageComponents/ReviewProfiles/ReviewProfiles";
-import HostDisplayContainer from "./HostContainer/HostContainer";
+import HostDisplayContainer from "./BookingPageComponents/HostContainer/HostContainer";
 import RulesAndSafetyContainer from "./BookingPageComponents/Rules&Safety/RulesAndSafety";
 
 const API_BASE = import.meta.env?.VITE_API_URL;
