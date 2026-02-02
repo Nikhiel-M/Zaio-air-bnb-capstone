@@ -12,6 +12,8 @@ import {
   GuestCount,
   DoneButton,
   DoneButtonContainer,
+  CountrySelector,
+  CountryOption,
 } from "./CalenderSection.styled";
 import { FaSearch } from "react-icons/fa";
 import CalendarComponent from "../Calandar/Calendar";
@@ -179,31 +181,21 @@ const CalenderSection = () => {
         </h2>
         {modals.location && (
           <GuestDropdownModal ref={(el) => (modalRefs.current.location = el)}>
-            <div style={{ padding: "10px" }}>
-              <div
-                style={{
-                  padding: "10px",
-                  cursor: "pointer",
-                  borderBottom: "1px solid #ddd",
-                }}
+            <CountrySelector >
+              <CountryOption
                 onClick={() => handleCountrySelect("All countries")}
               >
                 All countries
-              </div>
+              </CountryOption>
               {countries.map((country) => (
-                <div
+                <CountryOption
                   key={country}
-                  style={{
-                    padding: "10px",
-                    cursor: "pointer",
-                    borderBottom: "1px solid #ddd",
-                  }}
                   onClick={() => handleCountrySelect(country)}
                 >
                   {country}
-                </div>
+                </CountryOption>
               ))}
-            </div>
+            </CountrySelector>
           </GuestDropdownModal>
         )}
       </DateContainer>

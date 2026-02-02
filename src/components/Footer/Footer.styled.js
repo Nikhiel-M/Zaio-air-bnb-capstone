@@ -22,7 +22,7 @@ width: 25%;
 color: black;
 display: flex;
 flex-direction: column;
-border-bottom: 1px solid lightgray;
+border-bottom: 1px solid lightgrey;
 padding-bottom: 1rem;
 `
 export const FooterTitle = styled.h2`
