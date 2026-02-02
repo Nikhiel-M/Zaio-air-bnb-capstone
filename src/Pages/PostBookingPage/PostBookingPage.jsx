@@ -163,7 +163,8 @@ const PostBookingPage = () => {
         });
       }
 
-      const res = await fetch("http://localhost:5000/api/properties", {
+      // http://localhost:5000/api/properties
+      const res = await fetch("http://localhost:10000/api/properties", {
         method: "POST",
         headers: {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),

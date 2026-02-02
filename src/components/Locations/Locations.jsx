@@ -36,7 +36,8 @@ const Locations = () => {
 
   // const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
 
-   const ENDPOINT = `http://localhost:5000/api/properties`;
+   const ENDPOINT = `http://localhost:10000/api/properties`;
+  //  http://localhost:5000/api/properties
 
   useEffect(() => {
     let mounted = true;
