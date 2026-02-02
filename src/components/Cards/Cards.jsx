@@ -3,18 +3,18 @@ import {
   CardContainer,
   CardImage,
   CardContent,
-  CardTitle,
+  SmlCardTitle,
   CardDescription,
-  CardBody
+  CardBody,
+  CardTitle,
 } from "../Cards/Cards.styled";
-import { Title } from "../../Styles/General.styled";
 import LargeCards from './LargeCards';
 
 const Cards = () => {
   return (
     <>
     <CardBody>
-      <Title className='card-title'>Inspiration for your next trip </Title>
+      <CardTitle className='inspiration-title'>Inspiration for your next trip </CardTitle>
       <div className="cards">
         <CardContainer>
             <CardImage
@@ -22,7 +22,7 @@ const Cards = () => {
               alt="Card Image"
             />
             <CardContent>
-              <CardTitle>Sandtons luxurious aparthotel</CardTitle>
+              <SmlCardTitle>Sandtons luxurious aparthotel</SmlCardTitle>
               <CardDescription>
                 Comfort and privacy in a place to yourself
               </CardDescription>
@@ -35,7 +35,7 @@ const Cards = () => {
               alt="Card Image"
             />
             <CardContent>
-              <CardTitle>Loft Apartment </CardTitle>
+              <SmlCardTitle>Loft Apartment </SmlCardTitle>
               <CardDescription>
                 Entire loft in Johannesburg, South Africa
               </CardDescription>
@@ -48,7 +48,7 @@ const Cards = () => {
               alt="Card Image"
             />
             <CardContent>
-              <CardTitle>Apartment in Table View</CardTitle>
+              <SmlCardTitle>Apartment in Table View</SmlCardTitle>
               <CardDescription>
                 Beachfront bliss, sunsets galore
               </CardDescription>
@@ -61,15 +61,17 @@ const Cards = () => {
               alt="Card Image"
             />
             <CardContent>
-              <CardTitle>Guesthouse in The Bluff</CardTitle>
+              <SmlCardTitle>Guesthouse in The Bluff</SmlCardTitle>
               <CardDescription>
               Angelfish Cottage modern & on the Beach
               </CardDescription>
             </CardContent>
           </CardContainer>
+
         </div>
       </CardBody>
        
+       <CardTitle className='LrgCard-title'>Discover Experiences</CardTitle>
       <LargeCards />
       </>
 )

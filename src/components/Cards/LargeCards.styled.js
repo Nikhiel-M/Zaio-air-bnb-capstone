@@ -11,6 +11,8 @@ padding: 2rem;
 export const CardOrganizer = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: space-evenly;
+
 `;
 
 export const ImageWrapper = styled.div`
@@ -20,9 +22,10 @@ display: flex;
 justify-content: center;
 
 .body-image{
-    width: 100%;
-    height: 90%;
+    width: 55rem;
+    height: 60rem;
     border-radius: 12px;
+    object-fit: cover;
 }
 `;
 

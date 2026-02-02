@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Title } from "../../Styles/General.styled";
+
 
 export const CardBody = styled.div`
  
@@ -11,12 +13,12 @@ export const CardBody = styled.div`
     margin-left: 2rem;
 }
 
-.card-title{
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 1rem 0 1rem 2rem;
-    color: #000;
-}
+    .inspiration-title{
+      margin: 2rem 0 2rem 2rem;
+    }
+
+
+
 `;
 
 export const CardContainer = styled.div`
@@ -28,6 +30,8 @@ export const CardContainer = styled.div`
   margin-bottom: 3rem;
   max-width: 400px;
   background-color: #f23030ff;
+
+  
 `;
 
 export const CardImage = styled.img`
@@ -41,11 +45,20 @@ export const CardContent = styled.div`
 
 `;
 
-export const CardTitle = styled.h2`
+export const CardTitle = styled(Title)`
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin: 1rem 0 1rem 2rem;
+    color: #000;
+
+`
+
+export const SmlCardTitle = styled.h2`
   font-size: 1.5rem;
   margin: 0 0 8px;
   color: white;
 `;
+
 
 export const CardDescription = styled.p`
   font-size: 1rem;

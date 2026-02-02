@@ -16,7 +16,7 @@ import {
   CountryOption,
 } from "./CalenderSection.styled";
 import { FaSearch } from "react-icons/fa";
-import CalendarComponent from "../Calandar/Calendar";
+import CalendarComponent from "../Calendar/Calendar";
 import { locationsAPI } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -273,7 +273,10 @@ const CalenderSection = () => {
         )}
       </DateContainer>
 
-      <FaSearch className="search-icon" />
+      <a href="/locations">
+      <FaSearch className="search-icon"  />
+      </a>
+
     </CalenderContainer>
   );
 };

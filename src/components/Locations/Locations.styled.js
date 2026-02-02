@@ -6,7 +6,6 @@ export const LocationsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background-color: #f7f7f7;
 `;
 
 export const LocationsCard = styled.div`
