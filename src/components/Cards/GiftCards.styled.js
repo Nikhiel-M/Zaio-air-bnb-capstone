@@ -27,7 +27,10 @@ padding: 1rem 4rem;
 }
 
 .gift-image{
+    object-fit: cover;
+    image-rendering: optimizeQuality;
     width: 100%;
+    
 }
 
 .gift-image-container{
