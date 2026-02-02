@@ -17,7 +17,7 @@ button {
 
 .datepicker {
 	width: 95%;
-	max-width: 350px;
+	max-width: 23rem;
 	background-color: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0 0 2px 0 rgba(0, 0, 0, .2), 0 5px 10px 0 rgba(0, 0, 0, .1);
@@ -25,7 +25,7 @@ button {
 }
 
 .datepicker-top {
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 }
 
 
@@ -44,21 +44,22 @@ button {
 	background-color: #ffffff;
 	color: #333;
 	border-radius: 12px;
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 2.1rem;
+	height: 2.1rem;
 	box-shadow: 0 0 2px 0 rgba(0, 0, 0, .25), 0 0 10px 0 rgba(0, 0, 0, .15);
 	font-size: 1.2rem;
 }
 
 .month-name {
+	font-size: 1.5rem;
 	font-weight: 600;
-	color: #333;
+	color: #272727;
 }
 
 .datepicker-calendar {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
-	grid-row-gap: 1rem;
+	grid-row-gap: 0.5rem;
 }
 
 .day, .date {
@@ -67,24 +68,26 @@ button {
 
 .day {
 	color: #666;
-	font-size: .875em;
+	font-size: 1.2rem;
 	font-weight: 500;
 	justify-self: center;
+	padding: 0.5rem;
 }
 
 .date {
 	border: 0;
 	padding: 0;
-	width: 2.25rem;
-	height: 2.25rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 1.5rem;
 	border-radius: 6px;
 	font-weight: 600;
 	border: 2px solid transparent;
 	background-color: transparent;
-	color: #333;
+	color: #272727;
 	cursor: pointer;
 	&:focus {
 		outline: 0;
