@@ -115,12 +115,12 @@ const ProfileSection = () => {
             {isDropDownOpen && (
               <DropDownContainer>
                 {!user ? (
-                  <a href="/login" className="dropdown-a-tag">
+                  <a onClick={() => navigate("/login")} className="dropdown-a-tag">
                     <div className="dropdown-login">Login</div>
                   </a>
                 ) : (
                   <>
-                    <a href="/reservations" className="dropdown-r-tag">
+                    <a onClick={() => navigate("/reservations")} className="dropdown-r-tag">
                       <div className="dropdown-login">View reservations</div>
                     </a>
                     <span className="dropdown-r-tag">
