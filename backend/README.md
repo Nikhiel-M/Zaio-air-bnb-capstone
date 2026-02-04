@@ -69,7 +69,7 @@ A RESTful API backend for an Airbnb clone built with Node.js, Express.js, and Mo
    npm run dev
    ```
 
-<!-- The server will start on `http://localhost:5000` -->
+The server will start on `http://localhost:5000`
 
 ## Sample Login Credentials
 
