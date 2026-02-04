@@ -48,8 +48,7 @@ const Locations = () => {
         if (!res.ok) throw new Error(`status ${res.status}`);
         const data = await res.json();
         if (!mounted) return;
-        setProperties(data.data || []);
-        // Array.isArray(data) ? data : data.properties || []
+        setProperties(Array.isArray(data) ? data : data.properties || []);
       } catch (err) {
         console.error("Fetch properties error:", err);
         if (mounted) setError("Failed to load properties");
