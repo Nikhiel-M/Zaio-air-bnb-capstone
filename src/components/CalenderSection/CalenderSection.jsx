@@ -273,7 +273,7 @@ const CalenderSection = () => {
         )}
       </DateContainer>
 
-      <a href="/locations">
+      <a className="search-button" onClick={() => navigate("/locations")}>
       <FaSearch className="search-icon"  />
       </a>
 
