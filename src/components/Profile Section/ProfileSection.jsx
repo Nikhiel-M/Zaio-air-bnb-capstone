@@ -69,7 +69,6 @@ const ProfileSection = () => {
     const handleLogout = () => {
     authAPI.logout();
     navigate ("/");
-    window.location.reload();
     setUser(null)
   };
 
