@@ -37,10 +37,10 @@ const Locations = () => {
   // const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
 
 
-   const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/properties`;
+   const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
   //  http://localhost:5000/api/properties
 
-
+  
   useEffect(() => {
     let mounted = true;
 
