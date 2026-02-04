@@ -1,5 +1,4 @@
 // Frontend API service to connect to your backend
-// Place this file in your React src folder as: src/services/api.js
 
 const API_BASE_URL = 'https://zaio-air-bnb-capstone.onrender.com/api';
 // http://localhost:5000/api
@@ -79,6 +78,7 @@ export const authAPI = {
   // Logout user
   logout: () => {
     localStorage.removeItem('token');
+    
   },
 };
 
