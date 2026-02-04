@@ -165,7 +165,7 @@ const PostBookingPage = () => {
 
       // http://localhost:5000/api/properties
 
-      const res = await fetch("https://zaio-air-bnb-capstone.onrender.com/properties", {
+      const res = await fetch("https://zaio-air-bnb-capstone.onrender.com/api/properties", {
         method: "POST",
         headers: {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
