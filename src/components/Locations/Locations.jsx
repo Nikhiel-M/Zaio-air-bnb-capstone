@@ -21,22 +21,22 @@ const Locations = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getApiBase = () => {
-    try {
-      if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL) {
-        return String(import.meta.env.VITE_API_URL).replace(/\/$/, "");
-      }
-    } catch (e) {
-    }
-    if (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) {
-      return String(process.env.REACT_APP_API_URL).replace(/\/$/, "");
-    }
-    return "";
-  };
+  // const getApiBase = () => {
+  //   try {
+  //     if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL) {
+  //       return String(import.meta.env.VITE_API_URL).replace(/\/$/, "");
+  //     }
+  //   } catch (e) {
+  //   }
+  //   if (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) {
+  //     return String(process.env.REACT_APP_API_URL).replace(/\/$/, "");
+  //   }
+  //   return "";
+  // };
 
-  const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
+  // const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
 
-  //  const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
+   const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/locations/properties`;
   //  http://localhost:5000/api/properties
 
   useEffect(() => {
@@ -48,7 +48,8 @@ const Locations = () => {
         if (!res.ok) throw new Error(`status ${res.status}`);
         const data = await res.json();
         if (!mounted) return;
-        setProperties(Array.isArray(data) ? data : data.properties || []);
+        setProperties(data.data || []);
+        // Array.isArray(data) ? data : data.properties || []
       } catch (err) {
         console.error("Fetch properties error:", err);
         if (mounted) setError("Failed to load properties");
