@@ -11,6 +11,7 @@ import { TbWorld } from "react-icons/tb";
 import { PiList } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import { usersAPI, authAPI } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSection = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -19,6 +20,7 @@ const ProfileSection = () => {
   const [isHost, setIsHost] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkUserStatus = async () => {
