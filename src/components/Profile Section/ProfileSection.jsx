@@ -47,7 +47,7 @@ const ProfileSection = () => {
 
   const handleBecomeHost = async () => {
     if (!user) {
-      window.location.href = "/login";
+       navigate("/login");
       return;
     }
     setIsBecomingHost(true);
@@ -66,11 +66,11 @@ const ProfileSection = () => {
 
     const handleLogout = () => {
     authAPI.logout();
-    window.location.href = "/";
+    navigate ("/");
   };
 
   const handleBookingRoute = () => {
-    window.location.href = "/post-booking";
+    navigate("/post-booking");
   }
 
   if (loading) {
