@@ -234,9 +234,9 @@ router.patch('/:id/cancel', auth, async (req, res) => {
       isHost
     });
 
-    if (!isGuest && !isHost) {
-      return res.status(403).json({ message: 'Not authorized to cancel this booking' });
-    }
+      if (booking.guest.toString() !== req.userId.toString() && booking.host.toString() !== req.userId.toString()) {
+        return res.status(403).json({ message: 'Not authorized to cancel this booking' });
+      }
 
     if (booking.status === 'completed') {
       return res.status(400).json({ message: 'Cannot cancel completed booking' });

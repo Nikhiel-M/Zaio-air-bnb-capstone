@@ -163,7 +163,7 @@ export const bookingsAPI = {
   },
 
   // Cancel booking
-  cancelBooking: async (id, reason) => {
+  cancelBooking: async (id, reason = '') => {
     return apiRequest(`/bookings/${id}/cancel`, {
       method: 'PATCH',
       body: JSON.stringify({ cancellationReason: reason }),
