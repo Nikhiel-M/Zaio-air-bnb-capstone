@@ -86,7 +86,8 @@ const BookingPage = () => {
 
   const closeModal = () => setIsModalOpen(false);
 
-  const showPrev = () => setSelectedIndex((i) => (i - 1 + images.length) % images.length);
+  const showPrev = () =>
+    setSelectedIndex((i) => (i - 1 + images.length) % images.length);
   const showNext = () => setSelectedIndex((i) => (i + 1) % images.length);
 
   useEffect(() => {
@@ -100,10 +101,8 @@ const BookingPage = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [isModalOpen, images.length]);
 
-  if (loading) return <div>Loading booking page...</div>; 
+  if (loading) return <div>Loading booking page...</div>;
 
-
-  
   return (
     <BookingPageContainer>
       <HeaderContainer>
@@ -259,19 +258,6 @@ const BookingPage = () => {
               ))}
             </OffersGrid>
           </OffersContainer>
-
-          {/* <InformationFooter>
-            <CalendarContainer>
-              <BookingSubtitle>
-                {" "}
-                Nights in {property.address.state}
-              </BookingSubtitle>
-              <div className="Calendars">
-                <CalendarComponent />
-                <CalendarComponent />
-              </div>
-            </CalendarContainer>
-          </InformationFooter> */}
 
           <BookingTitle className="review-title">Reviews</BookingTitle>
 
