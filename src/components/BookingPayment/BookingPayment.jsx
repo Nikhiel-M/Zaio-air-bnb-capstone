@@ -62,7 +62,7 @@ const BookingPayment = ({ property }) => {
     <BookingPaymentContainer>
       <BookingPaymentHeader>
         <BookingTitle className="title">
-          $ {property.pricePerNight ?? 0} / night pp{" "}
+          $ {property.pricePerNight ?? 0} / night{" "}
         </BookingTitle>
         <BookingSubtitle>
           <GoStarFill /> {property.rating?.average ?? 0} (

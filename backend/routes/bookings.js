@@ -161,6 +161,16 @@ router.get('/:id', auth, async (req, res) => {
       return res.status(403).json({ message: 'Not authorized to view this booking' });
     }
 
+    // Debug logging
+    console.log('Get booking debug:', {
+      bookingId: booking._id,
+      guest: booking.guest.toString(),
+      host: booking.host.toString(),
+      userId: req.userId.toString(),
+      isGuest: booking.guest.toString() === req.userId.toString(),
+      isHost: booking.host.toString() === req.userId.toString()
+    });
+
     res.json({ booking });
   } catch (error) {
     console.error('Get booking error:', error);
@@ -211,24 +221,36 @@ router.patch('/:id/cancel', auth, async (req, res) => {
       return res.status(404).json({ message: 'Booking not found' });
     }
 
-    // Guest or host can cancel
-    if (booking.guest.toString() !== req.userId && booking.host.toString() !== req.userId) {
+    const isGuest = booking.guest.toString() === req.userId.toString();
+    const isHost = booking.host.toString() === req.userId.toString();
+
+    // Debug logging
+    console.log('Cancel booking debug:', {
+      bookingId: booking._id,
+      guest: booking.guest.toString(),
+      host: booking.host.toString(),
+      userId: req.userId.toString(),
+      isGuest,
+      isHost
+    });
+
+    if (!isGuest && !isHost) {
       return res.status(403).json({ message: 'Not authorized to cancel this booking' });
     }
 
-    // Can't cancel completed bookings
     if (booking.status === 'completed') {
       return res.status(400).json({ message: 'Cannot cancel completed booking' });
+    }
+
+    if (booking.status === 'cancelled') {
+      return res.status(400).json({ message: 'Booking already cancelled' });
     }
 
     booking.status = 'cancelled';
     booking.cancellationReason = cancellationReason || '';
     await booking.save();
 
-    res.json({
-      message: 'Booking cancelled successfully',
-      booking
-    });
+    res.json({ message: 'Booking cancelled successfully', booking });
   } catch (error) {
     console.error('Cancel booking error:', error);
     res.status(500).json({ message: 'Server error while cancelling booking' });
