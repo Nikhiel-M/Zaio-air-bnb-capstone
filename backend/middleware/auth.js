@@ -11,13 +11,11 @@ const auth = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Get user from database
-    const user = await User.findById(decoded.userId);
+    const user = await User.findById(decoded.id); 
     if (!user) {
       return res.status(401).json({ message: 'Token is not valid' });
     }
 
-    // Add user info to request
     req.userId = user._id;
     req.user = user;
     
