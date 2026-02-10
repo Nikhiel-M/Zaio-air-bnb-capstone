@@ -214,101 +214,21 @@ router.patch('/:id/status', auth, async (req, res) => {
 // Cancel booking
 router.patch('/:id/cancel', auth, async (req, res) => {
   try {
-    const { cancellationReason } = req.body;
     const booking = await Booking.findById(req.params.id);
-
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found' });
     }
-
-    const isGuest = booking.guest.toString() === req.userId.toString();
-    const isHost = booking.host.toString() === req.userId.toString();
-
-    // Debug logging
-    console.log('Cancel booking debug:', {
-      bookingId: booking._id,
-      guest: booking.guest.toString(),
-      host: booking.host.toString(),
-      userId: req.userId.toString(),
-      isGuest,
-      isHost
-    });
-
-      if (booking.guest.toString() !== req.userId.toString() && booking.host.toString() !== req.userId.toString()) {
-        return res.status(403).json({ message: 'Not authorized to cancel this booking' });
-      }
-
-    if (booking.status === 'completed') {
-      return res.status(400).json({ message: 'Cannot cancel completed booking' });
+    // Only guest or host can delete
+    if (booking.guest.toString() !== req.userId.toString() && booking.host.toString() !== req.userId.toString()) {
+      return res.status(403).json({ message: 'Not authorized to delete this booking' });
     }
-
-    if (booking.status === 'cancelled') {
-      return res.status(400).json({ message: 'Booking already cancelled' });
-    }
-
-    booking.status = 'cancelled';
-    booking.cancellationReason = cancellationReason || '';
-    await booking.save();
-
-    res.json({ message: 'Booking cancelled successfully', booking });
+    await Booking.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Booking deleted successfully' });
   } catch (error) {
     console.error('Cancel booking error:', error);
     res.status(500).json({ message: 'Server error while cancelling booking' });
   }
 });
 
-// Add review to booking
-router.post('/:id/review', auth, async (req, res) => {
-  try {
-    const { rating, comment } = req.body;
-    const booking = await Booking.findById(req.params.id);
-
-    if (!booking) {
-      return res.status(404).json({ message: 'Booking not found' });
-    }
-
-    // Only guest can review
-    if (booking.guest.toString() !== req.userId) {
-      return res.status(403).json({ message: 'Only guest can review the booking' });
-    }
-
-    // Can only review completed bookings
-    if (booking.status !== 'completed') {
-      return res.status(400).json({ message: 'Can only review completed bookings' });
-    }
-
-    // Check if already reviewed
-    if (booking.review.rating) {
-      return res.status(400).json({ message: 'Booking already reviewed' });
-    }
-
-    booking.review = {
-      rating,
-      comment,
-      reviewDate: new Date()
-    };
-    await booking.save();
-
-    // Update property rating
-    const property = await Property.findById(booking.property);
-    const allReviews = await Booking.find({
-      property: booking.property,
-      'review.rating': { $exists: true }
-    });
-
-    const totalRating = allReviews.reduce((sum, b) => sum + b.review.rating, 0);
-    property.rating.average = totalRating / allReviews.length;
-    property.rating.count = allReviews.length;
-    await property.save();
-
-    res.json({
-      message: 'Review added successfully',
-      booking
-    });
-  } catch (error) {
-    console.error('Add review error:', error);
-    res.status(500).json({ message: 'Server error while adding review' });
-  }
-});
 
 module.exports = router;
