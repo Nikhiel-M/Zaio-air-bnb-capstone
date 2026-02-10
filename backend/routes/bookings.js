@@ -161,15 +161,6 @@ router.get('/:id', auth, async (req, res) => {
       return res.status(403).json({ message: 'Not authorized to view this booking' });
     }
 
-    // Debug logging
-    console.log('Get booking debug:', {
-      bookingId: booking._id,
-      guest: booking.guest.toString(),
-      host: booking.host.toString(),
-      userId: req.userId.toString(),
-      isGuest: booking.guest.toString() === req.userId.toString(),
-      isHost: booking.host.toString() === req.userId.toString()
-    });
 
     res.json({ booking });
   } catch (error) {

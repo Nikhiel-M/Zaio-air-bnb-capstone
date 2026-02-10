@@ -25,6 +25,7 @@ const BookingPayment = ({ property }) => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const maxGuests = property.maxGuests || 1;
+  const [loading, setLoading] = useState(false); 
 
   const nights = checkIn && checkOut ? Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) : 0;
   const subtotal = nights * (property.pricePerNight ?? 0);
@@ -44,6 +45,7 @@ const BookingPayment = ({ property }) => {
     }
     try {
       const user = await authAPI.getCurrentUser();
+      setLoading(true);
       const bookingData = {
         propertyId: property._id,
         checkInDate: checkIn,
@@ -56,6 +58,7 @@ const BookingPayment = ({ property }) => {
     } catch (error) {
       alert('Error creating booking: ' + error.message);
     }
+    setLoading(false);
   };
 
   return (
@@ -94,7 +97,9 @@ const BookingPayment = ({ property }) => {
           </GuestsDropdown>
         </BookingGuests>
       </BookingContainer>
-      <PillButton className="reserve-button" onClick={handleReserve}>Reserve</PillButton>
+      <PillButton className="reserve-button" onClick={handleReserve} disabled={loading}>
+        {loading ? "Reserving..." : "Reserve"}
+      </PillButton>
       <BookingSubtitle className="guests-subtitle">
         you won't be charged yet
       </BookingSubtitle>
