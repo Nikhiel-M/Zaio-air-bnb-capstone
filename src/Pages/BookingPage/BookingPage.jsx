@@ -217,7 +217,7 @@ const BookingPage = () => {
                     <WiStars /> Enhanced Cleaning:
                   </BookingTitle>
                   <BookingSubtitle className="information-body-subtitle">
-                    The host commited to Airbnb's 5-step enhanced cleaning
+                    The host committed to Airbnb's 5-step enhanced cleaning
                     process.
                   </BookingSubtitle>
 
