@@ -11,6 +11,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ReservationsPage from "./Pages/ReservationsPage/ReservationsPage";
 import PostBookingPage from "./Pages/PostBookingPage/PostBookingPage";
+import UserListings from "./Pages/UserListings/UserListings";
 
 function AppContent() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function AppContent() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/reservations" element={<ReservationsPage />} />
           <Route path="/post-booking" element={<PostBookingPage />} />
+          <Route path="/user-listings" element={<UserListings />} />
         </Routes>
       </div>
       {!hideLayout && <Footer />}

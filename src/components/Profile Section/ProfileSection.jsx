@@ -24,7 +24,7 @@ const ProfileSection = () => {
 
   useEffect(() => {
     const checkUserStatus = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
         setLoading(false);
         return;
@@ -49,7 +49,7 @@ const ProfileSection = () => {
 
   const handleBecomeHost = async () => {
     if (!user) {
-       navigate("/login");
+      navigate("/login");
       return;
     }
     setIsBecomingHost(true);
@@ -66,15 +66,15 @@ const ProfileSection = () => {
     }
   };
 
-    const handleLogout = () => {
+  const handleLogout = () => {
     authAPI.logout();
-    navigate ("/");
-    setUser(null)
+    navigate("/");
+    setUser(null);
   };
 
   const handleBookingRoute = () => {
     navigate("/post-booking");
-  }
+  };
 
   if (loading) {
     return (
@@ -90,7 +90,10 @@ const ProfileSection = () => {
     <ProfileSectionContainer>
       <Container className="profile-section">
         {user && isHost ? (
-          <h2 className="host-title-booking" onClick={handleBookingRoute} > Welcome {user?.firstName} <br /> Post your homes Here!</h2>
+          <h2 className="host-title-booking" onClick={handleBookingRoute}>
+            {" "}
+            Welcome {user?.firstName} <br /> Post your homes Here!
+          </h2>
         ) : (
           <h2
             className="host-title"
@@ -98,9 +101,17 @@ const ProfileSection = () => {
             disabled={isBecomingHost}
             style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
           >
-            {!user ? <>Welcome guest <br /> please sign in</> : <>Welcome {user?.firstName} <br /> Click here to become a host </>}
+            {!user ? (
+              <>
+                Welcome guest <br /> please sign in
+              </>
+            ) : (
+              <>
+                Welcome {user?.firstName} <br /> Click here to become a
+                host{" "}
+              </>
+            )}
           </h2>
-
         )}
 
         {hostMessage && <div className="host-message">{hostMessage}</div>}
@@ -116,17 +127,36 @@ const ProfileSection = () => {
             {isDropDownOpen && (
               <DropDownContainer>
                 {!user ? (
-                  <a onClick={() => navigate("/login")} className="dropdown-a-tag">
+                  <a
+                    onClick={() => navigate("/login")}
+                    className="dropdown-a-tag"
+                  >
                     <div className="dropdown-login">Login</div>
                   </a>
                 ) : (
                   <>
-                    <a onClick={() => navigate("/reservations")} className="dropdown-r-tag">
+                    <a
+                      onClick={() => navigate("/reservations")}
+                      className="dropdown-r-tag"
+                    >
                       <div className="dropdown-login">View reservations</div>
                     </a>
-                    <span className="dropdown-r-tag">
-                      <div className="dropdown-login" onClick={handleLogout}>Logout</div>
-                    </span>
+                    {isHost && (
+                      <a
+                        onClick={() => navigate("/user-listings")}
+                        className="dropdown-r-tag"
+                      >
+                        <div className="dropdown-login">Your listings</div>
+                      </a>
+                    )}
+                    <a
+                      onClick={handleLogout}
+                      className="dropdown-r-tag"
+                    >
+                      <div className="dropdown-login">
+                        Logout
+                      </div>
+                    </a>
                   </>
                 )}
               </DropDownContainer>
