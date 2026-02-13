@@ -8,11 +8,10 @@ import {
   LocationImage,
   LocationTitle,
   LocationSubtitle,
-  LocationReview
+  LocationReview,
 } from "./Locations.styled";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
 
 const Locations = () => {
   const [properties, setProperties] = useState([]);
@@ -36,7 +35,7 @@ const Locations = () => {
 
   // const ENDPOINT = `${getApiBase() || 'http://localhost:5000'}/api/properties`;
 
-   const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
+  const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
   //  http://localhost:5000/api/properties
 
   useEffect(() => {
@@ -58,8 +57,10 @@ const Locations = () => {
     };
 
     fetchProps();
-    return () => { mounted = false; };
-  }, []); 
+    return () => {
+      mounted = false;
+    };
+  }, []);
   if (loading) return <LocationsContainer>Loading...</LocationsContainer>;
   if (error) return <LocationsContainer>{error}</LocationsContainer>;
 
@@ -68,8 +69,14 @@ const Locations = () => {
 
   const displayedProperties = countryParam
     ? properties.filter((p) => {
-        const propCountry = (p?.address?.country || "").toString().toLowerCase().trim();
-        const queryCountry = (countryParam || "").toString().toLowerCase().trim();
+        const propCountry = (p?.address?.country || "")
+          .toString()
+          .toLowerCase()
+          .trim();
+        const queryCountry = (countryParam || "")
+          .toString()
+          .toLowerCase()
+          .trim();
         return propCountry === queryCountry;
       })
     : properties;
@@ -77,14 +84,16 @@ const Locations = () => {
   return (
     <LocationsContainer>
       {displayedProperties.map((p) => {
-            const img = p.images?.[0]?.url || "https://via.placeholder.com/400x250";
-          
+        const img = p.images?.[0]?.url || "https://via.placeholder.com/400x250";
+
         const details = [
           p.maxGuests ? `${p.maxGuests} guests` : null,
           p.bedrooms !== undefined ? `${p.bedrooms} bedrooms` : null,
           p.bathrooms !== undefined ? `${p.bathrooms} bathrooms` : null,
-          ...(p.amenities || []).slice(0, 3)
-        ].filter(Boolean).join(" · ");
+          ...(p.amenities || []).slice(0, 3),
+        ]
+          .filter(Boolean)
+          .join(" · ");
 
         return (
           <LocationsCard
@@ -95,13 +104,15 @@ const Locations = () => {
             <LocationsInformationContainer>
               <LocationImage src={img || null} />
               <LocationDetails>
-
-                <LocationTitle>{p.title || p.address?.city || "Unknown location"}</LocationTitle>
+                <LocationTitle>
+                  {p.title || p.address?.city || "Unknown location"}
+                </LocationTitle>
                 <LocationSubtitle>{p.description}</LocationSubtitle>
                 <LocationSubtitle>{p.address.country}</LocationSubtitle>
                 <LocationSubtitle>{details}</LocationSubtitle>
                 <LocationReview>
-                  <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} ({p.rating?.count ?? 0} reviews)
+                  <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
+                  {p.rating?.count ?? 0} reviews)
                 </LocationReview>
               </LocationDetails>
             </LocationsInformationContainer>
