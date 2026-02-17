@@ -9,6 +9,7 @@ import {
   LocationImage,
   LocationReview,
 } from "../../components/Locations/Locations.styled";
+import { DropDownContainer } from "../../components/Profile Section/ProfileSection.styled";
 
 export const UserListingsTitle = styled(LocationTitle)`
 
@@ -28,7 +29,11 @@ export const UserListingsContainer = styled(LocationsContainer)`
 `;
 
 export const UserListingsCard = styled(LocationsCard)`
+  transform: translate(0, 0);
 
+&:hover{
+  transform: translate(0, 0);
+}
 `;
 
 export const UserListingsInformationContainer = styled(LocationsInformationContainer)`
@@ -49,7 +54,7 @@ export const UserListingsReview = styled(LocationReview)`
 `;
 
 export const UserListingsIcon = styled.div`
-
+height: 10%;
 
 .options-icon{
   font-size: 2.5rem;
@@ -62,3 +67,19 @@ export const UserListingsIcon = styled.div`
   }
 }
 `;
+
+export const OptionsMenu = styled(DropDownContainer)`
+   transform: translate( -2rem, -11rem);
+   padding: 0;
+
+  .options-title{
+    font-size: 1rem;
+    color: grey;
+    padding:  1rem 1rem 0.2rem 1rem;
+    cursor: pointer;
+
+    
+  }
+`;
+
+ 

@@ -9,6 +9,7 @@ import {
   UserListingsDetails,
   UserListingsReview,
   UserListingsIcon,
+  OptionsMenu,
 } from "./UserListings.styled";
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
@@ -22,7 +23,7 @@ const UserListings = () => {
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
-  const [showOptions, setShowOptions] = useState(false);
+  const [openOptionsId, setOpenOptionsId] = useState(null);
 
   useEffect(() => {
     // Get user from localStorage or API (token-based)
@@ -80,9 +81,9 @@ const UserListings = () => {
     };
   }, [userId]);
 
-  const toggleOptions = () => {
-    setShowOptions(!showOptions);
-  };
+  const toggleOptions = (id) => {
+    setOpenOptionsId((prevId) => (prevId === id ? null : id));
+  } 
 
   if (loading) return <UserListingsContainer>Loading...</UserListingsContainer>;
   if (error) return <UserListingsContainer>{error}</UserListingsContainer>;
@@ -139,14 +140,16 @@ const UserListings = () => {
                 </UserListingsDetails>
 
                 <UserListingsIcon>
-              
                   <SlOptionsVertical
                     className="options-icon"
-                    onClick={() => {
-                      toggleOptions();
-                    }}
-                    />
-                    {showOptions && (<div> test</div>)}
+                    onClick={() => toggleOptions(p._id || p.id || p.title)}
+                  />
+                  {openOptionsId === (p._id || p.id || p.title) && (
+                    <OptionsMenu>
+                      <h3 className="options-title">Edit</h3>
+                      <h3 className="options-title">Delete</h3>
+                    </OptionsMenu>
+                  )}
                 </UserListingsIcon>
               </UserListingsInformationContainer>
             </UserListingsCard>
