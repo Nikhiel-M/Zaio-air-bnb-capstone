@@ -47,3 +47,18 @@ export const UserListigsImage = styled(LocationImage)`
 export const UserListingsReview = styled(LocationReview)`
 
 `;
+
+export const UserListingsIcon = styled.div`
+
+
+.options-icon{
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 9999px;
+
+  &:hover {
+    background-color: #ebebeb;
+  }
+}
+`;

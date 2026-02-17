@@ -8,9 +8,11 @@ import {
   UserListigsImage,
   UserListingsDetails,
   UserListingsReview,
+  UserListingsIcon,
 } from "./UserListings.styled";
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import { SlOptionsVertical } from "react-icons/sl";
 
 const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
 
@@ -20,6 +22,7 @@ const UserListings = () => {
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     // Get user from localStorage or API (token-based)
@@ -77,6 +80,10 @@ const UserListings = () => {
     };
   }, [userId]);
 
+  const toggleOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
   if (loading) return <UserListingsContainer>Loading...</UserListingsContainer>;
   if (error) return <UserListingsContainer>{error}</UserListingsContainer>;
 
@@ -105,8 +112,9 @@ const UserListings = () => {
           return (
             <UserListingsCard
               key={p._id || p.id || p.title}
+
               //   change into edit function
-              onClick={() => navigate(`/booking/${p._id}`)}
+              // onClick={() => navigate(`/booking/${p._id}`)}
             >
               <UserListingsInformationContainer>
                 <UserListigsImage src={img} alt={p.title} />
@@ -128,8 +136,18 @@ const UserListings = () => {
                     <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
                     {p.rating?.count ?? 0} reviews)
                   </UserListingsReview>
-
                 </UserListingsDetails>
+
+                <UserListingsIcon>
+              
+                  <SlOptionsVertical
+                    className="options-icon"
+                    onClick={() => {
+                      toggleOptions();
+                    }}
+                    />
+                    {showOptions && (<div> test</div>)}
+                </UserListingsIcon>
               </UserListingsInformationContainer>
             </UserListingsCard>
           );
