@@ -183,20 +183,33 @@ router.put('/:id', auth, async (req, res) => {
 
 // Delete property (requires authentication and ownership)
 router.delete('/:id', auth, async (req, res) => {
+  console.log('DELETE /api/properties/:id route hit. Property id:', req.params.id);
   try {
+    // Log start of delete logic
+    console.log('Attempting to fetch property for delete:', req.params.id);
     const property = await Property.findById(req.params.id);
-    
+    console.log('Fetched property:', property);
     if (!property) {
+      console.log('Property not found for id:', req.params.id);
       return res.status(404).json({ message: 'Property not found' });
     }
 
+    // Debug log: print both IDs
+    console.log('Delete property debug:', {
+      propertyHost: property.host,
+      propertyHostString: property.host.toString(),
+      reqUserId: req.userId,
+      reqUserIdString: req.userId.toString()
+    });
+
     // Check if user is the host of this property
     if (property.host.toString() !== req.userId) {
+      console.log('User is not authorized to delete this property.');
       return res.status(403).json({ message: 'Not authorized to delete this property' });
     }
 
     await Property.findByIdAndDelete(req.params.id);
-
+    console.log('Property deleted successfully:', req.params.id);
     res.json({ message: 'Property deleted successfully' });
   } catch (error) {
     console.error('Delete property error:', error);

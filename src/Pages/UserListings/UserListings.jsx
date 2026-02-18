@@ -14,6 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
+import { propertiesAPI } from "../../services/api";
 
 const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
 
@@ -85,6 +86,16 @@ const UserListings = () => {
     setOpenOptionsId((prevId) => (prevId === id ? null : id));
   } 
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this listing?")) return;
+    try {
+      await propertiesAPI.deleteProperty(id);
+      setProperties((prev) => prev.filter((p) => p._id !== id && p.id !== id));
+    } catch (err) {
+      alert("Failed to delete listing");
+    }
+  }
+
   if (loading) return <UserListingsContainer>Loading...</UserListingsContainer>;
   if (error) return <UserListingsContainer>{error}</UserListingsContainer>;
 
@@ -147,7 +158,7 @@ const UserListings = () => {
                   {openOptionsId === (p._id || p.id || p.title) && (
                     <OptionsMenu>
                       <h3 className="options-title">Edit</h3>
-                      <h3 className="options-title">Delete</h3>
+                      <h3 className="options-title" onClick={() => handleDelete(p._id || p.id || p.title)}>Delete</h3>
                     </OptionsMenu>
                   )}
                 </UserListingsIcon>
