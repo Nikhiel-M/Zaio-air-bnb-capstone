@@ -203,7 +203,7 @@ router.delete('/:id', auth, async (req, res) => {
     });
 
     // Check if user is the host of this property
-    if (property.host.toString() !== req.userId) {
+    if (property.host.toString() !== req.userId.toString()) {
       console.log('User is not authorized to delete this property.');
       return res.status(403).json({ message: 'Not authorized to delete this property' });
     }
