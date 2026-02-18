@@ -161,7 +161,7 @@ router.put('/:id', auth, async (req, res) => {
     }
 
     // Check if user is the host of this property
-    if (property.host.toString() !== req.userId) {
+    if (property.host.toString() !== req.userId.toString()) {
       return res.status(403).json({ message: 'Not authorized to update this property' });
     }
 
