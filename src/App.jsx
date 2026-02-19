@@ -3,20 +3,28 @@ import "./App.css";
 import { GlobalStyles } from "./Styles/Global.styled";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import BookingPage from "./Pages/BookingPage/BookingPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import Locations from "./components/Locations/Locations";
-import LoginPage from "./Pages/LoginPage/LoginPage"; 
+import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import ReservationsPage from "./Pages/ReservationsPage/ReservationsPage";
 import PostBookingPage from "./Pages/PostBookingPage/PostBookingPage";
 import UserListings from "./Pages/UserListings/UserListings";
+import UpdateListingPage from "./Pages/UpdateListingPage/UpdateListingPage";
 
 function AppContent() {
   const location = useLocation();
-  const hiddenPaths = ["/login", "/register", "/post-booking"];
-  const hideLayout = hiddenPaths.some((p) => location.pathname === p || location.pathname.startsWith(p + "/"));
+  const hiddenPaths = ["/login", "/register", "/post-booking", "/user-listings"];
+  const hideLayout = hiddenPaths.some(
+    (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
+  );
 
   return (
     <div className="app-container">
@@ -32,6 +40,7 @@ function AppContent() {
           <Route path="/reservations" element={<ReservationsPage />} />
           <Route path="/post-booking" element={<PostBookingPage />} />
           <Route path="/user-listings" element={<UserListings />} />
+          <Route path="/user-listings/:listingId" element={<UpdateListingPage />} />
         </Routes>
       </div>
       {!hideLayout && <Footer />}

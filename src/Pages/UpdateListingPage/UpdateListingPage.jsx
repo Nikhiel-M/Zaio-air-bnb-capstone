@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { UpdateListingContainer } from "./UpdateListingPage.styled";
 
 const UpdateListingPage = () => {
   return (
-    <div>UpdateListingPage</div>
-  )
-}
+  <UpdateListingContainer>
+    
+    
+  </UpdateListingContainer>
+  );
+};
 
-export default UpdateListingPage
+export default UpdateListingPage;
