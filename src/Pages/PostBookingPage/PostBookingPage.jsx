@@ -106,7 +106,6 @@ const PostBookingPage = () => {
       return;
     }
 
-    // Select values now match backend enums directly
     const payload = {
       title,
       description,
@@ -135,7 +134,6 @@ const PostBookingPage = () => {
     try {
       const token = localStorage.getItem("token");
 
-      // Build multipart/form-data
       const formData = new FormData();
       formData.append("title", payload.title);
       formData.append("description", payload.description);
