@@ -1,0 +1,28 @@
+﻿
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : {"properties":[{"address":{"city":"sdW WADDWAD AADWA","coun
+                    try":"Canada"},"rating":{"average":5,"count":888},"_id":"69
+                    9c332db03af185a736c7d1","title":"nefahiohakjbd","descriptio
+                    n":"dhhahudhwkjahuydoik...
+RawContent        : HTTP/1.1 200 OK
+                    Transfer-Encoding: chunked
+                    Connection: keep-alive
+                    CF-RAY: 9d3674812c164ecc-JNB
+                    access-control-allow-origin: *
+                    rndr-id: cee66288-cdeb-485f
+                    vary: Accept-Encoding
+                    x-render-origin-s...
+Forms             : {}
+Headers           : {[Transfer-Encoding, chunked], [Connection, keep-alive], 
+                    [CF-RAY, 9d3674812c164ecc-JNB], 
+                    [access-control-allow-origin, *]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 2184485
+
+
+

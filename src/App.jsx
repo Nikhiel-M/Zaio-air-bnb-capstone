@@ -40,7 +40,7 @@ function AppContent() {
           <Route path="/reservations" element={<ReservationsPage />} />
           <Route path="/post-booking" element={<PostBookingPage />} />
           <Route path="/user-listings" element={<UserListings />} />
-          <Route path="/user-listings/:listingId" element={<UpdateListingPage />} />
+          <Route path="/user-listings/:id" element={<UpdateListingPage />} />
         </Routes>
       </div>
       {!hideLayout && <Footer />}
