@@ -81,6 +81,7 @@ import {
   UpdateListingsAmenityToggle,
   UpdateListingsAmenityMenu,
   UpdateListingsAmenityItem,
+  UpdateListingsTextArea,
 } from "./UpdateListingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useState, useRef } from "react";
@@ -157,14 +158,15 @@ const UpdateListingPage = () => {
       <UpdateListingsTitle>Update your listing here!</UpdateListingsTitle>
 
       <UpdateListingsFormContainer>
-        <UpdateListingsForm
+        <UpdateListingsTextArea
           type="text"
           value={typeof title === "string" ? title : (title ?? "")}
           onChange={(e) => setTitle(e.target.value)}
           required
           placeholder="Title"
+          className="text-block"
         />
-        <UpdateListingsForm
+        <UpdateListingsTextArea
           type="text"
           value={
             typeof description === "string" ? description : (description ?? "")
@@ -172,8 +174,10 @@ const UpdateListingPage = () => {
           onChange={(e) => setDescription(e.target.value)}
           required
           placeholder="Description"
+          className="text-block"
         />
-        <UpdateListingsForm
+
+        <UpdateListingsTextArea
           type="text"
           value={
             typeof long_description === "string"
@@ -183,6 +187,7 @@ const UpdateListingPage = () => {
           onChange={(e) => setLong_description(e.target.value)}
           required
           placeholder="Information"
+          className="text-block"
         />
         <UpdateListingsSelector
           type="text"
@@ -215,48 +220,6 @@ const UpdateListingPage = () => {
           <option value="Shared room">Shared room</option>
         </UpdateListingsSelector>
 
-        <UpdateListingsForm
-          type="text"
-          value={typeof address === "string" ? address : (address ?? "")}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-          placeholder="Address"
-        />
-        <UpdateListingsForm
-          type="number"
-          value={maxGuests ?? 1}
-          onChange={(e) => setMaxGuests(Number(e.target.value) || 1)}
-          required
-          placeholder="Amount of guests"
-        />
-        <UpdateListingsForm
-          type="number"
-          value={pricePerNight ?? 0}
-          onChange={(e) => setPricePerNight(Number(e.target.value) || 0)}
-          required
-          placeholder="Price per night"
-        />
-        <UpdateListingsForm
-          type="text"
-          value={country ?? ""}
-          onChange={(e) => setCountry(e.target.value)}
-          required
-          placeholder="Country"
-        />
-        <UpdateListingsForm
-          type="number"
-          value={bedrooms ?? 1}
-          onChange={(e) => setBedrooms(Number(e.target.value) || 1)}
-          required
-          placeholder="Bedrooms"
-        />
-        <UpdateListingsForm
-          type="number"
-          value={bathrooms ?? 1}
-          onChange={(e) => setBathrooms(Number(e.target.value) || 1)}
-          required
-          placeholder="Bathrooms"
-        />
         <UpdateListingsAmenityWrapper>
           <UpdateListingsAmenityToggle
             type="button"
@@ -314,6 +277,50 @@ const UpdateListingPage = () => {
             </UpdateListingsAmenityMenu>
           )}
         </UpdateListingsAmenityWrapper>
+
+        <UpdateListingsForm
+          type="number"
+          value={maxGuests ?? 1}
+          onChange={(e) => setMaxGuests(Number(e.target.value) || 1)}
+          required
+          placeholder="Amount of guests"
+        />
+        <UpdateListingsForm
+          type="number"
+          value={pricePerNight ?? 0}
+          onChange={(e) => setPricePerNight(Number(e.target.value) || 0)}
+          required
+          placeholder="Price per night"
+        />
+        <UpdateListingsForm
+          type="number"
+          value={bedrooms ?? 1}
+          onChange={(e) => setBedrooms(Number(e.target.value) || 1)}
+          required
+          placeholder="Bedrooms"
+        />
+        <UpdateListingsForm
+          type="number"
+          value={bathrooms ?? 1}
+          onChange={(e) => setBathrooms(Number(e.target.value) || 1)}
+          required
+          placeholder="Bathrooms"
+        />
+
+        <UpdateListingsForm
+          type="text"
+          value={country ?? ""}
+          onChange={(e) => setCountry(e.target.value)}
+          required
+          placeholder="Country"
+        />
+        <UpdateListingsForm
+          type="text"
+          value={typeof address === "string" ? address : (address ?? "")}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+          placeholder="Address"
+        />
 
         <UpdateListingsForm
           type="number"

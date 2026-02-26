@@ -38,6 +38,9 @@ width: 100%;
 padding: 0 5rem;
 `;
 
+
+
+
 export const PostBookingForm = styled(LoginForm)`
 border-color: #372ee5;
 color: grey;
