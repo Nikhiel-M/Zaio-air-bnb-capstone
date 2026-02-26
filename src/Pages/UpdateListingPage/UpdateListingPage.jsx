@@ -1,4 +1,46 @@
-const handleSubmit = async (e) => {
+import React, { useEffect } from "react";
+import {
+  UpdateListingContainer,
+  UpdateListingsTitle,
+  UpdateListingsFormContainer,
+  UpdateListingsForm,
+  UpdateListingsSelector,
+  UpdateListingsHiddenFileInput,
+  UpdateListingsImagePickerButton,
+  UpdateListingsAmenityWrapper,
+  UpdateListingsAmenityToggle,
+  UpdateListingsAmenityMenu,
+  UpdateListingsAmenityItem,
+  UpdateListingsTextArea,
+} from "./UpdateListingPage.styled";
+import { PillButton } from "../../components/Buttons/PillButton.styled";
+import { useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+const UpdateListingPage = () => {
+  const { id } = useParams();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [long_description, setLong_description] = useState("");
+  const [propertyType, setPropertyType] = useState("");
+  const [roomType, setRoomType] = useState("");
+  const [address, setAddress] = useState("");
+  const [maxGuests, setMaxGuests] = useState(1);
+  const [pricePerNight, setPricePerNight] = useState(0);
+  const [images, setImages] = useState([]);
+  const [country, setCountry] = useState("");
+  const [amenities, setAmenities] = useState([]);
+  const [average, setAverage] = useState(0);
+  const [count, setCount] = useState(0);
+  const [bedrooms, setBedrooms] = useState(1);
+  const [bathrooms, setBathrooms] = useState(1);
+  const [amenitiesOpen, setAmenitiesOpen] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
   e.preventDefault();
   setError(null);
   if (!title || !description || !address || !pricePerNight) {
@@ -9,21 +51,23 @@ const handleSubmit = async (e) => {
     title,
     description,
     long_description,
-    propertyType: propertyType || "Other",
+    propertyType: propertyType ,
     roomType: roomType || "Entire place",
     address: {
       city: address,
-      country: country || "Unknown",
+      country: country,
     },
     bedrooms: Number(bedrooms) || 1,
     bathrooms: Number(bathrooms) || 1,
-    beds: Math.max(1, Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1),
+    beds: Math.max(1, Number(maxGuests)),
     maxGuests: Number(maxGuests) || 1,
     pricePerNight: Number(pricePerNight) || 0,
     amenities,
     rating: { average: Number(average) || 0, count: Number(count) || 0 },
   };
+  
   setLoading(true);
+
   try {
     const token = localStorage.getItem("token");
     const formData = new FormData();
@@ -68,46 +112,7 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
-import React, { useEffect } from "react";
-import {
-  UpdateListingContainer,
-  UpdateListingsTitle,
-  UpdateListingsFormContainer,
-  UpdateListingsForm,
-  UpdateListingsSelector,
-  UpdateListingsHiddenFileInput,
-  UpdateListingsImagePickerButton,
-  UpdateListingsAmenityWrapper,
-  UpdateListingsAmenityToggle,
-  UpdateListingsAmenityMenu,
-  UpdateListingsAmenityItem,
-  UpdateListingsTextArea,
-} from "./UpdateListingPage.styled";
-import { PillButton } from "../../components/Buttons/PillButton.styled";
-import { useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
-const UpdateListingPage = () => {
-  const { id } = useParams();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [long_description, setLong_description] = useState("");
-  const [propertyType, setPropertyType] = useState("");
-  const [roomType, setRoomType] = useState("");
-  const [address, setAddress] = useState("");
-  const [maxGuests, setMaxGuests] = useState(1);
-  const [pricePerNight, setPricePerNight] = useState(0);
-  const [images, setImages] = useState([]);
-  const [country, setCountry] = useState("");
-  const [amenities, setAmenities] = useState([]);
-  const [average, setAverage] = useState(0);
-  const [count, setCount] = useState(0);
-  const [bedrooms, setBedrooms] = useState(1);
-  const [bathrooms, setBathrooms] = useState(1);
-  const [amenitiesOpen, setAmenitiesOpen] = useState(false);
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  
   useEffect(() => {
     if (!id) return;
     setLoading(true);

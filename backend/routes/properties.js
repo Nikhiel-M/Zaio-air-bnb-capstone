@@ -152,22 +152,46 @@ router.post('/', auth, upload.array('images', 5), async (req, res) => {
 });
 
 // Update property (requires authentication and ownership)
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
   try {
     const property = await Property.findById(req.params.id);
-    
+
     if (!property) {
       return res.status(404).json({ message: 'Property not found' });
     }
 
-    // Check if user is the host of this property
     if (property.host.toString() !== req.userId.toString()) {
       return res.status(403).json({ message: 'Not authorized to update this property' });
     }
 
+    // Parse fields if sent as JSON strings
+    let updateData = { ...req.body };
+    if (updateData.address && typeof updateData.address === 'string') {
+      try { updateData.address = JSON.parse(updateData.address); } catch {}
+    }
+    if (updateData.amenities && typeof updateData.amenities === 'string') {
+      try { updateData.amenities = JSON.parse(updateData.amenities); } catch { updateData.amenities = updateData.amenities.split(','); }
+    }
+    if (updateData.rating && typeof updateData.rating === 'string') {
+      try { updateData.rating = JSON.parse(updateData.rating); } catch {}
+    }
+    ['bedrooms','bathrooms','beds','maxGuests','pricePerNight'].forEach(k => {
+      if (updateData[k] !== undefined) {
+        const n = Number(updateData[k]);
+        if (!Number.isNaN(n)) updateData[k] = n;
+      }
+    });
+
+    // Handle images if uploaded
+    if (req.files && req.files.length) {
+      updateData.images = req.files.map((f) => ({
+        url: `data:${f.mimetype};base64,${f.buffer.toString('base64')}`
+      }));
+    }
+
     const updatedProperty = await Property.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true, runValidators: true }
     ).populate('host', 'firstName lastName profilePicture');
 
