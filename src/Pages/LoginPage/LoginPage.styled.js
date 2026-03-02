@@ -67,5 +67,10 @@ flex-direction: column;
 
 .a-tag{
     text-decoration: none;
+
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }
 `

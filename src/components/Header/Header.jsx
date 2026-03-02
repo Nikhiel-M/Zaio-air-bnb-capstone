@@ -2,12 +2,14 @@ import React from "react";
 import ProfileSection from "../Profile Section/ProfileSection";
 import { HeaderContainer } from "./Header.styled";
 import CalenderSection from "../CalenderSection/CalenderSection";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
 
   return (
     <HeaderContainer>
-      <a href="/">
+      <a onClick={() => navigate('/')}>
       <img
         className="logo"
         src="https://cdn.brandfetch.io/idkuvXnjOH/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1717146469893"
