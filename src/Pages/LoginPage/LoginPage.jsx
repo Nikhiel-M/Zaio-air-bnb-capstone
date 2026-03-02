@@ -69,10 +69,10 @@ const LoginPage = () => {
 
         <LoginFooter>
           <LoginSubtitle className="forgot-password">
-            <a href="forgotPassword" className="a-tag">Forgot password?</a>
+            <a onClick={() => navigate("/forgotPassword")} className="a-tag">Forgot password?</a>
           </LoginSubtitle>
           <LoginSubtitle className="forgot-password">
-            <a href="register" className="a-tag">Register here</a>
+            <a onClick={() => navigate("/register")} className="a-tag">Register here</a>
           </LoginSubtitle>
 
           <LoginButton type="submit" disabled={loading}>
