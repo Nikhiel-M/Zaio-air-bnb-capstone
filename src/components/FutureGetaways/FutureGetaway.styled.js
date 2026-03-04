@@ -43,6 +43,7 @@ display: grid;
 `
 export const GetawayCards = styled.div`
 font-size: 1rem;
+font-weight: 600;
 padding: 0 0 0.5rem 0;
 `;
  export const GetawaySubtitle = styled.div`

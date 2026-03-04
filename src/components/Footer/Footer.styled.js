@@ -26,7 +26,7 @@ border-bottom: 1px solid lightgrey;
 padding-bottom: 1rem;
 `
 export const FooterTitle = styled.h2`
-font-weight: 500;
+font-weight: 600;
 color: black;
 font-size: 1rem;
 `
