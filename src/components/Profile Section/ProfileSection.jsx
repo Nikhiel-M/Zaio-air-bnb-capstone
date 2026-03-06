@@ -34,7 +34,7 @@ const ProfileSection = () => {
         setUser(response.user);
         setIsHost(response.user.isHost);
       } catch (error) {
-        console.error("Error fetching user:", error);
+        // console.error("Error fetching user:", error);
       } finally {
         setLoading(false);
       }
@@ -76,15 +76,15 @@ const ProfileSection = () => {
     navigate("/post-booking");
   };
 
-  if (loading) {
-    return (
-      <ProfileSectionContainer>
-        <Container className="profile-section">
-          <h2 className="host-title">Loading...</h2>
-        </Container>
-      </ProfileSectionContainer>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <ProfileSectionContainer>
+  //       <Container className="profile-section">
+  //         <h2 className="host-title">Loading...</h2>
+  //       </Container>
+  //     </ProfileSectionContainer>
+  //   );
+  // }
 
   return (
     <ProfileSectionContainer>
