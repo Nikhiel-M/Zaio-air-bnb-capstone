@@ -279,8 +279,8 @@ const UpdateListingPage = () => {
                   </label>
                 </UpdateListingsAmenityItem>
               ))}
-              }
-              }
+
+              
             </UpdateListingsAmenityMenu>
           )}
         </UpdateListingsAmenityWrapper>
