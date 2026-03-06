@@ -38,20 +38,20 @@ const PostBookingPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Amenities options (match backend Schema)
+  // Amenities options (must match backend enum exactly)
   const amenityOptions = [
-    "wifi",
-    "kitchen",
-    "parking",
-    "pool",
-    "gym",
-    "air_conditioning",
-    "heating",
-    "tv",
-    "washer",
-    "dryer",
-    "pets_allowed",
-    "smoking_allowed",
+    'Wifi',
+    'Kitchen',
+    'Parking',
+    'Pool',
+    'Gym',
+    'Air conditioning',
+    'Heating',
+    'TV',
+    'Washer',
+    'Dryer',
+    'Pets allowed',
+    'Smoking allowed',
   ];
 
   const toggleAmenity = (name) => {

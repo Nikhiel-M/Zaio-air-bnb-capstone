@@ -242,18 +242,18 @@ const UpdateListingPage = () => {
               aria-multiselectable="true"
             >
               {[
-                "wifi",
-                "kitchen",
-                "parking",
-                "pool",
-                "gym",
-                "air_conditioning",
-                "heating",
-                "tv",
-                "washer",
-                "dryer",
-                "pets_allowed",
-                "smoking_allowed",
+                'Wifi',
+                'Kitchen',
+                'Parking',
+                'Pool',
+                'Gym',
+                'Air conditioning',
+                'Heating',
+                'TV',
+                'Washer',
+                'Dryer',
+                'Pets allowed',
+                'Smoking allowed',
               ].map((opt) => (
                 <UpdateListingsAmenityItem key={opt}>
                   <input
@@ -279,6 +279,8 @@ const UpdateListingPage = () => {
                   </label>
                 </UpdateListingsAmenityItem>
               ))}
+              }
+              }
             </UpdateListingsAmenityMenu>
           )}
         </UpdateListingsAmenityWrapper>

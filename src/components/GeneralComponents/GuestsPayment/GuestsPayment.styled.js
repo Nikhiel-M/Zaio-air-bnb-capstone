@@ -21,18 +21,18 @@ padding: 1rem;
 export const GuestsTitle = styled(Title)`
 font-size: 1.2rem;
 color: black;
-font-weight: 300;
+font-weight: 500;
 `
 
 export const Pricing = styled.div`
 display: flex;
 align-items: center;
-font-weight: 300;
+font-weight: 500;
 `;
 
 export const PaymentRow = styled.div`
 display: flex;
 justify-content: space-between;
-
+font-weight: 500;
 
 `
