@@ -1,8 +1,8 @@
-const authMiddleware = require('../middleware/auth');
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const router = express.Router();
+import authMiddleware from '../middleware/auth';
+import { Router } from 'express';
+import { sign } from 'jsonwebtoken';
+import User, { findOne, findById } from '../models/User';
+const router = Router();
 
 
 
@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
 
     
-    const existingUser = await User.findOne({ email });
+    const existingUser = await findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists with this email' });
     }
@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    const token = jwt.sign(
+    const token = sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
    
-    const user = await User.findOne({ email });
+    const user = await findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign(
+    const token = sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
 router.get('/name', authMiddleware, async (req, res) => {
   try {
     const userId = req.userId || (req.user && req.user._id);
-    const user = await User.findById(userId).select('firstName lastName isHost');
+    const user = await findById(userId).select('firstName lastName isHost');
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json({ user: { firstName: user.firstName, lastName: user.lastName, isHost: user.isHost } });
   } catch (err) {
@@ -103,4 +103,4 @@ router.get('/me', authMiddleware, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
