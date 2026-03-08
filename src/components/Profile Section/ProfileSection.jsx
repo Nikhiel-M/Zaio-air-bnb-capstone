@@ -52,6 +52,8 @@ const ProfileSection = () => {
       navigate("/login");
       return;
     }
+    const confirmed = window.confirm("Are you sure you want to become a host?");
+    if (!confirmed) return;
     setIsBecomingHost(true);
     setHostMessage("");
     try {
