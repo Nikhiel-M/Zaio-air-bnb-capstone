@@ -1,6 +1,6 @@
 import authMiddleware from '../middleware/auth.js';
 import { Router } from 'express';
-import { sign } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 const router = Router();
 
@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
 
     
-    const existingUser = await findOne({ email });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists with this email' });
     }
@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    const token = sign(
+    const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
    
-    const user = await findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const token = sign(
+    const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
 router.get('/name', authMiddleware, async (req, res) => {
   try {
     const userId = req.userId || (req.user && req.user._id);
-    const user = await findById(userId).select('firstName lastName isHost');
+    const user = await User.findById(userId).select('firstName lastName isHost');
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json({ user: { firstName: user.firstName, lastName: user.lastName, isHost: user.isHost } });
   } catch (err) {
