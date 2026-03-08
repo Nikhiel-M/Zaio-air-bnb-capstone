@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const userSchema = require('../Schemas/UserSchema.js');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import userSchema from '../Schemas/UserSchema.js';
 // Hash password before saving
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
@@ -26,4 +26,5 @@ userSchema.methods.toJSON = function() {
   return user;
 };
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+export default User;

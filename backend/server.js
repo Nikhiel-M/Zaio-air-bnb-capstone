@@ -1,7 +1,16 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import authRoutes from './routes/auth.js';
+import propertyRoutes from './routes/properties.js';
+import bookingRoutes from './routes/bookings.js';
+import userRoutes from './routes/users.js';
+import locationRoutes from './routes/Locations.js';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -9,7 +18,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const path = require('path');
+
+// __dirname workaround for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // serve static uploads
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -28,12 +40,6 @@ app.get('/', (req, res) => {
   res.json({ message: 'Airbnb Clone Backend API' });
 });
 
-const authRoutes = require('./routes/auth');
-const propertyRoutes = require('./routes/properties');
-const bookingRoutes = require('./routes/bookings');
-const userRoutes = require('./routes/users');
-const locationRoutes = require('./routes/Locations')
-
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/bookings', bookingRoutes);
@@ -50,7 +56,7 @@ app.use((req, res) => {
 });
 
 const startServer = async () => {
-  connectDB(); 
+  connectDB();
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`API available at: http://localhost:${PORT}`);
