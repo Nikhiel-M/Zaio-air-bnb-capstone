@@ -1,7 +1,7 @@
 import authMiddleware from '../middleware/auth.js';
 import { Router } from 'express';
 import { sign } from 'jsonwebtoken';
-import User, { findOne, findById } from '../models/User';
+import User from '../models/User.js';
 const router = Router();
 
 
