@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const bookingSchema = require('../Schemas/BookingSchema.js')
+import mongoose from 'mongoose';
+import bookingSchema from '../Schemas/BookingSchema.js';
 
 // Validate check-in date is before check-out date
 bookingSchema.pre('save', function(next) {
@@ -14,4 +14,5 @@ bookingSchema.index({ guest: 1, createdAt: -1 });
 bookingSchema.index({ host: 1, createdAt: -1 });
 bookingSchema.index({ property: 1, checkInDate: 1, checkOutDate: 1 });
 
-module.exports = mongoose.model('Booking', bookingSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
+export default Booking;

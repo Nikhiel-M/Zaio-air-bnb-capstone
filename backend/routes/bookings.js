@@ -1,7 +1,7 @@
-const express = require('express');
-const Booking = require('../models/Booking');
-const Property = require('../models/Property');
-const auth = require('../middleware/auth');
+import express from 'express';
+import Booking from '../models/Booking.js';
+import Property from '../models/Property.js';
+import auth from '../middleware/auth.js';
 const router = express.Router();
 
 
@@ -222,4 +222,4 @@ router.patch('/:id/cancel', auth, async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;
