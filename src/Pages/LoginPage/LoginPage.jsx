@@ -69,7 +69,8 @@ const LoginPage = () => {
 
         <LoginFooter>
           <LoginSubtitle className="forgot-password">
-            <a onClick={() => navigate("/forgotPassword")} className="a-tag">Forgot password?</a>
+            {/* add Forgot password functionality */}
+            <a className="a-tag">Forgot password?</a>
           </LoginSubtitle>
           <LoginSubtitle className="forgot-password">
             <a onClick={() => navigate("/register")} className="a-tag">Register here</a>
