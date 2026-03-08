@@ -30,7 +30,7 @@ const ProfileSection = () => {
         return;
       }
       try {
-        const response = await authAPI.getCurrentUser();
+        const response = await authAPI.getUserName();
         setUser(response.user);
         setIsHost(response.user.isHost);
       } catch (error) {

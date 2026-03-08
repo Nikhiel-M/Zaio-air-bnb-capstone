@@ -2,6 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
+const authMiddleware = require('../middleware/auth');
+
 
 
 router.post('/register', async (req, res) => {
@@ -75,8 +77,19 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Get current user name
+router.get('/name', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.userId || (req.user && req.user._id);
+    const user = await User.findById(userId).select('firstName lastName isHost');
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json({ user: { firstName: user.firstName, lastName: user.lastName, isHost: user.isHost } });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
-const authMiddleware = require('../middleware/auth');
+
 
 router.get('/me', authMiddleware, async (req, res) => {
   try {

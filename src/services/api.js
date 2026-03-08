@@ -75,6 +75,11 @@ export const authAPI = {
     return apiRequest('/auth/me');
   },
 
+  // Get user name
+    getUserName: async () => {
+    return apiRequest('/auth/name');
+  },
+
   // Logout user
   logout: () => {
     localStorage.removeItem('token');
