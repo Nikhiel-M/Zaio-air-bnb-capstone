@@ -1,7 +1,7 @@
-const express = require('express');
-const Property = require('../models/Property');
-const auth = require('../middleware/auth');
-const upload = require('../middleware/multer');
+import express from 'express';
+import Property from '../models/Property.js';
+import auth from '../middleware/auth.js';
+import upload from '../middleware/multer.js';
 const router = express.Router();
 
 // Get all properties with filtering and pagination
@@ -272,4 +272,4 @@ router.get('/search/location', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

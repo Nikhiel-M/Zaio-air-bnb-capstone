@@ -1,6 +1,6 @@
-const express = require('express');
-const auth = require('../middleware/auth');
-const Property = require('../models/Property');
+import express from 'express';
+import auth from '../middleware/auth.js';
+import Property from '../models/Property.js';
 const router = express.Router();
 
 // GET all properties
@@ -129,4 +129,4 @@ router.get('/', async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;

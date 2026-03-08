@@ -1,6 +1,6 @@
-const express = require("express");
-const User = require("../models/User");
-const auth = require("../middleware/auth");
+import express from "express";
+import User from "../models/User.js";
+import auth from "../middleware/auth.js";
 const router = express.Router();
 
 const hanldleUserNotFound = (user, res) => {
@@ -120,7 +120,7 @@ router.patch("/become-host", auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
 // // Get public user profile (for hosts)
 // router.get('/:id/public', async (req, res) => {
 //   try {

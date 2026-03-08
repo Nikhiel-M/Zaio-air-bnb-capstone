@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const bookingSchema = new mongoose.Schema({
   property: {
@@ -64,4 +64,4 @@ const bookingSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
-module.exports = bookingSchema;
+export default bookingSchema;
