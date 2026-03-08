@@ -1,4 +1,4 @@
-import authMiddleware from '../middleware/auth';
+import authMiddleware from '../middleware/auth.js';
 import { Router } from 'express';
 import { sign } from 'jsonwebtoken';
 import User, { findOne, findById } from '../models/User';
