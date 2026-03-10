@@ -1,6 +1,5 @@
 import authMiddleware from '../middleware/auth.js';
 import { Router } from 'express';
-import jwt from 'jsonwebtoken';
 import { registerUser, loginUser, getCurrentUserName, meRoute } from '../Controllers/auth.controller.js';
 
 const router = Router();

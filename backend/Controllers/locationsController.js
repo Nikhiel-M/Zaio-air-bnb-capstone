@@ -1,5 +1,6 @@
 import Property from '../models/Property.js';
 
+
 // GET all properties
 export const getAllProperties = async (req, res) => {
   try {
