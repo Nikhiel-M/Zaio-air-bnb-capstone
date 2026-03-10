@@ -7,7 +7,6 @@ import {
   ImageContainer,
   InformationBody,
   InformationContainer,
-  // InformationFooter,ws
   InformationHeader,
   PaymentContainer,
   SubheaderContainer,
@@ -16,13 +15,13 @@ import {
   BookingSubtitle,
   OffersContainer,
   OffersGrid,
-  // CalendarContainer,
   ModalOverlay,
   ModalContent,
   ModalImage,
   ModalClose,
   ModalNav,
   SleepContainer,
+  NightsContainer,
 } from "./BookingPage.styled";
 import { GiShare } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa6";
@@ -31,17 +30,17 @@ import BookingPayment from "../../components/BookingPayment/BookingPayment";
 import { LuHouse } from "react-icons/lu";
 import { WiStars } from "react-icons/wi";
 import { MdOutlineDoorFront } from "react-icons/md";
-import { FaRegCalendar, FaCheckCircle, FaMedal } from "react-icons/fa";
+import { FaRegCalendar} from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
-// import CalendarComponent from "../../components/Calandar/Calendar";
 import ReviewBarSection from "./BookingPageComponents/ReviewSection/ReviewSection";
 import ReviewProfiles from "./BookingPageComponents/ReviewProfiles/ReviewProfiles";
 import HostDisplayContainer from "./BookingPageComponents/HostContainer/HostContainer";
 import RulesAndSafetyContainer from "./BookingPageComponents/Rules&Safety/RulesAndSafety";
+import { Form } from "react-bootstrap";
+
 
 const API_BASE = import.meta.env?.VITE_API_URL;
 
-const BACKEND_URL = API_BASE_URL.replace("/api", "");
 
 const BookingPage = () => {
   const { propertyId } = useParams();
@@ -78,6 +77,8 @@ const BookingPage = () => {
   const images = property?.images?.map((img) => img.url).filter(Boolean) || [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
 
   const openImage = (index) => {
     if (!images.length) return;
@@ -154,7 +155,7 @@ const BookingPage = () => {
               alt={`${property.title} - image ${selectedIndex + 1}`}
             />
             <ModalClose onClick={closeModal} aria-label="Close image">
-              ×
+              
             </ModalClose>
 
             {images.length > 1 && (
@@ -271,6 +272,16 @@ const BookingPage = () => {
               ))}
             </OffersGrid>
           </OffersContainer>
+
+          <NightsContainer property={property}>
+            <BookingTitle className="nights-title">7 Nights in {property.address.country}</BookingTitle>
+            <BookingSubtitle className="nights-subtitle">{checkIn} - {checkOut}</BookingSubtitle>
+
+              <div className="nights-calendar-container">
+            <Form.Control type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="date-input"/>
+            <Form.Control type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="date-input"/>
+              </div>
+          </NightsContainer>
 
           <BookingTitle className="review-title">Reviews</BookingTitle>
 

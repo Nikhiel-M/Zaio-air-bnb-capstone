@@ -307,5 +307,35 @@ padding-bottom: 3rem;
 
 `
 
+export const NightsContainer = styled.div`
+display: flex;
+flex-direction: column;
+height: auto;
+padding:  2rem 0 3rem 0 ;
+border-bottom: 1px solid lightgray;
 
+.nights-title{
+  font-size: 4rem;
+  padding-bottom: 1rem;
+}
+
+.nights-subtitle{
+  color: #5d5c5c;
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.nights-calendar-container{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.date-input{
+  width: 13rem;
+  padding: 0.5rem;
+  margin: 2rem 2rem 0 0;
+}
+
+`
 
