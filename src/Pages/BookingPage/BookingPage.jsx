@@ -22,6 +22,7 @@ import {
   ModalImage,
   ModalClose,
   ModalNav,
+  SleepContainer,
 } from "./BookingPage.styled";
 import { GiShare } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa6";
@@ -240,9 +241,21 @@ const BookingPage = () => {
             <BookingPayment property={property} />
           </div>
 
+
           <BookingSubtitle className="longDescription">
             {property.long_description}
           </BookingSubtitle>
+
+          <SleepContainer>
+          <BookingTitle className="sleep-title">Where you will sleep</BookingTitle>
+          <img
+              src={"https://images.unsplash.com/photo-1540518614846-7eded433c457?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmVkcm9vbXxlbnwwfHwwfHx8MA%3D%3D"}
+              alt={'bedroom'}
+              className="bed-image"
+              style={{ cursor: "pointer" }}
+            />
+            <BookingSubtitle className="sleep-subtitle">Spacious bedroom with comfortable bed</BookingSubtitle>
+          </SleepContainer>
 
           <OffersContainer>
             <BookingSubtitle className="offersHeader">

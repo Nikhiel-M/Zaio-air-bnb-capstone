@@ -34,7 +34,7 @@ width: 100%;
 padding: 1rem 0 2rem 0;
 border-bottom: 1px lightgray solid;
 font-size: 1.8rem;
-color: black;
+color: #5d5c5c;
 line-height: 1.2;
 }
 
@@ -172,6 +172,29 @@ align-content: start;
     height: 6.3rem;
   }
 }
+`
+export const SleepContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem 2rem 0 ;
+  border-bottom: 1px solid lightgray;
+
+  .sleep-title{
+    font-size: 3rem;
+    padding: 2rem 0;
+  }
+    .sleep-subtitle{
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    color: #5d5c5c;
+  }
+
+  .bed-image{
+  width: 35%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  }
 `
 
 export const ModalOverlay = styled.div`
