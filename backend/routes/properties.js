@@ -8,7 +8,7 @@ import {
   updateProperty,
   deleteProperty,
   searchPropertiesByLocation,
-} from "../Controllers/PropertiesController.js";
+} from "../Controllers/propertiesController.js";
 
 const router = express.Router();
 
