@@ -61,7 +61,7 @@ const ProfileSection = () => {
       alert("Successfully became a host!");
       setIsHost(true);
     } catch (error) {
-      setHostMessage("Failed to become a host. Please try again.");
+      alert("Failed to become a host. Please try again.");
       console.error("Become host error:", error);
     } finally {
       setIsBecomingHost(false);

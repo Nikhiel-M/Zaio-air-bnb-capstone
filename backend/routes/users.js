@@ -5,7 +5,7 @@ import { getUserProfile, becomeHost } from "../Controllers/userController.js";
 const router = express.Router();
 
 router.get("/profile", auth, getUserProfile);
-router.post("/become-host", auth, becomeHost);
+router.patch("/become-host", auth, becomeHost);
 
 export default router;
 
