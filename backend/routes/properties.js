@@ -15,8 +15,8 @@ const router = express.Router();
 router.get("/", getAllProperties);
 router.get("/:id", getPropertyById);
 router.post("/", auth, upload.array("images", 5), createProperty);
-router.patch("/:id", auth, upload.array("images", 5), updateProperty);
 router.delete("/:id", auth, deleteProperty);
 router.get("/search/location", searchPropertiesByLocation);
+router.put("/:id", auth, upload.array("images", 5), updateProperty);
 
 export default router;
