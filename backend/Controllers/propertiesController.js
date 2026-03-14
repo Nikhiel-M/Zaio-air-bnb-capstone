@@ -197,7 +197,7 @@ export const updateProperty = async (req, res) => {
     });
   } catch (error) {
     console.error('Update property error:', error);
-    res.status(500).json({ message: 'Server error while updating property' });
+    res.status(500).json({ message: error.message || 'Server error while updating property', error });
   }
 };
 
