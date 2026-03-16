@@ -1,22 +1,25 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-  padding: 1rem 0 1rem 2rem;
+  padding: 1rem 0 1rem 0;
   width: 100%;
   height: 15%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  position:relative;
+  position: relative;
   top: 0;
   background-color: ${({$isColorChange }) => $isColorChange ? "black" : "white"};
   color:  ${({$isColorChange }) => $isColorChange ? "white" : "black"};;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
   
   .logo {
     margin-top: 1%;
     height: 2rem;
     width: auto;
+    margin-left: 1rem;
+    cursor: pointer;
 }
 .calender-titles{
     display: flex;

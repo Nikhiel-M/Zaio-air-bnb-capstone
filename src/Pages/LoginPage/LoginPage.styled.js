@@ -8,7 +8,8 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 height: 100vh;
-width: 100vw;
+width: auto;
+overflow: hidden;
 `
 export const LoginTitle = styled(Title)`
 color: #000;
