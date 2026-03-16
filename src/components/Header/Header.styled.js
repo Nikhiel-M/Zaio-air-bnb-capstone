@@ -38,4 +38,8 @@ margin: 0 1rem;
 }
 `;
 
-
+export const MainContainer = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+`
