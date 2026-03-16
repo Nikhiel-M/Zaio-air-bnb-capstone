@@ -10,6 +10,7 @@ export const ProfileSectionContainer = styled.div`
     white-space: nowrap;
     cursor: pointer;
     padding-top: 0.5rem;
+     
 }
 .host-title-booking{
     font-size: 1.3rem;
@@ -63,6 +64,8 @@ export const DropDown = styled.div`
 display: flex;
 flex-direction: column;
 position: relative;
+border-radius: 16px;
+box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.4);
 
 .dropdown-a-tag{
     text-decoration: none;

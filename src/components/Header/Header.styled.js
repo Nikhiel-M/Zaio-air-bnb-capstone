@@ -9,8 +9,9 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   position:relative;
   top: 0;
-  background-color: black;
-  color: white;
+  background-color: ${({$isColorChange }) => $isColorChange ? "black" : "white"};
+  color:  ${({$isColorChange }) => $isColorChange ? "white" : "black"};;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
   
   .logo {
     margin-top: 1%;

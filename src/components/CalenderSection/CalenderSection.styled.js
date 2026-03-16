@@ -8,9 +8,12 @@ export const CalenderContainer = styled.div`
   color: black;
   font-size: 1rem;
   border-radius: 30px;
+  padding: 0 0.5rem;
   display: flex;
   flex-direction: row;
   position: relative;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+
 
   .search-icon {
     margin: 0.6rem 0.5rem 0 3rem;

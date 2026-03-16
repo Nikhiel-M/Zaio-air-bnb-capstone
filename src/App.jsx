@@ -29,7 +29,7 @@ function AppContent() {
   return (
     <div className="app-container">
       <GlobalStyles />
-      {!hideLayout && <Header />}
+      <Header />
       <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
