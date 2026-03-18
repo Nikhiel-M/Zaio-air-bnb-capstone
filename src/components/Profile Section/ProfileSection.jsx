@@ -11,16 +11,16 @@ import { TbWorld } from "react-icons/tb";
 import { PiList } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import { usersAPI, authAPI } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const ProfileSection = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [isBecomingHost, setIsBecomingHost] = useState(false);
   const [hostMessage, setHostMessage] = useState("");
   const [isHost, setIsHost] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const checkUserStatus = async () => {
@@ -48,24 +48,7 @@ const ProfileSection = () => {
   };
 
   const handleBecomeHost = async () => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
-    const confirmed = window.confirm("Are you sure you want to become a host?");
-    if (!confirmed) return;
-    setIsBecomingHost(true);
-    setHostMessage("");
-    try {
-      const response = await usersAPI.becomeHost();
-      alert("Successfully became a host!");
-      setIsHost(true);
-    } catch (error) {
-      alert("Failed to become a host. Please try again.");
-      console.error("Become host error:", error);
-    } finally {
-      setIsBecomingHost(false);
-    }
+    navigate("/become-host")
   };
 
   const handleLogout = () => {
@@ -74,9 +57,9 @@ const ProfileSection = () => {
     setUser(null);
   };
 
-  const handleBookingRoute = () => {
-    navigate("/post-booking");
-  };
+  // const handleBookingRoute = () => {
+  //   navigate("/post-booking");
+  // };
 
   if (loading) {
     return (
@@ -84,92 +67,82 @@ const ProfileSection = () => {
         <Container className="profile-section">
           <h2 className="host-title">Loading...</h2>
 
-                 <WorldIconContainer>
-          <TbWorld className="world-icon" />
-        </WorldIconContainer>
+          <WorldIconContainer>
+            <TbWorld className="world-icon" />
+          </WorldIconContainer>
 
-        <DropDown>
-          <ProfileContainer onClick={handleDropDown}>
-            <PiList className="list-icon" />
-            <CgProfile className="profile-icon" />
-            {isDropDownOpen && (
-              <DropDownContainer>
-                {!user ? (
-                  <a
-                    onClick={() => navigate("/login")}
-                    className="dropdown-a-tag"
-                  >
-                    <div className="dropdown-login">Login</div>
-                  </a>
-                ) : (
-                  <>
+          <DropDown>
+            <ProfileContainer onClick={handleDropDown}>
+              <PiList className="list-icon" />
+              <CgProfile className="profile-icon" />
+              {isDropDownOpen && (
+                <DropDownContainer>
+                  {!user ? (
                     <a
-                      onClick={() => navigate("/reservations")}
-                      className="dropdown-r-tag"
+                      onClick={() => navigate("/login")}
+                      className="dropdown-a-tag"
                     >
-                      <div className="dropdown-login">View reservations</div>
+                      <div className="dropdown-login">Login</div>
                     </a>
-                    {isHost && (
+                  ) : (
+                    <>
                       <a
-                        onClick={() => navigate("/user-listings")}
+                        onClick={() => navigate("/reservations")}
                         className="dropdown-r-tag"
                       >
-                        <div className="dropdown-login">Your listings</div>
+                        <div className="dropdown-login">View reservations</div>
                       </a>
-                    )}
-                    <a
-                      onClick={handleLogout}
-                      className="dropdown-r-tag"
-                    >
-                      <div className="dropdown-login">
-                        Logout
-                      </div>
-                    </a>
-                  </>
-                )}
-              </DropDownContainer>
-            )}
-          </ProfileContainer>
-        </DropDown>
+                      {isHost && (
+                        <a
+                          onClick={() => navigate("/user-listings")}
+                          className="dropdown-r-tag"
+                        >
+                          <div className="dropdown-login">Your listings</div>
+                        </a>
+                      )}
+                      <a onClick={handleLogout} className="dropdown-r-tag">
+                        <div className="dropdown-login">Logout</div>
+                      </a>
+                    </>
+                  )}
+                </DropDownContainer>
+              )}
+            </ProfileContainer>
+          </DropDown>
         </Container>
       </ProfileSectionContainer>
     );
   }
 
+  const iconPaths = ["/", "/booking", "/locations"];
+  const isIconsPage = iconPaths.some(
+    (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
+  );
+
   return (
     <ProfileSectionContainer>
       <Container className="profile-section">
-        {user && isHost ? (
-      
-          <h2 className="host-title-booking" onClick={handleBookingRoute}>
-            {" "}
-            Welcome {user?.firstName} <br /> Post your homes Here!
-          </h2>
-        ) : (
+
+                {isIconsPage && (
+          <>
+        { (
           <h2
             className="host-title"
             onClick={handleBecomeHost}
-            disabled={isBecomingHost}
-            style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
+            
           >
-            {!user ? (
-              <>
-                Welcome guest <br /> please sign in
-              </>
-            ) : (
-              <>
-                Welcome {user?.firstName} <br /> Click here to become a
-                host{" "}
-              </>
-            )}
+           Become a host
           </h2>
         )}
 
-        {hostMessage && <div className="host-message">{hostMessage}</div>}
 
-        <WorldIconContainer>
-          <TbWorld className="world-icon" />
-        </WorldIconContainer>
+            {hostMessage && <div className="host-message">{hostMessage}</div>}
+            <WorldIconContainer>
+              <TbWorld className="world-icon" />
+            </WorldIconContainer>
+          </>
+        )}
+
 
         <DropDown>
           <ProfileContainer onClick={handleDropDown}>
@@ -200,13 +173,8 @@ const ProfileSection = () => {
                         <div className="dropdown-login">Your listings</div>
                       </a>
                     )}
-                    <a
-                      onClick={handleLogout}
-                      className="dropdown-r-tag"
-                    >
-                      <div className="dropdown-login">
-                        Logout
-                      </div>
+                    <a onClick={handleLogout} className="dropdown-r-tag">
+                      <div className="dropdown-login">Logout</div>
                     </a>
                   </>
                 )}
@@ -220,3 +188,28 @@ const ProfileSection = () => {
 };
 
 export default ProfileSection;
+
+    //  {user && isHost ? (
+    //       <h2 className="host-title-booking" onClick={handleBookingRoute}>
+    //         {" "}
+    //         Welcome {user?.firstName} <br /> Post your homes Here!
+    //       </h2>
+    //     ) : (
+    //       <h2
+    //         className="host-title"
+    //         onClick={handleBecomeHost}
+    //         disabled={isBecomingHost}
+    //         style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
+    //       >
+    //         {!user ? (
+    //           <>
+    //             Welcome guest <br /> please sign in
+    //           </>
+    //         ) : (
+    //           <>
+    //             Welcome {user?.firstName} <br /> Click here to become a
+    //             host{" "}
+    //           </>
+    //         )}
+    //       </h2>
+    //     )}

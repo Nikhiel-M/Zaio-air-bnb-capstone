@@ -12,6 +12,16 @@ const Header = () => {
     (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
   );
 
+  const calendarPaths = ["/", "/locations"];
+  const isCalendarPage = calendarPaths.some(
+    (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
+  );
+
+  const titlesPaths = ["/", "/booking"]
+    const isTitlesPage = titlesPaths.some(
+    (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
+  );
+
   return (
     <HeaderContainer $isColorChange={isColorChange}>
       <a onClick={() => navigate("/")}>
@@ -27,13 +37,14 @@ const Header = () => {
       </a>
       <MainContainer>
         <div className="calender-titles">
+          {isTitlesPage && (
           <div className="header-titles">
             <h1 className="title"> places to stay </h1>
             <h1 className="title"> Experiences </h1>
             <h1 className="title"> Online Experiences </h1>
-          </div>
+          </div>)}
 
-          <CalenderSection />
+          {isCalendarPage && <CalenderSection />}
         </div>
       </MainContainer>
       <ProfileSection />

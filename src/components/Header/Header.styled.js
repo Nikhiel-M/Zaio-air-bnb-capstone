@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div`
   background-color: ${({$isColorChange }) => $isColorChange ? "black" : "white"};
   color:  ${({$isColorChange }) => $isColorChange ? "white" : "black"};;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+  z-index: 9000;
   
   .logo {
     margin-top: 1%;

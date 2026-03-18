@@ -20,6 +20,7 @@ export const ProfileSectionContainer = styled.div`
     white-space: nowrap;
     cursor: pointer;
 }
+
 `
 
 export const ProfileContainer = styled.div`

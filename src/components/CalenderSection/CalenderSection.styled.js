@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CalenderContainer = styled.div`
-  /* margin: 4rem 0 0 0; */
   height: fit-content;
   width: 60%;
   background-color: white;
@@ -38,6 +37,7 @@ export const DateContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+
   .calender-title {
     font-size: 1.2rem;
     margin-bottom: 0.2rem;
@@ -62,7 +62,7 @@ export const DateContainer = styled.div`
 
 export const CalendarModal = styled.div`
   position: absolute;
-  z-index: 1000;
+  z-index: 9999;
   left: 0;
   width: max-content;
   min-width: 350px;
@@ -70,7 +70,10 @@ export const CalendarModal = styled.div`
 
 export const GuestDropdownModal = styled.div`
   position: absolute;
-  z-index: 1000;
+  z-index: 9999;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
   top: 100%;
   right: 0;
   margin-top: 10px;
