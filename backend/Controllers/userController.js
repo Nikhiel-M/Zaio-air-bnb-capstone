@@ -23,31 +23,31 @@ export const getUserProfile = async (req, res) => {
 };
 
 // Become a host
-export const becomeHost = async (req, res) => {
-  try {
-    const user = await User.findByIdAndUpdate(
-      req.userId,
-      { isHost: true, role: "host" },
-      { new: true }
-    );
+// export const becomeHost = async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndUpdate(
+//       req.userId,
+//       { isHost: true, role: "host" },
+//       { new: true }
+//     );
 
-    if (!user) {
-      if (hanldleUserNotFound(user, res)) {
-        return;
-      }
-    }
+//     if (!user) {
+//       if (hanldleUserNotFound(user, res)) {
+//         return;
+//       }
+//     }
 
-    res.json({
-      message: "You are now a host!",
-      user,
-    });
-  } catch (error) {
-    console.error("Become host error:", error);
-    res
-      .status(500)
-      .json({ message: "Server error while updating host status" });
-  }
-};
+//     res.json({
+//       message: "You are now a host!",
+//       user,
+//     });
+//   } catch (error) {
+//     console.error("Become host error:", error);
+//     res
+//       .status(500)
+//       .json({ message: "Server error while updating host status" });
+//   }
+// };
 
 
 // // Change password

@@ -48,7 +48,7 @@ const ProfileSection = () => {
   };
 
   const handleBecomeHost = async () => {
-    navigate("/become-host")
+    navigate("/register-host")
   };
 
   const handleLogout = () => {
@@ -61,58 +61,6 @@ const ProfileSection = () => {
   //   navigate("/post-booking");
   // };
 
-  if (loading) {
-    return (
-      <ProfileSectionContainer>
-        <Container className="profile-section">
-          <h2 className="host-title">Loading...</h2>
-
-          <WorldIconContainer>
-            <TbWorld className="world-icon" />
-          </WorldIconContainer>
-
-          <DropDown>
-            <ProfileContainer onClick={handleDropDown}>
-              <PiList className="list-icon" />
-              <CgProfile className="profile-icon" />
-              {isDropDownOpen && (
-                <DropDownContainer>
-                  {!user ? (
-                    <a
-                      onClick={() => navigate("/login")}
-                      className="dropdown-a-tag"
-                    >
-                      <div className="dropdown-login">Login</div>
-                    </a>
-                  ) : (
-                    <>
-                      <a
-                        onClick={() => navigate("/reservations")}
-                        className="dropdown-r-tag"
-                      >
-                        <div className="dropdown-login">View reservations</div>
-                      </a>
-                      {isHost && (
-                        <a
-                          onClick={() => navigate("/user-listings")}
-                          className="dropdown-r-tag"
-                        >
-                          <div className="dropdown-login">Your listings</div>
-                        </a>
-                      )}
-                      <a onClick={handleLogout} className="dropdown-r-tag">
-                        <div className="dropdown-login">Logout</div>
-                      </a>
-                    </>
-                  )}
-                </DropDownContainer>
-              )}
-            </ProfileContainer>
-          </DropDown>
-        </Container>
-      </ProfileSectionContainer>
-    );
-  }
 
   const iconPaths = ["/", "/booking", "/locations"];
   const isIconsPage = iconPaths.some(
