@@ -42,8 +42,22 @@ const apiRequest = async (endpoint, options = {}) => {
 };
 
 export const authAPI = {
+  // Register user
   register: async (userData) => {
     const response = await apiRequest('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    });
+    
+    if (response.token) {
+      localStorage.setItem('token', response.token);
+    }
+    
+    return response;
+  },
+  // Register host
+  registerHost: async (userData) => {
+    const response = await apiRequest('/auth/register-host', {
       method: 'POST',
       body: JSON.stringify(userData),
     });

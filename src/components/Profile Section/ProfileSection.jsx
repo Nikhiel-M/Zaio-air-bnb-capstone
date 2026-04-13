@@ -26,6 +26,8 @@ const ProfileSection = () => {
     const checkUserStatus = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
+        setUser(null);
+        setIsHost(false);
         setLoading(false);
         return;
       }
@@ -34,33 +36,35 @@ const ProfileSection = () => {
         setUser(response.user);
         setIsHost(response.user.isHost);
       } catch (error) {
-        // console.error("Error fetching user:", error);
+        setUser(null);
+        setIsHost(false);
       } finally {
         setLoading(false);
       }
     };
 
     checkUserStatus();
-  }, []);
+    // Re-run when location changes (login/logout)
+  }, [location]);
 
   const handleDropDown = () => {
     setIsDropDownOpen(!isDropDownOpen);
   };
 
   const handleBecomeHost = async () => {
-    navigate("/register-host")
+    navigate("/login-host");
   };
 
   const handleLogout = () => {
     authAPI.logout();
-    navigate("/");
     setUser(null);
+    setIsHost(false);
+    navigate("/");
   };
 
   // const handleBookingRoute = () => {
   //   navigate("/post-booking");
   // };
-
 
   const iconPaths = ["/", "/booking", "/locations"];
   const isIconsPage = iconPaths.some(
@@ -70,27 +74,21 @@ const ProfileSection = () => {
   return (
     <ProfileSectionContainer>
       <Container className="profile-section">
-
-                {isIconsPage && (
+        {isIconsPage && (
           <>
-        { (
-          <h2
-            className="host-title"
-            onClick={handleBecomeHost}
-            
-          >
-           Become a host
-          </h2>
-        )}
-
-
+            <h2
+              className="host-title"
+              onClick={!isHost ? handleBecomeHost : undefined}
+              style={{ cursor: isHost ? "default" : "pointer" }}
+            >
+              {isHost ? "Welcome host" : "Become a host"}
+            </h2>
             {hostMessage && <div className="host-message">{hostMessage}</div>}
             <WorldIconContainer>
               <TbWorld className="world-icon" />
             </WorldIconContainer>
           </>
         )}
-
 
         <DropDown>
           <ProfileContainer onClick={handleDropDown}>
@@ -137,27 +135,27 @@ const ProfileSection = () => {
 
 export default ProfileSection;
 
-    //  {user && isHost ? (
-    //       <h2 className="host-title-booking" onClick={handleBookingRoute}>
-    //         {" "}
-    //         Welcome {user?.firstName} <br /> Post your homes Here!
-    //       </h2>
-    //     ) : (
-    //       <h2
-    //         className="host-title"
-    //         onClick={handleBecomeHost}
-    //         disabled={isBecomingHost}
-    //         style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
-    //       >
-    //         {!user ? (
-    //           <>
-    //             Welcome guest <br /> please sign in
-    //           </>
-    //         ) : (
-    //           <>
-    //             Welcome {user?.firstName} <br /> Click here to become a
-    //             host{" "}
-    //           </>
-    //         )}
-    //       </h2>
-    //     )}
+//  {user && isHost ? (
+//       <h2 className="host-title-booking" onClick={handleBookingRoute}>
+//         {" "}
+//         Welcome {user?.firstName} <br /> Post your homes Here!
+//       </h2>
+//     ) : (
+//       <h2
+//         className="host-title"
+//         onClick={handleBecomeHost}
+//         disabled={isBecomingHost}
+//         style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
+//       >
+//         {!user ? (
+//           <>
+//             Welcome guest <br /> please sign in
+//           </>
+//         ) : (
+//           <>
+//             Welcome {user?.firstName} <br /> Click here to become a
+//             host{" "}
+//           </>
+//         )}
+//       </h2>
+//     )}

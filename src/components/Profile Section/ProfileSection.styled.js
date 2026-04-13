@@ -10,6 +10,7 @@ export const ProfileSectionContainer = styled.div`
     white-space: nowrap;
     cursor: pointer;
     padding-top: 0.5rem;
+
      
 }
 .host-title-booking{
