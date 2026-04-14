@@ -1,8 +1,7 @@
-import { checkHost } from "../../services/hooks";
+import { useHostGuard } from "../../services/hooks";
 
 const HostPage = () => {
-  checkHost();
-  
+  useHostGuard();
   return (
     <div>HostPage</div>
   );

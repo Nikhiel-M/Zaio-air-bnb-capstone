@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "./api";
 
-export function checkHost(redirectPath = "/") {
+// Correct custom hook for host-only access
+export function useHostGuard(redirectPath = "/") {
   const navigate = useNavigate();
   useEffect(() => {
     const checkHost = async () => {
@@ -13,11 +14,11 @@ export function checkHost(redirectPath = "/") {
       }
       try {
         const user = await authAPI.getCurrentUser();
-        if (!user.isHost && user.role !== "host") {
+        if (!user?.isHost && user?.role !== "host") {
           navigate(redirectPath); // Not a host, redirect
         }
       } catch (err) {
-        navigate("/login-host"); 
+        navigate("/login-host");
       }
     };
     checkHost();

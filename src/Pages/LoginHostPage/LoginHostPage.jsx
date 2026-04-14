@@ -11,10 +11,8 @@ import {
 } from "../LoginPage/LoginPage.styled";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/api";
-import { checkHost } from "../../services/hooks";
 
 const LoginHostPage = () => {
-  checkHost();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
