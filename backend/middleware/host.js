@@ -1,5 +1,3 @@
-
-
 const checkHostStatus = async (req, res, next) => {
     try {
         // Assumes req.user is set by authentication middleware
