@@ -18,7 +18,7 @@ const LoginHostPage = () => {
         
             try {
               await authAPI.login({ email, password });
-              navigate("/");
+              navigate("/host");
             } catch (err) {
               setError(err.message || "Login failed");
             } finally {

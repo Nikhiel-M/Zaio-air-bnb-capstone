@@ -1,6 +1,9 @@
 import User from "../models/User";
+import { useNavigate } from "react-router-dom";
+
 
 const checkHostStatus = async (req, res, next) => {
+    const navigate = useNavigate();
     try {
         // Assumes req.user is set by authentication middleware
         if (!req.user) {
@@ -12,6 +15,7 @@ const checkHostStatus = async (req, res, next) => {
             return next();
         } else {
             return res.status(403).json({ message: "Forbidden: Only hosts can access this route" });
+            navigate("/login-host");
         }
     } catch (error) {
         console.error("Host status check error:", error);
