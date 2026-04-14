@@ -1,7 +1,7 @@
 import authMiddleware from '../middleware/auth.js';
 import { Router } from 'express';
 import { registerUser, registerHost, loginUser, getCurrentUserName, meRoute } from '../Controllers/auth.controller.js';
-import {checkHostStatus} from '../middleware/Host.js';
+import checkHostStatus from '../middleware/Host.js';
 
 const router = Router();
 
