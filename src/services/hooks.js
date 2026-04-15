@@ -2,25 +2,31 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "./api";
 
-// Correct custom hook for host-only access
-export function useHostGuard(redirectPath = "/") {
+// Custom hook to guard host-only routes
+export function useHostGuard(redirectPath = "/login-host") {
   const navigate = useNavigate();
   useEffect(() => {
     const checkHost = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        navigate("/login-host"); // Not logged in, redirect to host login
+        alert("You must be logged in as a host to access this page.");
+        navigate("/login-host", { replace: true });
         return;
       }
       try {
-        const user = await authAPI.getCurrentUser();
-        if (!user?.isHost && user?.role !== "host") {
-          navigate(redirectPath); // Not a host, redirect
+        const response = await authAPI.getCurrentUser();
+        const user = response.user;
+        if (!(user && (user.isHost === true || user.role === "host"))) {
+          navigate(redirectPath, { replace: true });
         }
       } catch (err) {
-        navigate("/login-host");
+        navigate("/login-host", { replace: true });
       }
     };
     checkHost();
-  }, [navigate, redirectPath]);
+    // Only run on mount or if redirectPath changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [redirectPath]);
 }
+
+// Not detecting host correctly in the hook

@@ -44,7 +44,7 @@ const ProfileSection = () => {
     };
 
     checkUserStatus();
-    // Re-run when location changes (login/logout)
+    
   }, [location]);
 
   const handleDropDown = () => {
@@ -53,6 +53,10 @@ const ProfileSection = () => {
 
   const handleBecomeHost = async () => {
     navigate("/login-host");
+  };
+
+    const handleRedirectToHost = async () => {
+    navigate("/host");
   };
 
   const handleLogout = () => {
@@ -78,7 +82,7 @@ const ProfileSection = () => {
           <>
             <h2
               className="host-title"
-              onClick={!isHost ? handleBecomeHost : undefined}
+              onClick={!isHost ? handleBecomeHost : handleRedirectToHost}
               style={{ cursor: isHost ? "default" : "pointer" }}
             >
               {isHost ? "Welcome host" : "Become a host"}

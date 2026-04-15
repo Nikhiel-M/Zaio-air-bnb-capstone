@@ -3,7 +3,6 @@
 const API_BASE_URL = 'https://zaio-air-bnb-capstone.onrender.com/api';
 // http://localhost:5000/api
 
-// Helper function to get auth token from localStorage
 const getAuthToken = () => {
   return localStorage.getItem('token');
 };
