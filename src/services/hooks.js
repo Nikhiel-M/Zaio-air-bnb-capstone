@@ -24,9 +24,6 @@ export function useHostGuard(redirectPath = "/login-host") {
       }
     };
     checkHost();
-    // Only run on mount or if redirectPath changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [redirectPath]);
 }
 
-// Not detecting host correctly in the hook
