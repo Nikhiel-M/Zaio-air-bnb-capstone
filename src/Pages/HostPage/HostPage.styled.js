@@ -27,4 +27,7 @@ align-self: start;
 }
 `
 
-export const HostPageBody = styled.div``
+export const HostPageBody = styled.div`
+width: 100%;
+
+`

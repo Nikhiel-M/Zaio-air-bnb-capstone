@@ -5,16 +5,17 @@ import {
   UserListingsContainer,
   UserListingsCard,
   UserListingsInformationContainer,
-  UserListigsImage,
+  UserListingsImage,
   UserListingsDetails,
   UserListingsReview,
-  UserListingsIcon,
-  OptionsMenu,
+  UserListingsImageContainer,
+  UserListingsPillButton,
 } from "./UserListings.styled";
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
 import { propertiesAPI } from "../../services/api";
+import { PillButton } from "../../components/Buttons/PillButton.styled";
 
 const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
 
@@ -102,7 +103,7 @@ const UserListings = () => {
 
   return (
     <UserListingsContainer>
-      <UserListingsTitle className="header">Your Listings</UserListingsTitle>
+      <UserListingsTitle className="header">My Listings</UserListingsTitle>
 
       {properties.length === 0 ? (
         <UserListingsTitle>
@@ -123,53 +124,51 @@ const UserListings = () => {
             .join(" · ");
 
           return (
-            <UserListingsCard key={p._id || p.id || p.title}>
-              <UserListingsInformationContainer>
-                <UserListigsImage src={img} alt={p.title} />
+<UserListingsCard key={p._id || p.id || p.title}>
+  <UserListingsInformationContainer>
+               <UserListingsImageContainer>
+                   <UserListingsImage src={img} alt={p.title} />
+                   
+                  <UserListingsPillButton
+                    onClick={() => navigate(`/user-listings/${p._id}`)}
+                  >
+                    {" "}
+                    Update{" "}
+                  </UserListingsPillButton>
 
-                <UserListingsDetails>
-                  <UserListingsTitle>
-                    {p.title || p.address?.city || "Unknown location"}
-                  </UserListingsTitle>
+                  <UserListingsPillButton
+                    className="delete-btn"
+                    onClick={() => handleDelete(p._id)}
+                  >
+                    {" "}
+                    Delete{" "}
+                  </UserListingsPillButton>
+                </UserListingsImageContainer>
+    <UserListingsDetails>
+      <UserListingsTitle>
+        {p.title || p.address?.city || "Unknown location"}
+      </UserListingsTitle>
 
-                  <UserListingsSubtitle>{p.description}</UserListingsSubtitle>
+      <UserListingsSubtitle>{p.description}</UserListingsSubtitle>
 
-                  <UserListingsSubtitle>
-                    {p.address.country}
-                  </UserListingsSubtitle>
+      <UserListingsSubtitle>
+        {p.address.country}
+      </UserListingsSubtitle>
 
-                  <UserListingsSubtitle>{details}</UserListingsSubtitle>
+      <UserListingsSubtitle>{details}</UserListingsSubtitle>
 
-                  <UserListingsReview>
-                    <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
-                    {p.rating?.count ?? 0} reviews)
-                  </UserListingsReview>
-                </UserListingsDetails>
+<div className="review-price-container">
+      <UserListingsReview>
+        <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
+        {p.rating?.count ?? 0} reviews)
+      </UserListingsReview>
 
-                <UserListingsIcon>
-                  <SlOptionsVertical
-                    className="options-icon"
-                    onClick={() => toggleOptions(p._id || p.id || p.title)}
-                  />
-                  {openOptionsId === (p._id || p.id || p.title) && (
-                    <OptionsMenu>
-                      <h3
-                        className="options-title"
-                        onClick={() => navigate(`/user-listings/${p._id}`)}
-                      >
-                        Edit
-                      </h3>
-                      <h3
-                        className="options-title"
-                        onClick={() => handleDelete(p._id || p.id || p.title)}
-                      >
-                        Delete
-                      </h3>
-                    </OptionsMenu>
-                  )}
-                </UserListingsIcon>
-              </UserListingsInformationContainer>
-            </UserListingsCard>
+         <UserListingsSubtitle className="price"> ${p.pricePerNight} / per night </UserListingsSubtitle>
+</div>
+     
+    </UserListingsDetails>
+  </UserListingsInformationContainer>
+</UserListingsCard>
           );
         })
       )}

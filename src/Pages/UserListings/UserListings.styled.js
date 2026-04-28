@@ -10,14 +10,19 @@ import {
   LocationReview,
 } from "../../components/Locations/Locations.styled";
 import { DropDownContainer } from "../../components/Profile Section/ProfileSection.styled";
+import { PillButton } from "../../components/Buttons/PillButton.styled";
+
 
 export const UserListingsTitle = styled(LocationTitle)`
-
-
 `;
 
 export const UserListingsSubtitle = styled(LocationSubtitle)`
+`;
 
+export const UserListingsReview = styled(LocationReview)`
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
 `;
 
 export const UserListingsContainer = styled(LocationsContainer)`
@@ -29,57 +34,65 @@ export const UserListingsContainer = styled(LocationsContainer)`
 `;
 
 export const UserListingsCard = styled(LocationsCard)`
-  transform: translate(0, 0);
-
-&:hover{
-  transform: translate(0, 0);
-}
+width: 90%;
+height: auto;
+ 
 `;
+
 
 export const UserListingsInformationContainer = styled(LocationsInformationContainer)`
 
 `;
 
-export const UserListingsDetails = styled(LocationDetails)`
-
+export const UserListingsDetails = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1rem;
+  
+  .review-price-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .price {
+    color: black;
+    font-weight: 600;
+  }
 `;
 
-export const UserListigsImage = styled(LocationImage)`
+export const UserListingsImageContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0 3rem 0 5rem;
 
-`;
+.delete-btn{
+  background-color: red;
 
-
-export const UserListingsReview = styled(LocationReview)`
-
-`;
-
-export const UserListingsIcon = styled.div`
-height: 10%;
-
-.options-icon{
-  font-size: 2.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 9999px;
-
-  &:hover {
-    background-color: #ebebeb;
+  &:hover{
+    background-color: #ff2121;
   }
 }
 `;
 
-export const OptionsMenu = styled(DropDownContainer)`
-   transform: translate( -2rem, -11rem);
-   padding: 0;
+export const UserListingsImage = styled(LocationImage)`
+object-fit: cover;
 
-  .options-title{
-    font-size: 1rem;
-    color: grey;
-    padding:  1rem 1rem 0.2rem 1rem;
-    cursor: pointer;
-
-    
-  }
 `;
 
- 
+export const UserListingsPillButton = styled(PillButton)`
+background-color: blue;
+color: white;
+width: 100%;
+font-size: 1rem;
+font-weight: 100;
+border-radius: 10px;
+
+&:hover {
+  background-color: #2727ff;
+}
+`
+
