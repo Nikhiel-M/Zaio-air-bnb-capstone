@@ -16,8 +16,10 @@ import {
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useHostGuard } from "../../services/hooks";
 
 const UpdateListingPage = () => {
+  useHostGuard();
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

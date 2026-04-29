@@ -41,10 +41,10 @@ function AppContent() {
           <Route path="/booking/:propertyId" element={<BookingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/reservations" element={<ReservationsPage />} />
-          <Route path="/post-booking" element={<PostBookingPage />} />
-          <Route path="/user-listings" element={<UserListings />} />
-          <Route path="/user-listings/:id" element={<UpdateListingPage />} />
+          <Route path="/host/reservations" element={<ReservationsPage />} />
+          <Route path="/host/post-booking" element={<PostBookingPage />} />
+          <Route path="/host/user-listings" element={<UserListings />} />
+          <Route path="/host/user-listings/:id" element={<UpdateListingPage />} />
           <Route path="/login-host" element={<LoginHostPage />} />
           <Route path="/register-host" element={<RegisterHostPage />} />
           <Route path="/host" element={<HostPage />} />

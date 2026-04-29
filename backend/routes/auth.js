@@ -12,6 +12,9 @@ router.post('/login', loginUser);
 router.get('/name', authMiddleware, getCurrentUserName);
 router.get('/me', authMiddleware, meRoute);
 router.get('/host', authMiddleware, checkHostStatus)
+router.get("/host/reservations", authMiddleware, checkHostStatus)
+router.get("/host/post-booking", authMiddleware, checkHostStatus)
+router.get("/host/user-listings", authMiddleware, checkHostStatus)
 
 
 export default router;

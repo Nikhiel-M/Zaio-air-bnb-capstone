@@ -16,10 +16,12 @@ import { FaStar } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
 import { propertiesAPI } from "../../services/api";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
+import { useHostGuard } from "../../services/hooks";
 
 const ENDPOINT = `https://zaio-air-bnb-capstone.onrender.com/api/properties`;
 
 const UserListings = () => {
+  useHostGuard();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

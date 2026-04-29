@@ -15,8 +15,10 @@ import {
   AmenityItem,
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
+import { useHostGuard } from "../../services/hooks";
 
 const PostBookingPage = () => {
+  useHostGuard();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [long_description, setLong_description] = useState("");
