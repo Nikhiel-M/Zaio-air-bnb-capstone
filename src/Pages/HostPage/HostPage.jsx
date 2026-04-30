@@ -11,9 +11,9 @@ const HostPage = () => {
     <HostPageContainer>
       <HostPageHeader>
         <div className="pill-container">
-        <PillButton className="btn" onClick={() => navigate("/reservations")}>View Reservations</PillButton>
+        <PillButton className="btn" onClick={() => navigate("/host/reservations")}>View Reservations</PillButton>
         <PillButton className="btn" onClick={() => navigate("/host")}>View Listings</PillButton>
-        <PillButton className="btn" onClick={() => navigate("/post-booking")}>Create Listings</PillButton>
+        <PillButton className="btn" onClick={() => navigate("/host/post-booking")}>Create Listings</PillButton>
         </div>
       </HostPageHeader>
       <HostPageBody> <UserListings  /> </HostPageBody>
