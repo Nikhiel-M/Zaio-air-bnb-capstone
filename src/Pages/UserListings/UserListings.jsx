@@ -132,7 +132,7 @@ const UserListings = () => {
                    <UserListingsImage src={img} alt={p.title} />
                    
                   <UserListingsPillButton
-                    onClick={() => navigate(`/user-listings/${p._id}`)}
+                    onClick={() => navigate(`/host/user-listings/${p._id}`)}
                   >
                     {" "}
                     Update{" "}
