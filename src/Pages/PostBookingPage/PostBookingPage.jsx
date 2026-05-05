@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   PostBookingContainer,
   PostBookingTitle,
+  PostBookingSubtitle,
   PostBookingFormContainer,
   PostBookingForm,
   PostBookingSelector,
@@ -13,6 +14,8 @@ import {
   AmenityToggle,
   AmenityMenu,
   AmenityItem,
+  PostBookingAlignmentContainer,
+  PostBookingTextarea,
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
@@ -42,18 +45,18 @@ const PostBookingPage = () => {
 
   // Amenities options (must match backend enum exactly)
   const amenityOptions = [
-    'Wifi',
-    'Kitchen',
-    'Parking',
-    'Pool',
-    'Gym',
-    'Air conditioning',
-    'Heating',
-    'TV',
-    'Washer',
-    'Dryer',
-    'Pets allowed',
-    'Smoking allowed',
+    "Wifi",
+    "Kitchen",
+    "Parking",
+    "Pool",
+    "Gym",
+    "Air conditioning",
+    "Heating",
+    "TV",
+    "Washer",
+    "Dryer",
+    "Pets allowed",
+    "Smoking allowed",
   ];
 
   const toggleAmenity = (name) => {
@@ -165,13 +168,16 @@ const PostBookingPage = () => {
 
       // http://localhost:5000/api/properties
 
-      const res = await fetch("https://zaio-air-bnb-capstone.onrender.com/api/properties", {
-        method: "POST",
-        headers: {
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      const res = await fetch(
+        "https://zaio-air-bnb-capstone.onrender.com/api/properties",
+        {
+          method: "POST",
+          headers: {
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: formData,
         },
-        body: formData,
-      });
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to create property");
@@ -191,105 +197,39 @@ const PostBookingPage = () => {
       <PostBookingTitle>Please fill in these fields</PostBookingTitle>
 
       <PostBookingFormContainer>
-        <PostBookingForm
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          placeholder="Title"
-        />
-        <PostBookingForm
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          placeholder="description"
-        />
+        <div className="left-column">
+          {/* Title */}
+          <PostBookingSubtitle>Listing Title</PostBookingSubtitle>
+          <PostBookingForm
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
 
-        <PostBookingForm
-          type="text"
-          value={long_description}
-          onChange={(e) => setLong_description(e.target.value)}
-          required
-          placeholder="Information"
-        />
+          {/* Country */}
+          <PostBookingSubtitle>Location</PostBookingSubtitle>
+          <PostBookingForm
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            
+          />
 
-        <PostBookingSelector
-          type="text"
-          value={propertyType}
-          onChange={(e) => setPropertyType(e.target.value)}
-          required
-          placeholder="Type of property"
-        >
-          <option value="">Select property type</option>
-          <option value="House">House</option>
-          <option value="Apartment">Apartment</option>
-          <option value="Condo">Condo</option>
-          <option value="Villa">Villa</option>
-          <option value="Cabin">Cabin</option>
-          <option value="Loft">Loft</option>
-          <option value="Townhouse">Townhouse</option>
-          <option value="Other">Other</option>
-        </PostBookingSelector>
+          {/* LongDescription */}
+          <PostBookingSubtitle>Description</PostBookingSubtitle>
+          <PostBookingTextarea
+            className="description"
+            type="textarea"
+            value={long_description}
+            onChange={(e) => setLong_description(e.target.value)}
+            required
+            
+          />
+          {/* Add enhanced cleaning/self check-in boxes here */}
 
-        <PostBookingSelector
-          type="text"
-          value={roomType}
-          onChange={(e) => setRoomType(e.target.value)}
-          required
-          placeholder="Type of room"
-        >
-          <option value="">Select room type</option>
-          <option value="Entire place">Entire place</option>
-          <option value="Private room">Private room</option>
-          <option value="Shared room">Shared room</option>
-        </PostBookingSelector>
-
-        <PostBookingForm
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-          placeholder="Address"
-        />
-        <PostBookingForm
-          type="number"
-          value={maxGuests}
-          onChange={(e) => setMaxGuests(e.target.value)}
-          required
-          placeholder="Amount of guests"
-        />
-        <PostBookingForm
-          type="number"
-          value={pricePerNight}
-          onChange={(e) => setPricePerNight(e.target.value)}
-          required
-          placeholder="Price per night"
-        />
-
-        <PostBookingForm
-          type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          placeholder="Country"
-        />
-
-        <PostBookingForm
-          type="number"
-          value={bedrooms}
-          onChange={(e) => setBedrooms(Number(e.target.value) || 1)}
-          min={1}
-          placeholder="Bedrooms"
-        />
-
-        <PostBookingForm
-          type="number"
-          value={bathrooms}
-          onChange={(e) => setBathrooms(Number(e.target.value) || 1)}
-          min={1}
-          placeholder="Bathrooms"
-        />
-
+          {/* Amenities (Needs to be redone so that anything can be typed and selected) */}
+          <PostBookingSubtitle>Amenities</PostBookingSubtitle>
           <div>
             <AmenityWrapper>
               <AmenityToggle
@@ -335,48 +275,101 @@ const PostBookingPage = () => {
               )}
             </AmenityWrapper>
           </div>
-  
+        </div>
 
-        <PostBookingForm
-          type="number"
-          value={average}
-          onChange={(e) => setAverage(Number(e.target.value) || 0)}
-          min={0}
-          max={5}
-          step={0.1}
-          placeholder="Stars (0-5)"
-        />
+        <div className="right-column">
+          <div className="column-container">
+            <PostBookingAlignmentContainer>
+              {/* Price */}
+              <PostBookingSubtitle>Price</PostBookingSubtitle>
+              <PostBookingForm
+                type="number"
+                value={pricePerNight}
+                onChange={(e) => setPricePerNight(e.target.value)}
+                required
+                
+              />
+            </PostBookingAlignmentContainer>
 
-        <PostBookingForm
-          type="number"
-          value={count}
-          onChange={(e) => setCount(Number(e.target.value) || 0)}
-          min={0}
-          placeholder="Reviews"
-        />
+            <PostBookingAlignmentContainer>
+              {/* Room Type */}
+              <PostBookingSubtitle>Type</PostBookingSubtitle>
+              <PostBookingSelector
+                type="text"
+                value={roomType}
+                onChange={(e) => setRoomType(e.target.value)}
+                required
+                
+              >
+                <option value="">Select room type</option>
+                <option value="Entire place">Entire place</option>
+                <option value="Private room">Private room</option>
+                <option value="Shared room">Shared room</option>
+              </PostBookingSelector>
+            </PostBookingAlignmentContainer>
+          </div>
 
-        <HiddenFileInput
-          type="file"
-          ref={fileInputRef}
-          multiple
-          accept="image/*"
-          onChange={handleChange}
-        />
+          <div className="column-container">
+            <PostBookingAlignmentContainer>
+              {/* Guests */}
+              <PostBookingSubtitle>Guests</PostBookingSubtitle>
+              <PostBookingForm
+                type="number"
+                value={maxGuests}
+                onChange={(e) => setMaxGuests(e.target.value)}
+                required
+               
+              />
+            </PostBookingAlignmentContainer>
+            <PostBookingAlignmentContainer>
+              {/* Bedrooms */}
+              <PostBookingSubtitle>Bedrooms</PostBookingSubtitle>
+              <PostBookingForm
+                type="number"
+                value={bedrooms}
+                onChange={(e) => setBedrooms(Number(e.target.value) || 1)}
+                min={1}
+               
+              />
+            </PostBookingAlignmentContainer>
+            <PostBookingAlignmentContainer>
+              {/* Bathrooms */}
+              <PostBookingSubtitle>Bathrooms</PostBookingSubtitle>
+              <PostBookingForm
+                type="number"
+                value={bathrooms}
+                onChange={(e) => setBathrooms(Number(e.target.value) || 1)}
+                min={1}
+               
+              />
+            </PostBookingAlignmentContainer>
+          </div>
 
-        <ImagePickerButton
-          type="button"
-          onClick={handleClick}
-          aria-live="polite"
-          title={
-            images && images.length
+          {/* Image Upload */}
+          <PostBookingSubtitle>Image Upload</PostBookingSubtitle>
+          <HiddenFileInput
+            type="file"
+            ref={fileInputRef}
+            multiple
+            accept="image/*"
+            onChange={handleChange}
+          />
+
+          <ImagePickerButton
+            type="button"
+            onClick={handleClick}
+            aria-live="polite"
+            title={
+              images && images.length
+                ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
+                : "Click to select 5 images"
+            }
+          >
+            {images && images.length > 0
               ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
-              : "Click to select 5 images"
-          }
-        >
-          {images && images.length > 0
-            ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
-            : "Click to select 5 images"}
-        </ImagePickerButton>
+              : "Click to select 5 images"}
+          </ImagePickerButton>
+        </div>
       </PostBookingFormContainer>
 
       {error && <div className="error-msg">{error}</div>}
@@ -387,6 +380,64 @@ const PostBookingPage = () => {
       >
         {loading ? "Submitting..." : "Submit"}
       </PillButton>
+      
+
+      {/* Description */}
+      {/* <PostBookingForm
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          placeholder="Description"
+        /> */}
+
+      {/*Property Type */}
+      {/* <PostBookingSelector
+          type="text"
+          value={propertyType}
+          onChange={(e) => setPropertyType(e.target.value)}
+          required
+          placeholder="Type of property"
+        >
+          <option value="">Select property type</option>
+          <option value="House">House</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Condo">Condo</option>
+          <option value="Villa">Villa</option>
+          <option value="Cabin">Cabin</option>
+          <option value="Loft">Loft</option>
+          <option value="Townhouse">Townhouse</option>
+          <option value="Other">Other</option>
+        </PostBookingSelector> */}
+
+      {/* Location */}
+      {/* <PostBookingForm
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+          placeholder="Address"
+        /> */}
+
+      {/* Stars */}
+      {/* <PostBookingForm
+          type="number"
+          value={average}
+          onChange={(e) => setAverage(Number(e.target.value) || 0)}
+          min={0}
+          max={5}
+          step={0.1}
+          placeholder="Stars (0-5)"
+        /> */}
+
+      {/* Reviews (Create a function for this) */}
+      {/* <PostBookingForm
+          type="number"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value) || 0)}
+          min={0}
+          placeholder="Reviews"
+        /> */}
     </PostBookingContainer>
   );
 };
