@@ -33,10 +33,10 @@ const PostBookingPage = () => {
   const [images, setImages] = useState(null);
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
-  const [average, setAverage] = useState();
-  const [count, setCount] = useState();
-  const [bedrooms, setBedrooms] = useState();
-  const [bathrooms, setBathrooms] = useState();
+  const [average, setAverage] = useState("");
+  const [count, setCount] = useState("");
+  const [bedrooms, setBedrooms] = useState("");
+  const [bathrooms, setBathrooms] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const amenityRef = useRef(null);
 
@@ -104,7 +104,7 @@ const PostBookingPage = () => {
     setError(null);
 
     // basic validation for required fields
-    if (!title || !description || !address || !pricePerNight) {
+    if (!title || !long_description || !country || !pricePerNight) {
       setError(
         "Please fill required fields: title, description, address, price",
       );
@@ -113,26 +113,18 @@ const PostBookingPage = () => {
 
     const payload = {
       title,
-      description,
       long_description,
-      propertyType: propertyType || "Other",
       roomType: roomType || "Entire place",
       address: {
-        city: address,
         country: country || "Unknown",
       },
       bedrooms:
-        Number(bedrooms) ||
-        Math.max(1, Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1),
-      bathrooms: Number(bathrooms) || 1,
-      beds: Math.max(
-        1,
-        Number(maxGuests) ? Math.ceil(Number(maxGuests) / 2) : 1,
-      ),
-      maxGuests: Number(maxGuests) || 1,
-      pricePerNight: Number(pricePerNight) || 0,
+        bedrooms === "" ? Math.max(1, maxGuests !== "" ? Math.ceil(Number(maxGuests) / 2) : 1) : Number(bedrooms),
+      bathrooms: bathrooms === "" ? 1 : Number(bathrooms),
+      maxGuests: maxGuests === "" ? 1 : Number(maxGuests),
+      pricePerNight: pricePerNight === "" ? 0 : Number(pricePerNight),
       amenities,
-      rating: { average: Number(average) || 0, count: Number(count) || 0 },
+      rating: { average: average === "" ? 0 : Number(average), count: count === "" ? 0 : Number(count) },
     };
 
     setLoading(true);
@@ -141,14 +133,11 @@ const PostBookingPage = () => {
 
       const formData = new FormData();
       formData.append("title", payload.title);
-      formData.append("description", payload.description);
       formData.append("long_description", payload.long_description);
-      formData.append("propertyType", payload.propertyType);
       formData.append("roomType", payload.roomType);
       formData.append("address", JSON.stringify(payload.address));
       formData.append("bedrooms", String(payload.bedrooms));
       formData.append("bathrooms", String(payload.bathrooms));
-      formData.append("beds", String(payload.beds));
       formData.append("maxGuests", String(payload.maxGuests));
       formData.append("pricePerNight", String(payload.pricePerNight));
 
@@ -287,7 +276,7 @@ const PostBookingPage = () => {
                 value={pricePerNight}
                 onChange={(e) => setPricePerNight(e.target.value)}
                 required
-                
+                className="number-input"
               />
             </PostBookingAlignmentContainer>
 
@@ -318,7 +307,7 @@ const PostBookingPage = () => {
                 value={maxGuests}
                 onChange={(e) => setMaxGuests(e.target.value)}
                 required
-               
+                className="number-input"
               />
             </PostBookingAlignmentContainer>
             <PostBookingAlignmentContainer>
@@ -327,9 +316,9 @@ const PostBookingPage = () => {
               <PostBookingForm
                 type="number"
                 value={bedrooms}
-                onChange={(e) => setBedrooms(Number(e.target.value) || 1)}
+                onChange={(e) => setBedrooms(e.target.value)}
                 min={1}
-               
+                className="number-input"
               />
             </PostBookingAlignmentContainer>
             <PostBookingAlignmentContainer>
@@ -338,9 +327,9 @@ const PostBookingPage = () => {
               <PostBookingForm
                 type="number"
                 value={bathrooms}
-                onChange={(e) => setBathrooms(Number(e.target.value) || 1)}
+                onChange={(e) => setBathrooms(e.target.value)}
                 min={1}
-               
+                className="number-input"
               />
             </PostBookingAlignmentContainer>
           </div>

@@ -74,6 +74,7 @@ export const PostBookingAlignmentContainer = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
+
 `
 
 
@@ -88,6 +89,12 @@ cursor: pointer;
 background: white;
 margin: 0.3rem 0 1rem 0;
 text-align: start;
+
+  &.number-input::-webkit-outer-spin-button,
+  &.number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
 &:focus {
   border: 2px solid #000000;
