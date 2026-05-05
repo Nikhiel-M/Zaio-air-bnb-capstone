@@ -61,7 +61,6 @@ const UpdateListingPage = () => {
     },
     bedrooms: Number(bedrooms) || 1,
     bathrooms: Number(bathrooms) || 1,
-    beds: Math.max(1, Number(maxGuests)),
     maxGuests: Number(maxGuests) || 1,
     pricePerNight: Number(pricePerNight) || 0,
     amenities,
@@ -81,7 +80,7 @@ const UpdateListingPage = () => {
     formData.append("address", JSON.stringify(payload.address));
     formData.append("bedrooms", String(payload.bedrooms));
     formData.append("bathrooms", String(payload.bathrooms));
-    formData.append("beds", String(payload.beds));
+    // formData.append("beds", String(payload.beds));
     formData.append("maxGuests", String(payload.maxGuests));
     formData.append("pricePerNight", String(payload.pricePerNight));
     if (amenities && amenities.length) {

@@ -20,7 +20,7 @@ export const getAllProperties =  async (req, res) => {
     // Build filter object
     const filter = { isActive: true };
     
-    if (city) filter['address.city'] = new RegExp(city, 'i');
+    // if (city) filter['address.city'] = new RegExp(city, 'i');
     if (country) filter['address.country'] = new RegExp(country, 'i');
     if (minPrice || maxPrice) {
       filter.pricePerNight = {};
@@ -120,7 +120,7 @@ export const createProperty = async (req, res) => {
     }
 
     // coerce numeric fields
-    ['bedrooms','bathrooms','beds','maxGuests','pricePerNight'].forEach(k => {
+    ['bedrooms','bathrooms','maxGuests','pricePerNight'].forEach(k => {
       if (propertyData[k] !== undefined) {
         const n = Number(propertyData[k]);
         if (!Number.isNaN(n)) propertyData[k] = n;
@@ -171,7 +171,7 @@ export const updateProperty = async (req, res) => {
     if (updateData.rating && typeof updateData.rating === 'string') {
       try { updateData.rating = JSON.parse(updateData.rating); } catch {}
     }
-    ['bedrooms','bathrooms','beds','maxGuests','pricePerNight'].forEach(k => {
+    ['bedrooms','bathrooms', 'maxGuests','pricePerNight'].forEach(k => {
       if (updateData[k] !== undefined) {
         const n = Number(updateData[k]);
         if (!Number.isNaN(n)) updateData[k] = n;

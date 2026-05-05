@@ -29,7 +29,6 @@ const propertySchema = new mongoose.Schema({
     enum: ['Entire place', 'Private room', 'Shared room']
   },
   address: {
-    city: { type: String, required: true },
     country: { type: String, required: true },
   },
   amenities: [{
