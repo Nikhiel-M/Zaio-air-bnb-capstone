@@ -6,38 +6,35 @@ const propertySchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  description: {
-    type: String,
-    required: true
-  },
+
+  // description: {
+  //   type: String,
+  //   required: true
+  // },
+ 
   long_description: {
     type: String,
     required: true
   },
-  propertyType: {
-    type: String,
-    required: true,
-    enum: ['House', 'Apartment', 'Condo', 'Villa', 'Cabin', 'Loft', 'Townhouse', 'Other']
-  },
+
+  // propertyType: {
+  //   type: String,
+  //   required: true,
+  //   enum: ['House', 'Apartment', 'Condo', 'Villa', 'Cabin', 'Loft', 'Townhouse', 'Other']
+  // },
+
   roomType: {
     type: String,
     required: true,
     enum: ['Entire place', 'Private room', 'Shared room']
   },
   address: {
-    street: String,
     city: { type: String, required: true },
-    state: String,
     country: { type: String, required: true },
-    zipCode: String,
-    coordinates: {
-      lat: Number,
-      lng: Number
-    }
   },
   amenities: [{
     type: [String],
-    enum: ['Wifi', 'Kitchen', 'Parking', 'Pool', 'Gym', 'Air conditioning', 'Heating', 'TV', 'Washer', 'Dryer', 'Pets allowed', 'Smoking allowed']
+
   }],
     amenities: {
       type: [String],
@@ -46,14 +43,9 @@ const propertySchema = new mongoose.Schema({
   bedrooms: {
     type: Number,
     required: true,
-    min: 0
-  },
-  bathrooms: {
-    type: Number,
-    required: true,
     min: 1
   },
-  beds: {
+  bathrooms: {
     type: Number,
     required: true,
     min: 1

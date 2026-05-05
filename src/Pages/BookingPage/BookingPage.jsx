@@ -193,10 +193,10 @@ const BookingPage = () => {
             <div className="informationBox">
               <InformationHeader>
                 <BookingTitle className="information-header-title">
-                  {property.propertyType} hosted by {property.host.firstName}
+                  {property.roomType} hosted by {property.host.firstName}
                 </BookingTitle>
                 <BookingSubtitle className="information-header-subtitle">
-                  {property.maxGuests} Guests • {property.propertyType} •{" "}
+                  {property.maxGuests} Guests • {property.roomType} •{" "}
                   {property.bedrooms} Bedrooms •{" "}
                   {((property) => {
                     const bathrooms = property.bathrooms ?? 0;
@@ -212,7 +212,7 @@ const BookingPage = () => {
                     <LuHouse /> {property.roomType}
                   </BookingTitle>
                   <BookingSubtitle className="information-body-subtitle">
-                    {property.description}
+                    {property.roomType} in {property.address.country}
                   </BookingSubtitle>
 
                   <BookingTitle className="information-body-title">

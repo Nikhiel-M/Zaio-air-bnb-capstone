@@ -105,10 +105,9 @@ const Locations = () => {
               <LocationImage src={img || null} />
               <LocationDetails>
                 <LocationTitle>
-                  {p.title || p.address?.city || "Unknown location"}
+                  {p.title }
                 </LocationTitle>
-                <LocationSubtitle>{p.description}</LocationSubtitle>
-                <LocationSubtitle>{p.address.country}</LocationSubtitle>
+                <LocationSubtitle>{p.roomType} in {p.address.country}</LocationSubtitle>
                 <LocationSubtitle>{details}</LocationSubtitle>
                 <LocationReview>
                   <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
