@@ -36,6 +36,9 @@ border-bottom: 1px lightgray solid;
 font-size: 1.8rem;
 color: #5d5c5c;
 line-height: 1.2;
+word-break: break-all;
+word-wrap: break-word;
+overflow: hidden;
 }
 
 .informationBox{

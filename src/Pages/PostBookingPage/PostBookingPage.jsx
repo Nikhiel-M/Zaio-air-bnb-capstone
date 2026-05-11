@@ -370,63 +370,6 @@ const PostBookingPage = () => {
         {loading ? "Submitting..." : "Submit"}
       </PillButton>
       
-
-      {/* Description */}
-      {/* <PostBookingForm
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          placeholder="Description"
-        /> */}
-
-      {/*Property Type */}
-      {/* <PostBookingSelector
-          type="text"
-          value={propertyType}
-          onChange={(e) => setPropertyType(e.target.value)}
-          required
-          placeholder="Type of property"
-        >
-          <option value="">Select property type</option>
-          <option value="House">House</option>
-          <option value="Apartment">Apartment</option>
-          <option value="Condo">Condo</option>
-          <option value="Villa">Villa</option>
-          <option value="Cabin">Cabin</option>
-          <option value="Loft">Loft</option>
-          <option value="Townhouse">Townhouse</option>
-          <option value="Other">Other</option>
-        </PostBookingSelector> */}
-
-      {/* Location */}
-      {/* <PostBookingForm
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-          placeholder="Address"
-        /> */}
-
-      {/* Stars */}
-      {/* <PostBookingForm
-          type="number"
-          value={average}
-          onChange={(e) => setAverage(Number(e.target.value) || 0)}
-          min={0}
-          max={5}
-          step={0.1}
-          placeholder="Stars (0-5)"
-        /> */}
-
-      {/* Reviews (Create a function for this) */}
-      {/* <PostBookingForm
-          type="number"
-          value={count}
-          onChange={(e) => setCount(Number(e.target.value) || 0)}
-          min={0}
-          placeholder="Reviews"
-        /> */}
     </PostBookingContainer>
   );
 };
