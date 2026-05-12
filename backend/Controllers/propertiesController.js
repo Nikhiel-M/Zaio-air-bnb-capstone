@@ -91,6 +91,9 @@ export const createProperty = async (req, res) => {
       host: req.userId
     };
 
+    // Debug: log propertyData to check rating
+    console.log('DEBUG propertyData:', propertyData);
+
     // If addr was sent as JSON string (from multipart form), parse it
     if (propertyData.address && typeof propertyData.address === 'string') {
       try {

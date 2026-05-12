@@ -33,8 +33,6 @@ const PostBookingPage = () => {
   const [images, setImages] = useState(null);
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
-  // const [average, setAverage] = useState("");
-  // const [count, setCount] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
@@ -162,7 +160,7 @@ const PostBookingPage = () => {
           formData.append("images", file);
         });
       }
-
+      
       // http://localhost:5000/api/properties
 
       const res = await fetch(
@@ -180,7 +178,7 @@ const PostBookingPage = () => {
       if (!res.ok) throw new Error(data.message || "Failed to create property");
 
       // on success navigate or clear form
-      navigate("/");
+      navigate("/host");
     } catch (err) {
       console.error(err);
       setError(err.message || "Error submitting property");
