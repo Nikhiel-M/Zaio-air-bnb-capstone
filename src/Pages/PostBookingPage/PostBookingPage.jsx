@@ -33,8 +33,8 @@ const PostBookingPage = () => {
   const [images, setImages] = useState(null);
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
-  const [average, setAverage] = useState("");
-  const [count, setCount] = useState("");
+  // const [average, setAverage] = useState("");
+  // const [count, setCount] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
@@ -98,6 +98,7 @@ const PostBookingPage = () => {
     setAmenities(selected);
   };
 
+
   const handleSubmit = async (e) => {
     // If called from button onClick without event
     if (e && e.preventDefault) e.preventDefault();
@@ -110,6 +111,10 @@ const PostBookingPage = () => {
       );
       return;
     }
+    
+      const randomAverage = (Math.random() * 5).toFixed(1);
+      const randomCount = Math.floor(Math.random() * 600);
+      
 
     const payload = {
       title,
@@ -119,12 +124,14 @@ const PostBookingPage = () => {
         country: country || "Unknown",
       },
       bedrooms:
-        bedrooms === "" ? Math.max(1, maxGuests !== "" ? Math.ceil(Number(maxGuests) / 2) : 1) : Number(bedrooms),
+        bedrooms === ""
+          ? Math.max(1, maxGuests !== "" ? Math.ceil(Number(maxGuests) / 2) : 1)
+          : Number(bedrooms),
       bathrooms: bathrooms === "" ? 1 : Number(bathrooms),
       maxGuests: maxGuests === "" ? 1 : Number(maxGuests),
       pricePerNight: pricePerNight === "" ? 0 : Number(pricePerNight),
       amenities,
-      rating: { average: average === "" ? 0 : Number(average), count: count === "" ? 0 : Number(count) },
+      rating: { average: Number(randomAverage), count: Number(randomCount) },
     };
 
     setLoading(true);
@@ -140,6 +147,7 @@ const PostBookingPage = () => {
       formData.append("bathrooms", String(payload.bathrooms));
       formData.append("maxGuests", String(payload.maxGuests));
       formData.append("pricePerNight", String(payload.pricePerNight));
+      formData.append("rating", (payload.rating));
 
       if (amenities && amenities.length) {
         formData.append("amenities", JSON.stringify(amenities));
@@ -202,7 +210,6 @@ const PostBookingPage = () => {
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            
           />
 
           {/* LongDescription */}
@@ -213,7 +220,6 @@ const PostBookingPage = () => {
             value={long_description}
             onChange={(e) => setLong_description(e.target.value)}
             required
-            
           />
           {/* Add enhanced cleaning/self check-in boxes here */}
 
@@ -288,7 +294,6 @@ const PostBookingPage = () => {
                 value={roomType}
                 onChange={(e) => setRoomType(e.target.value)}
                 required
-                
               >
                 <option value="">Select room type</option>
                 <option value="Entire place">Entire place</option>
@@ -369,7 +374,6 @@ const PostBookingPage = () => {
       >
         {loading ? "Submitting..." : "Submit"}
       </PillButton>
-      
     </PostBookingContainer>
   );
 };

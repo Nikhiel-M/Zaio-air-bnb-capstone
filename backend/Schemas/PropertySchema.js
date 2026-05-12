@@ -31,14 +31,10 @@ const propertySchema = new mongoose.Schema({
   address: {
     country: { type: String, required: true },
   },
-  amenities: [{
+  amenities: {
     type: [String],
-
-  }],
-    amenities: {
-      type: [String],
-      enum: ['Wifi', 'Kitchen', 'Parking', 'Pool', 'Gym', 'Air conditioning', 'Heating', 'TV', 'Washer', 'Dryer', 'Pets allowed', 'Smoking allowed']
-    },
+    enum: ['Wifi', 'Kitchen', 'Parking', 'Pool', 'Gym', 'Air conditioning', 'Heating', 'TV', 'Washer', 'Dryer', 'Pets allowed', 'Smoking allowed']
+  },
   bedrooms: {
     type: Number,
     required: true,
