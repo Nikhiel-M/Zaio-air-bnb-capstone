@@ -235,3 +235,15 @@ export const cancelBooking = async (req, res) => {
     res.status(500).json({ message: "Server error while cancelling booking" });
   }
 };
+
+export const deleteAllBookingsPerProperty = async (req, res) => {
+  try{
+    const propertyId = req.params.propertyId;
+    await Booking.deleteMany({ property: propertyId });
+    res.json({ message: "All bookings for the property deleted successfully" });
+  }
+catch(err){
+    console.error("Delete bookings per property error:", err);
+    res.status(500).json({ message: "Server error while deleting bookings for property" });
+}
+}

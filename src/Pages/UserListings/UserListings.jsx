@@ -89,12 +89,23 @@ const UserListings = () => {
     setOpenOptionsId((prevId) => (prevId === id ? null : id));
   };
 
+  const deleteAllBookings = async (propertyId) => {
+ try {
+  await propertiesAPI.deleteAllBookingsPerProperty(propertyId);
+ }
+ catch(err){
+  console.error("Failed to delete bookings for property:", err);
+ }
+  }
+
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this listing?"))
       return;
     try {
       await propertiesAPI.deleteProperty(id);
       setProperties((prev) => prev.filter((p) => p._id !== id && p.id !== id));
+      await deleteAllBookings(id);
+      alert("Listing deleted successfully");
     } catch (err) {
       alert("Failed to delete listing");
     }

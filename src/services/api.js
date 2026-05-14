@@ -188,6 +188,12 @@ export const bookingsAPI = {
     });
   },
 
+  deleteAllBookingsPerProperty: async (propertyId) =>{
+    return apiRequest(`/bookings/property/${propertyId}`, {
+      method: "DELETE"
+    });
+  },
+
   // Add review to booking
   addReview: async (id, reviewData) => {
     return apiRequest(`/bookings/${id}/review`, {
