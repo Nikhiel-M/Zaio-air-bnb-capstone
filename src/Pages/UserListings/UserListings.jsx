@@ -14,7 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
-import { propertiesAPI } from "../../services/api";
+import { propertiesAPI, bookingsAPI } from "../../services/api";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
 
@@ -90,13 +90,12 @@ const UserListings = () => {
   };
 
   const deleteAllBookings = async (propertyId) => {
- try {
-  await propertiesAPI.deleteAllBookingsPerProperty(propertyId);
- }
- catch(err){
-  console.error("Failed to delete bookings for property:", err);
- }
-  }
+    try {
+      await bookingsAPI.deleteAllBookingsPerProperty(propertyId);
+    } catch (err) {
+      console.error("Failed to delete bookings for property:", err);
+    }
+  };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this listing?"))
