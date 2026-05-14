@@ -161,7 +161,7 @@ const UserListings = () => {
 
 <div className="review-price-container">
       <UserListingsReview>
-        <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
+        <FaStar /> {(p.rating.average)} (
         {p.rating?.count ?? 0} reviews)
       </UserListingsReview>
 

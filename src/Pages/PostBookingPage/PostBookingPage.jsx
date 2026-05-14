@@ -112,7 +112,6 @@ const PostBookingPage = () => {
     
       const randomAverage = (Math.random() * 5).toFixed(1);
       const randomCount = Math.floor(Math.random() * 600);
-      
 
     const payload = {
       title,
@@ -145,14 +144,10 @@ const PostBookingPage = () => {
       formData.append("bathrooms", String(payload.bathrooms));
       formData.append("maxGuests", String(payload.maxGuests));
       formData.append("pricePerNight", String(payload.pricePerNight));
-      formData.append("rating", (payload.rating));
+      formData.append("rating", JSON.stringify(payload.rating));
 
       if (amenities && amenities.length) {
         formData.append("amenities", JSON.stringify(amenities));
-      }
-
-      if (payload.rating) {
-        formData.append("rating", JSON.stringify(payload.rating));
       }
 
       if (images && images.length) {

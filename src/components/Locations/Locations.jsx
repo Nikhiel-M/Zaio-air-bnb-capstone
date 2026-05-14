@@ -110,7 +110,7 @@ const Locations = () => {
                 <LocationSubtitle>{p.roomType} in {p.address.country}</LocationSubtitle>
                 <LocationSubtitle>{details}</LocationSubtitle>
                 <LocationReview>
-                  <FaStar /> {(p.rating?.average ?? 0).toFixed(1)} (
+                  <FaStar /> {(p.rating?.average ?? 0)} (
                   {p.rating?.count ?? 0} reviews)
                 </LocationReview>
               </LocationDetails>
