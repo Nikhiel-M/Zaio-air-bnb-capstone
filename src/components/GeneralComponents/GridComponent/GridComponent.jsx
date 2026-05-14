@@ -12,14 +12,10 @@ const GridComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchBookings();
-  }, []);
-
-  const fetchBookings = async () => {
+  const fetchHostBookings = async () => {
     try {
       setLoading(true);
-      const response = await bookingsAPI.getMyBookings();
+      const response = await bookingsAPI.getHostBookings();
       setBookings(response.bookings || []);
     } catch (err) {
       setError(err.message);
@@ -28,12 +24,17 @@ const GridComponent = () => {
     }
   };
 
+  useEffect(() => {
+    fetchHostBookings();
+  }, []);
+  
+
   const handleCancelBooking = async (bookingId) => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
       try {
         await bookingsAPI.cancelBooking(bookingId, "Cancelled by user");
         // Refresh the bookings list
-        fetchBookings();
+        fetchHostBookings();
         alert("Booking cancelled successfully");
       } catch (err) {
         alert("Error cancelling booking: " + err.message);

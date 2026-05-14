@@ -102,9 +102,9 @@ const UserListings = () => {
     if (!window.confirm("Are you sure you want to delete this listing?"))
       return;
     try {
+      await deleteAllBookings(id);
       await propertiesAPI.deleteProperty(id);
       setProperties((prev) => prev.filter((p) => p._id !== id && p.id !== id));
-      await deleteAllBookings(id);
       alert("Listing deleted successfully");
     } catch (err) {
       alert("Failed to delete listing");

@@ -16,7 +16,7 @@ const HostPage = () => {
         <PillButton className="btn" onClick={() => navigate("/host/post-booking")}>Create Listings</PillButton>
         </div>
       </HostPageHeader>
-      <HostPageBody> <UserListings  /> </HostPageBody>
+      <HostPageBody> <UserListings /> </HostPageBody>
     </HostPageContainer>
   );
 }
