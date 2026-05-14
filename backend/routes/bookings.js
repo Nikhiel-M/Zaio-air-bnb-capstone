@@ -7,6 +7,7 @@ import {
   getHostBookings,
   updateBookingStatus,
   cancelBooking,
+  deleteAllBookingsPerProperty
 } from "../Controllers/bookingsController.js";
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.get("/host-bookings", auth, getHostBookings);
 router.get("/:id", auth, getBookingById);
 router.patch("/:id/status", auth, updateBookingStatus);
 router.patch("/:id/cancel", auth, cancelBooking);
+router.delete("/property/:propertyId", auth, deleteAllBookingsPerProperty);
 
 export default router;
