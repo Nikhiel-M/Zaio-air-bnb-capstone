@@ -38,7 +38,7 @@ padding: 2rem;
 export const PostBookingFormContainer = styled.div`
 display: flex;
 flex-direction: row;
-align-items: center;
+align-items: flex-start;
 justify-content: center;
 gap: 3rem;
 margin-top: 5rem;
@@ -68,7 +68,40 @@ padding: 0 5rem;
   margin-bottom: 1rem;
 }
 
+.amenities-container{
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  .add-btn{
+    margin: 0 0 0.6rem 0;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+
+    &:hover{
+      color: white;
+    }
+  }
+}
+
 `;
+
+export const AmenityUL = styled.ul`
+width: 100%;
+background-color: #f5e0e0;
+list-style: none;
+margin: 0;
+padding: 0;
+display: grid;
+grid-template-columns: 1fr 1fr ;
+overflow: hidden;
+`
+
+export const AmenityListItem = styled.li`
+
+`
 
 export const PostBookingAlignmentContainer = styled.div`
 display: flex;

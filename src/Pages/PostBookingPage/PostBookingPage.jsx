@@ -16,6 +16,8 @@ import {
   AmenityItem,
   PostBookingAlignmentContainer,
   PostBookingTextarea,
+  AmenityListItem,
+  AmenityUL
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
@@ -37,32 +39,33 @@ const PostBookingPage = () => {
   const [bathrooms, setBathrooms] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const amenityRef = useRef(null);
+  const [amenityItem, setAmenityItem] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Amenities options (must match backend enum exactly)
-  const amenityOptions = [
-    "Wifi",
-    "Kitchen",
-    "Parking",
-    "Pool",
-    "Gym",
-    "Air conditioning",
-    "Heating",
-    "TV",
-    "Washer",
-    "Dryer",
-    "Pets allowed",
-    "Smoking allowed",
-  ];
+  // const toggleAmenity = (name) => {
+  //   setAmenities((prev) => {
+  //     if (prev.includes(name)) return prev.filter((a) => a !== name);
+  //     return [...prev, name];
+  //   });
+  // };
 
-  const toggleAmenity = (name) => {
-    setAmenities((prev) => {
-      if (prev.includes(name)) return prev.filter((a) => a !== name);
-      return [...prev, name];
-    });
+
+  const addAmenity = (amenityItem) => {
+    if (!amenityItem.trim()) return;
+    setAmenities((prev) => [...prev, amenityItem]);
+    setAmenityItem("");
   };
+
+  const amenitiesList = (
+    <AmenityUL>
+      {amenities.map((amenity, index) => (
+        <AmenityListItem key={index}>{amenity}</AmenityListItem>
+      ))}
+    </AmenityUL>
+  );
+
   const navigate = useNavigate();
 
   const fileInputRef = useRef(null);
@@ -71,19 +74,19 @@ const PostBookingPage = () => {
     fileInputRef.current.click();
   };
 
-  useEffect(() => {
-    const onDocClick = (e) => {
-      if (
-        amenitiesOpen &&
-        amenityRef.current &&
-        !amenityRef.current.contains(e.target)
-      ) {
-        setAmenitiesOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, [amenitiesOpen]);
+  // useEffect(() => {
+  //   const onDocClick = (e) => {
+  //     if (
+  //       amenitiesOpen &&
+  //       amenityRef.current &&
+  //       !amenityRef.current.contains(e.target)
+  //     ) {
+  //       setAmenitiesOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", onDocClick);
+  //   return () => document.removeEventListener("mousedown", onDocClick);
+  // }, [amenitiesOpen]);
 
   const handleChange = (e) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
@@ -91,10 +94,10 @@ const PostBookingPage = () => {
     setImages(limited);
   };
 
-  const handleAmenitiesChange = (e) => {
-    const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
-    setAmenities(selected);
-  };
+  // const handleAmenitiesChange = (e) => {
+  //   const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
+  //   setAmenities(selected);
+  // };
 
 
   const handleSubmit = async (e) => {
@@ -218,50 +221,16 @@ const PostBookingPage = () => {
 
           {/* Amenities (Needs to be redone so that anything can be typed and selected) */}
           <PostBookingSubtitle>Amenities</PostBookingSubtitle>
-          <div>
-            <AmenityWrapper>
-              <AmenityToggle
-                type="button"
-                onClick={() => setAmenitiesOpen((v) => !v)}
-                aria-expanded={amenitiesOpen}
-                aria-haspopup="listbox"
-              >
-                {amenities.length
-                  ? `${amenities.length} selected`
-                  : "Select amenities"}
-              </AmenityToggle>
-
-              {amenitiesOpen && (
-                <AmenityMenu role="listbox" aria-multiselectable="true">
-                  {amenityOptions.map((opt) => (
-                    <AmenityItem key={opt}>
-                      <input
-                        id={`amen-${opt}`}
-                        type="checkbox"
-                        checked={amenities.includes(opt)}
-                        onChange={() => {
-                          // toggle
-                          setAmenities((prev) =>
-                            prev.includes(opt)
-                              ? prev.filter((a) => a !== opt)
-                              : [...prev, opt],
-                          );
-                        }}
-                      />
-                      <label
-                        htmlFor={`amen-${opt}`}
-                        style={{
-                          marginLeft: "0.5rem",
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {opt.replace("_", " ")}
-                      </label>
-                    </AmenityItem>
-                  ))}
-                </AmenityMenu>
-              )}
-            </AmenityWrapper>
+          <div className="amenities-container">
+            <PostBookingForm 
+              type="text"
+              value={amenityItem}
+              onChange={(e) => setAmenityItem(e.target.value)}
+            />
+            <PillButton className="add-btn" onClick={() => addAmenity(amenityItem)} >Add</PillButton>
+          </div>
+          <div className="amenities-list">
+            {amenitiesList}
           </div>
         </div>
 
@@ -372,3 +341,48 @@ const PostBookingPage = () => {
 };
 
 export default PostBookingPage;
+
+
+{/* <AmenityWrapper>
+              <AmenityToggle
+                type="button"
+                onClick={() => setAmenitiesOpen((v) => !v)}
+                aria-expanded={amenitiesOpen}
+                aria-haspopup="listbox"
+              >
+                {amenities.length
+                  ? `${amenities.length} selected`
+                  : "Select amenities"}
+              </AmenityToggle>
+
+              {amenitiesOpen && (
+                <AmenityMenu role="listbox" aria-multiselectable="true">
+                  {amenityOptions.map((opt) => (
+                    <AmenityItem key={opt}>
+                      <input
+                        id={`amen-${opt}`}
+                        type="checkbox"
+                        checked={amenities.includes(opt)}
+                        onChange={() => {
+                          // toggle
+                          setAmenities((prev) =>
+                            prev.includes(opt)
+                              ? prev.filter((a) => a !== opt)
+                              : [...prev, opt],
+                          );
+                        }}
+                      />
+                      <label
+                        htmlFor={`amen-${opt}`}
+                        style={{
+                          marginLeft: "0.5rem",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {opt.replace("_", " ")}
+                      </label>
+                    </AmenityItem>
+                  ))}
+                </AmenityMenu>
+              )}
+</AmenityWrapper> */}

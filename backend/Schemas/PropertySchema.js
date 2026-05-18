@@ -6,22 +6,11 @@ const propertySchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-
-  // description: {
-  //   type: String,
-  //   required: true
-  // },
  
   long_description: {
     type: String,
     required: true
   },
-
-  // propertyType: {
-  //   type: String,
-  //   required: true,
-  //   enum: ['House', 'Apartment', 'Condo', 'Villa', 'Cabin', 'Loft', 'Townhouse', 'Other']
-  // },
 
   roomType: {
     type: String,
@@ -33,7 +22,7 @@ const propertySchema = new mongoose.Schema({
   },
   amenities: {
     type: [String],
-    enum: ['Wifi', 'Kitchen', 'Parking', 'Pool', 'Gym', 'Air conditioning', 'Heating', 'TV', 'Washer', 'Dryer', 'Pets allowed', 'Smoking allowed']
+    default: []
   },
   bedrooms: {
     type: Number,
