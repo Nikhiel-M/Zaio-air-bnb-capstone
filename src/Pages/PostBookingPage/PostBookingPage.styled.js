@@ -20,14 +20,31 @@ align-items: center;
 justify-content: center;
 padding: 2rem;
 
-.post-btn{
-    padding: 1rem 4rem;
-    margin-top: 8rem;
+  .button-group{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+  }
 
+.post-btn{
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+    width: 45%;
     &:hover{
         color: white;
     }
 }
+
+.cancel-btn{
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+    width: 45%;
+    &:hover{
+        color: white;
+        background-color: #3734eb;
+    }
+}
+
 
 .error-msg{
   color: red;
@@ -84,23 +101,38 @@ padding: 0 5rem;
       color: white;
     }
   }
+
 }
 
 `;
 
 export const AmenityUL = styled.ul`
 width: 100%;
-background-color: #f5e0e0;
 list-style: none;
 margin: 0;
 padding: 0;
 display: grid;
-grid-template-columns: 1fr 1fr ;
+grid-template-columns: 1fr 1fr;
+gap: 0.5rem;
 overflow: hidden;
+
+.delete-btn{
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
 `
 
 export const AmenityListItem = styled.li`
-
+display: flex;
+justify-content: space-between;
+font-size: 1rem;
+font-weight: 300;
+background-color: #f0f0f0;
+padding: 0.5rem;
+border-radius: 7px;
 `
 
 export const PostBookingAlignmentContainer = styled.div`

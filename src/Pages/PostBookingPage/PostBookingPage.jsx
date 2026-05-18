@@ -21,6 +21,7 @@ import {
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
+import { TiDeleteOutline } from "react-icons/ti";
 
 const PostBookingPage = () => {
   useHostGuard();
@@ -58,10 +59,14 @@ const PostBookingPage = () => {
     setAmenityItem("");
   };
 
+  const removeAmenity = (amenity, index) => {
+    setAmenities((prev) => prev.filter((a, i) => i !== index));
+  };
+
   const amenitiesList = (
     <AmenityUL>
       {amenities.map((amenity, index) => (
-        <AmenityListItem key={index}>{amenity}</AmenityListItem>
+        <AmenityListItem key={index}>{amenity} <button className="delete-btn" onClick={() => removeAmenity(amenity, index)}><TiDeleteOutline style={{ fontSize: "1.5rem", padding: "0" }} /></button></AmenityListItem>
       ))}
     </AmenityUL>
   );
@@ -325,10 +330,10 @@ const PostBookingPage = () => {
               ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
               : "Click to select 5 images"}
           </ImagePickerButton>
-        </div>
-      </PostBookingFormContainer>
-
+          
       {error && <div className="error-msg">{error}</div>}
+      
+      <div className="button-group">
       <PillButton
         className="post-btn"
         onClick={handleSubmit}
@@ -336,6 +341,19 @@ const PostBookingPage = () => {
       >
         {loading ? "Submitting..." : "Submit"}
       </PillButton>
+
+      <PillButton
+        className="cancel-btn"
+        onClick={() => navigate("/host")}
+        disabled={loading}
+      >
+        Cancel
+      </PillButton>
+      </div>
+        </div>
+        
+      </PostBookingFormContainer>
+
     </PostBookingContainer>
   );
 };
