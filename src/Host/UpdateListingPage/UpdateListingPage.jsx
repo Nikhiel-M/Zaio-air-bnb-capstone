@@ -10,8 +10,9 @@ import {
   UpdateListingsTextArea,
 } from "./UpdateListingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useHostGuard } from "../../services/hooks";
+import { usePropertyForm } from "../../services/propertySubmit";
 import { PostBookingSubtitle } from "../PostBookingPage/PostBookingPage.styled";
 import { TiDeleteOutline } from "react-icons/ti";
 import { AmenityUL, AmenityListItem } from "../PostBookingPage/PostBookingPage.styled";
@@ -33,45 +34,40 @@ const UpdateListingPage = () => {
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const { handlePropertyForm, loading, error } = usePropertyForm();
+  // Local loading and error for data fetching
+  const [fetchLoading, setFetchLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
 
-   const addAmenity = (amenityItem) => {
-      if (!amenityItem.trim()) return;
-      setAmenities((prev) => [...prev, amenityItem]);
-      setAmenityItem("");
-    };
-  
-    const removeAmenity = (amenity, index) => {
-      setAmenities((prev) => prev.filter((a, i) => i !== index));
-    };
-  
-    const amenitiesList = (
-      <AmenityUL>
-        {amenities.map((amenity, index) => (
-          <AmenityListItem key={index}>
-            {amenity}{" "}
-            <button
-              className="delete-btn"
-              onClick={() => removeAmenity(amenity, index)}
-            >
-              <TiDeleteOutline style={{ fontSize: "1.5rem", padding: "0" }} />
-            </button>
-          </AmenityListItem>
-        ))}
-      </AmenityUL>
-    );
+
+  const addAmenity = (amenityItem) => {
+    if (!amenityItem.trim()) return;
+    setAmenities((prev) => [...prev, amenityItem]);
+    setAmenityItem("");
+  };
+
+  const removeAmenity = (amenity, index) => {
+    setAmenities((prev) => prev.filter((a, i) => i !== index));
+  };
+
+  const amenitiesList = (
+    <AmenityUL>
+      {amenities.map((amenity, index) => (
+        <AmenityListItem key={index}>
+          {amenity}{" "}
+          <button
+            className="delete-btn"
+            onClick={() => removeAmenity(amenity, index)}
+          >
+            <TiDeleteOutline style={{ fontSize: "1.5rem", padding: "0" }} />
+          </button>
+        </AmenityListItem>
+      ))}
+    </AmenityUL>
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    if (!title || !long_description || !country || !pricePerNight) {
-      setError(
-        "Please fill required fields: Title, Description, Location, Price",
-      );
-      return;
-    }
     const payload = {
       title,
       long_description,
@@ -86,71 +82,29 @@ const UpdateListingPage = () => {
       amenities,
       rating: { average: Number(average) || 0, count: Number(count) || 0 },
     };
-
-    setLoading(true);
-
-    try {
-      const token = localStorage.getItem("token");
-      const formData = new FormData();
-      formData.append("title", payload.title);
-      formData.append("long_description", payload.long_description);
-      formData.append("roomType", payload.roomType);
-      formData.append("address.country", payload.address.country);
-      formData.append("bedrooms", String(payload.bedrooms));
-      formData.append("bathrooms", String(payload.bathrooms));
-      formData.append("maxGuests", String(payload.maxGuests));
-      formData.append("pricePerNight", String(payload.pricePerNight));
-      if (amenities && amenities.length) {
-        formData.append("amenities", JSON.stringify(amenities));
-      }
-      if (payload.rating) {
-        formData.append("rating", JSON.stringify(payload.rating));
-      }
-      if (images && images.length) {
-        Array.from(images).forEach((file) => {
-          formData.append("images", file);
-        });
-      }
-      const res = await fetch(
-        `https://zaio-air-bnb-capstone.onrender.com/api/properties/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: formData,
-        },
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to update property");
-      navigate("/");
-    } catch (err) {
-      setError(err.message || "Error updating property");
-    } finally {
-      setLoading(false);
-    }
+    await handlePropertyForm({ mode: "update", payload, images, id });
   };
 
   useEffect(() => {
     if (!id) return;
-    setLoading(true);
-    setError(null);
+    setFetchLoading(true);
+    setFetchError(null);
     fetch(`https://zaio-air-bnb-capstone.onrender.com/api/properties/${id}`)
       .then(async (res) => {
         let data;
         try {
           data = await res.json();
         } catch (jsonErr) {
-          setError("Failed to parse backend response.");
+          setFetchError("Failed to parse backend response.");
           return;
         }
         if (!res.ok) {
-          setError(data?.message || `Backend error: ${res.status}`);
+          setFetchError(data?.message || `Backend error: ${res.status}`);
           return;
         }
         const prop = data.property || data;
         if (!prop || !prop.title) {
-          setError("Property not found or invalid data from backend.");
+          setFetchError("Property not found or invalid data from backend.");
           return;
         }
         setTitle(prop.title ?? "");
@@ -166,12 +120,12 @@ const UpdateListingPage = () => {
         setCount(prop.rating?.count ?? 0);
       })
       .catch(() => {
-        setError("Failed to load listing");
+        setFetchError("Failed to load listing");
       })
-      .finally(() => setLoading(false));
+      .finally(() => setFetchLoading(false));
   }, [id]);
-  if (loading) return <div>Loading listing data...</div>;
-  if (error) return <div className="error-msg">{error}</div>;
+  if (fetchLoading) return <div>Loading listing data...</div>;
+  if (fetchError) return <div className="error-msg">{fetchError}</div>;
 
   return (
     <UpdateListingContainer>

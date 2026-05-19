@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import {
   PostBookingContainer,
   PostBookingTitle,
@@ -22,6 +21,7 @@ import {
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
+import { usePropertyForm } from "../../services/propertySubmit";
 import { TiDeleteOutline } from "react-icons/ti";
 
 const PostBookingPage = () => {
@@ -32,18 +32,17 @@ const PostBookingPage = () => {
   const [propertyType, setPropertyType] = useState("");
   const [roomType, setRoomType] = useState("");
   const [address, setAddress] = useState("");
-  const [maxGuests, setMaxGuests] = useState("");
   const [pricePerNight, setPricePerNight] = useState("");
   const [images, setImages] = useState(null);
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
+  const [maxGuests, setMaxGuests] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const amenityRef = useRef(null);
   const [amenityItem, setAmenityItem] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { handlePropertyForm, loading, error } = usePropertyForm();
 
   const addAmenity = (amenityItem) => {
     if (!amenityItem.trim()) return;
@@ -70,8 +69,9 @@ const PostBookingPage = () => {
       ))}
     </AmenityUL>
   );
+  
 
-  const navigate = useNavigate();
+  // navigation handled in hook
 
   const fileInputRef = useRef(null);
 
@@ -87,19 +87,8 @@ const PostBookingPage = () => {
 
   const handleSubmit = async (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    setError(null);
-
-    // basic validation for required fields
-    if (!title || !long_description || !country || !pricePerNight) {
-      setError(
-        "Please fill required fields: title, description, address, price",
-      );
-      return;
-    }
-
     const randomAverage = (Math.random() * 5).toFixed(1);
     const randomCount = Math.floor(Math.random() * 600);
-
     const payload = {
       title,
       long_description,
@@ -117,54 +106,7 @@ const PostBookingPage = () => {
       amenities,
       rating: { average: Number(randomAverage), count: Number(randomCount) },
     };
-
-    setLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-
-      const formData = new FormData();
-      formData.append("title", payload.title);
-      formData.append("long_description", payload.long_description);
-      formData.append("roomType", payload.roomType);
-      formData.append("address", JSON.stringify(payload.address));
-      formData.append("bedrooms", String(payload.bedrooms));
-      formData.append("bathrooms", String(payload.bathrooms));
-      formData.append("maxGuests", String(payload.maxGuests));
-      formData.append("pricePerNight", String(payload.pricePerNight));
-      formData.append("rating", JSON.stringify(payload.rating));
-
-      if (amenities && amenities.length) {
-        formData.append("amenities", JSON.stringify(amenities));
-      }
-
-      if (images && images.length) {
-        Array.from(images).forEach((file) => {
-          formData.append("images", file);
-        });
-      }
-
-      const res = await fetch(
-        "https://zaio-air-bnb-capstone.onrender.com/api/properties",
-        {
-          method: "POST",
-          headers: {
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: formData,
-        },
-      );
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to create property");
-
-      // on success navigate or clear form
-      navigate("/host");
-    } catch (err) {
-      console.error(err);
-      setError(err.message || "Error submitting property");
-    } finally {
-      setLoading(false);
-    }
+    await handlePropertyForm({ mode: "create", payload, images });
   };
 
   return (

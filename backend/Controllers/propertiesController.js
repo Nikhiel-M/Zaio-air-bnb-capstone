@@ -216,13 +216,6 @@ export const deleteProperty = async (req, res) => {
       return res.status(404).json({ message: 'Property not found' });
     }
 
-    // Debug log: print both IDs
-    console.log('Delete property debug:', {
-      propertyHost: property.host,
-      propertyHostString: property.host.toString(),
-      reqUserId: req.userId,
-      reqUserIdString: req.userId.toString()
-    });
 
     // Check if user is the host of this property
     if (property.host.toString() !== req.userId.toString()) {
