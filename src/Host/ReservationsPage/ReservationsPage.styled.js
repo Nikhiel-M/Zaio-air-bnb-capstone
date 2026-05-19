@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Title } from "../../Styles/General.styled";
+import { Container, Title } from "../../../Styles/General.styled";
 
 export const ReservationsContainer = styled.div`
 display: flex;

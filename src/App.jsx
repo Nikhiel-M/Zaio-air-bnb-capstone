@@ -14,13 +14,13 @@ import HomePage from "./Pages/HomePage/HomePage";
 import Locations from "./components/Locations/Locations";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
-import ReservationsPage from "./Pages/ReservationsPage/ReservationsPage";
-import PostBookingPage from "./Pages/PostBookingPage/PostBookingPage";
-import UserListings from "./Pages/UserListings/UserListings";
-import UpdateListingPage from "./Pages/UpdateListingPage/UpdateListingPage";
-import LoginHostPage from "./Pages/LoginHostPage/LoginHostPage";
-import RegisterHostPage from "./Pages/RegisterHostPage/RegisterHostPage";
-import HostPage from "./Pages/HostPage/HostPage";
+import ReservationsPage from "./Host/BookingPage/ReservationsPage/ReservationsPage";
+import PostBookingPage from "./Host/PostBookingPage/PostBookingPage";
+import UserListings from "./Host/UserListings/UserListings";
+import UpdateListingPage from "./Host/UpdateListingPage/UpdateListingPage";
+import LoginHostPage from "./Host/LoginHostPage/LoginHostPage";
+import RegisterHostPage from "./Host/RegisterHostPage/RegisterHostPage";
+import HostPage from "./Host/HostPage/HostPage";
 
 
 function AppContent() {
