@@ -8,7 +8,7 @@ import {
   LoginTitle,
   LoginSubtitle,
   LoginButton,
-} from "../LoginPage/LoginPage.styled";
+} from "../../Pages/LoginPage/LoginPage.styled";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/api";
 

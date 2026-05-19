@@ -11,7 +11,7 @@ import {
   LoginTitle,
   LoginSubtitle,
   LoginButton,
-} from "../LoginPage/LoginPage.styled";
+} from "../../Pages/LoginPage/LoginPage.styled";
 
 const RegisterHostPage = () => {
     const [firstName, setFirstName] = useState("");

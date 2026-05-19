@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Title } from "../../Styles/General.styled";
-import { LoginForm } from "../LoginPage/LoginPage.styled";
+import { LoginForm } from "../../Pages/LoginPage/LoginPage.styled";
 
 export const PostBookingTitle = styled(Title)`
 color: #000;                       
