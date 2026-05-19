@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   UpdateListingContainer,
   UpdateListingsTitle,
@@ -7,17 +7,14 @@ import {
   UpdateListingsSelector,
   UpdateListingsHiddenFileInput,
   UpdateListingsImagePickerButton,
-  UpdateListingsAmenityWrapper,
-  UpdateListingsAmenityToggle,
-  UpdateListingsAmenityMenu,
-  UpdateListingsAmenityItem,
   UpdateListingsTextArea,
 } from "./UpdateListingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
-import { useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useHostGuard } from "../../services/hooks";
 import { PostBookingSubtitle } from "../PostBookingPage/PostBookingPage.styled";
+import { TiDeleteOutline } from "react-icons/ti";
+import { AmenityUL, AmenityListItem } from "../PostBookingPage/PostBookingPage.styled";
 
 const UpdateListingPage = () => {
   useHostGuard();
@@ -30,6 +27,7 @@ const UpdateListingPage = () => {
   const [images, setImages] = useState([]);
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
+  const [amenityItem, setAmenityItem] = useState("");
   const [average, setAverage] = useState(0);
   const [count, setCount] = useState(0);
   const [bedrooms, setBedrooms] = useState("");
@@ -38,6 +36,32 @@ const UpdateListingPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+   const addAmenity = (amenityItem) => {
+      if (!amenityItem.trim()) return;
+      setAmenities((prev) => [...prev, amenityItem]);
+      setAmenityItem("");
+    };
+  
+    const removeAmenity = (amenity, index) => {
+      setAmenities((prev) => prev.filter((a, i) => i !== index));
+    };
+  
+    const amenitiesList = (
+      <AmenityUL>
+        {amenities.map((amenity, index) => (
+          <AmenityListItem key={index}>
+            {amenity}{" "}
+            <button
+              className="delete-btn"
+              onClick={() => removeAmenity(amenity, index)}
+            >
+              <TiDeleteOutline style={{ fontSize: "1.5rem", padding: "0" }} />
+            </button>
+          </AmenityListItem>
+        ))}
+      </AmenityUL>
+    );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -254,7 +278,6 @@ const UpdateListingPage = () => {
             placeholder="Bathrooms"
             className="number-input"
           />
-          {/* Location */}
         </UpdateListingsFormContainer>
         </div>
 
@@ -305,66 +328,25 @@ const UpdateListingPage = () => {
         </UpdateListingsFormContainer>
 
                 {/* Amenities */}
-        <UpdateListingsFormContainer>
-          <PostBookingSubtitle>Amenities</PostBookingSubtitle>
-          <UpdateListingsAmenityWrapper>
-            <UpdateListingsAmenityToggle
-              type="button"
-              onClick={() => setAmenitiesOpen((v) => !v)}
-              aria-expanded={amenitiesOpen}
-              aria-haspopup="listbox"
-            >
-              {amenities.length
-                ? `${amenities.length} selected`
-                : "Select amenities"}
-            </UpdateListingsAmenityToggle>
-            {amenitiesOpen && (
-              <UpdateListingsAmenityMenu
-                role="listbox"
-                aria-multiselectable="true"
-              >
-                {[
-                  "Wifi",
-                  "Kitchen",
-                  "Parking",
-                  "Pool",
-                  "Gym",
-                  "Air conditioning",
-                  "Heating",
-                  "TV",
-                  "Washer",
-                  "Dryer",
-                  "Pets allowed",
-                  "Smoking allowed",
-                ].map((opt) => (
-                  <UpdateListingsAmenityItem key={opt}>
-                    <input
-                      id={`amen-${opt}`}
-                      type="checkbox"
-                      checked={amenities.includes(opt)}
-                      onChange={() => {
-                        setAmenities((prev) =>
-                          prev.includes(opt)
-                            ? prev.filter((a) => a !== opt)
-                            : [...prev, opt],
-                        );
-                      }}
-                    />
-                    <label
-                      htmlFor={`amen-${opt}`}
-                      style={{
-                        marginLeft: "0.5rem",
-                        textTransform: "capitalize",
-                      }}
-                    >
-                      {opt.replace("_", " ")}
-                    </label>
-                  </UpdateListingsAmenityItem>
-                ))}
-              </UpdateListingsAmenityMenu>
-            )}
-          </UpdateListingsAmenityWrapper>
-        </UpdateListingsFormContainer>
+                 <UpdateListingsFormContainer>
+              <PostBookingSubtitle>Amenities</PostBookingSubtitle>
+              <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                <UpdateListingsForm
+                  type="text"
+                  value={amenityItem}
+                  onChange={(e) => setAmenityItem(e.target.value)}
+                  placeholder="Add an amenity"
+                />
+                <PillButton
+                  style={{margin: "0 0 0.6rem 0"} }
+                  type="button"
+                  onClick={() => addAmenity(amenityItem)}
+                >
+                  Add
+                </PillButton>
+              </div>
+              <div>{amenitiesList}</div>
+            </UpdateListingsFormContainer>
 
               {error && <div className="error-msg">{error}</div>}
           <div className="button-group">

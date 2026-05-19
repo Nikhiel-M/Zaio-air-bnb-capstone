@@ -42,6 +42,7 @@ overflow: hidden;
    .button-group{
     width: 80%;
     display: flex;
+    align-self: flex-start;
     justify-content: space-between;
     padding: 0 0.5rem;
   }
