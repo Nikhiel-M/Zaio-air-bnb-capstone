@@ -42,7 +42,6 @@ const PostBookingPage = () => {
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const amenityRef = useRef(null);
   const [amenityItem, setAmenityItem] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -87,7 +86,6 @@ const PostBookingPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    // If called from button onClick without event
     if (e && e.preventDefault) e.preventDefault();
     setError(null);
 
@@ -144,8 +142,6 @@ const PostBookingPage = () => {
           formData.append("images", file);
         });
       }
-
-      // http://localhost:5000/api/properties
 
       const res = await fetch(
         "https://zaio-air-bnb-capstone.onrender.com/api/properties",
