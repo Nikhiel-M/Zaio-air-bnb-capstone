@@ -103,8 +103,38 @@ padding: 0 5rem;
   }
 
 }
-
 `;
+
+export const CheckBoxesContainer = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-direction: row;
+
+.box-div{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+}
+
+.checkbox{
+  display: flex;
+  padding: 0;
+  margin: 0 0 0.2rem 0;
+  box-sizing: border-box;
+  
+}
+
+label{
+color: black;
+font-size: 1rem;
+font-weight: 600;
+margin: 0;
+white-space: nowrap;
+}
+`
 
 export const AmenityUL = styled.ul`
 width: 100%;

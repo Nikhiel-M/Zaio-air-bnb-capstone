@@ -17,7 +17,8 @@ import {
   PostBookingAlignmentContainer,
   PostBookingTextarea,
   AmenityListItem,
-  AmenityUL
+  AmenityUL,
+  CheckBoxesContainer,
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
@@ -45,14 +46,6 @@ const PostBookingPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // const toggleAmenity = (name) => {
-  //   setAmenities((prev) => {
-  //     if (prev.includes(name)) return prev.filter((a) => a !== name);
-  //     return [...prev, name];
-  //   });
-  // };
-
-
   const addAmenity = (amenityItem) => {
     if (!amenityItem.trim()) return;
     setAmenities((prev) => [...prev, amenityItem]);
@@ -66,7 +59,15 @@ const PostBookingPage = () => {
   const amenitiesList = (
     <AmenityUL>
       {amenities.map((amenity, index) => (
-        <AmenityListItem key={index}>{amenity} <button className="delete-btn" onClick={() => removeAmenity(amenity, index)}><TiDeleteOutline style={{ fontSize: "1.5rem", padding: "0" }} /></button></AmenityListItem>
+        <AmenityListItem key={index}>
+          {amenity}{" "}
+          <button
+            className="delete-btn"
+            onClick={() => removeAmenity(amenity, index)}
+          >
+            <TiDeleteOutline style={{ fontSize: "1.5rem", padding: "0" }} />
+          </button>
+        </AmenityListItem>
       ))}
     </AmenityUL>
   );
@@ -79,31 +80,11 @@ const PostBookingPage = () => {
     fileInputRef.current.click();
   };
 
-  // useEffect(() => {
-  //   const onDocClick = (e) => {
-  //     if (
-  //       amenitiesOpen &&
-  //       amenityRef.current &&
-  //       !amenityRef.current.contains(e.target)
-  //     ) {
-  //       setAmenitiesOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", onDocClick);
-  //   return () => document.removeEventListener("mousedown", onDocClick);
-  // }, [amenitiesOpen]);
-
   const handleChange = (e) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
     const limited = files.slice(0, 5);
     setImages(limited);
   };
-
-  // const handleAmenitiesChange = (e) => {
-  //   const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
-  //   setAmenities(selected);
-  // };
-
 
   const handleSubmit = async (e) => {
     // If called from button onClick without event
@@ -117,9 +98,9 @@ const PostBookingPage = () => {
       );
       return;
     }
-    
-      const randomAverage = (Math.random() * 5).toFixed(1);
-      const randomCount = Math.floor(Math.random() * 600);
+
+    const randomAverage = (Math.random() * 5).toFixed(1);
+    const randomCount = Math.floor(Math.random() * 600);
 
     const payload = {
       title,
@@ -163,7 +144,7 @@ const PostBookingPage = () => {
           formData.append("images", file);
         });
       }
-      
+
       // http://localhost:5000/api/properties
 
       const res = await fetch(
@@ -223,20 +204,34 @@ const PostBookingPage = () => {
             required
           />
           {/* Add enhanced cleaning/self check-in boxes here */}
+          <CheckBoxesContainer>
+            <div className="box-div">
+            <PostBookingForm type="checkbox" className="checkbox" />
+            <label>Enhanced Cleaning</label>
+            </div>
+            
+            <div className="box-div">
+            <PostBookingForm type="checkbox" className="checkbox" />
+            <label>Self Check-in</label>
+            </div>
+          </CheckBoxesContainer>
 
           {/* Amenities (Needs to be redone so that anything can be typed and selected) */}
           <PostBookingSubtitle>Amenities</PostBookingSubtitle>
           <div className="amenities-container">
-            <PostBookingForm 
+            <PostBookingForm
               type="text"
               value={amenityItem}
               onChange={(e) => setAmenityItem(e.target.value)}
             />
-            <PillButton className="add-btn" onClick={() => addAmenity(amenityItem)} >Add</PillButton>
+            <PillButton
+              className="add-btn"
+              onClick={() => addAmenity(amenityItem)}
+            >
+              Add
+            </PillButton>
           </div>
-          <div className="amenities-list">
-            {amenitiesList}
-          </div>
+          <div className="amenities-list">{amenitiesList}</div>
         </div>
 
         <div className="right-column">
@@ -330,77 +325,30 @@ const PostBookingPage = () => {
               ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
               : "Click to select 5 images"}
           </ImagePickerButton>
-          
-      {error && <div className="error-msg">{error}</div>}
-      
-      <div className="button-group">
-      <PillButton
-        className="post-btn"
-        onClick={handleSubmit}
-        disabled={loading}
-      >
-        {loading ? "Submitting..." : "Submit"}
-      </PillButton>
 
-      <PillButton
-        className="cancel-btn"
-        onClick={() => navigate("/host")}
-        disabled={loading}
-      >
-        Cancel
-      </PillButton>
-      </div>
+          {error && <div className="error-msg">{error}</div>}
+
+          <div className="button-group">
+            <PillButton
+              className="post-btn"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Submit"}
+            </PillButton>
+
+            <PillButton
+              className="cancel-btn"
+              onClick={() => navigate("/host")}
+              disabled={loading}
+            >
+              Cancel
+            </PillButton>
+          </div>
         </div>
-        
       </PostBookingFormContainer>
-
     </PostBookingContainer>
   );
 };
 
 export default PostBookingPage;
-
-
-{/* <AmenityWrapper>
-              <AmenityToggle
-                type="button"
-                onClick={() => setAmenitiesOpen((v) => !v)}
-                aria-expanded={amenitiesOpen}
-                aria-haspopup="listbox"
-              >
-                {amenities.length
-                  ? `${amenities.length} selected`
-                  : "Select amenities"}
-              </AmenityToggle>
-
-              {amenitiesOpen && (
-                <AmenityMenu role="listbox" aria-multiselectable="true">
-                  {amenityOptions.map((opt) => (
-                    <AmenityItem key={opt}>
-                      <input
-                        id={`amen-${opt}`}
-                        type="checkbox"
-                        checked={amenities.includes(opt)}
-                        onChange={() => {
-                          // toggle
-                          setAmenities((prev) =>
-                            prev.includes(opt)
-                              ? prev.filter((a) => a !== opt)
-                              : [...prev, opt],
-                          );
-                        }}
-                      />
-                      <label
-                        htmlFor={`amen-${opt}`}
-                        style={{
-                          marginLeft: "0.5rem",
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {opt.replace("_", " ")}
-                      </label>
-                    </AmenityItem>
-                  ))}
-                </AmenityMenu>
-              )}
-</AmenityWrapper> */}
