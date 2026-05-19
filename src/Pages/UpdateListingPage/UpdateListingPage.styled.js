@@ -38,6 +38,13 @@ overflow: hidden;
     gap: 1rem;
     width: 80%;
   }
+
+   .button-group{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+  }
 `;
 
 export const UpdateListingsTitle = styled(PostBookingTitle)`

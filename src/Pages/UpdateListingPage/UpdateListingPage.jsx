@@ -23,11 +23,8 @@ const UpdateListingPage = () => {
   useHostGuard();
   const { id } = useParams();
   const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
   const [long_description, setLong_description] = useState("");
-  // const [propertyType, setPropertyType] = useState("");
   const [roomType, setRoomType] = useState("");
-  // const [address, setAddress] = useState("");
   const [maxGuests, setMaxGuests] = useState(1);
   const [pricePerNight, setPricePerNight] = useState("");
   const [images, setImages] = useState([]);
@@ -53,12 +50,9 @@ const UpdateListingPage = () => {
     }
     const payload = {
       title,
-      // description,
       long_description,
-      // propertyType: propertyType,
       roomType: roomType || "Entire place",
       address: {
-        // city: address,
         country: country,
       },
       bedrooms: Number(bedrooms) || 1,
@@ -75,15 +69,11 @@ const UpdateListingPage = () => {
       const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append("title", payload.title);
-      // formData.append("description", payload.description);
       formData.append("long_description", payload.long_description);
-      // formData.append("propertyType", payload.propertyType);
       formData.append("roomType", payload.roomType);
-      // formData.append("address", JSON.stringify(payload.address));
       formData.append("address.country", payload.address.country);
       formData.append("bedrooms", String(payload.bedrooms));
       formData.append("bathrooms", String(payload.bathrooms));
-      // formData.append("beds", String(payload.beds));
       formData.append("maxGuests", String(payload.maxGuests));
       formData.append("pricePerNight", String(payload.pricePerNight));
       if (amenities && amenities.length) {
@@ -140,11 +130,8 @@ const UpdateListingPage = () => {
           return;
         }
         setTitle(prop.title ?? "");
-        // setDescription(prop.description ?? "");
         setLong_description(prop.long_description ?? "");
-        // setPropertyType(prop.propertyType ?? "");
         setRoomType(prop.roomType ?? "");
-        // setAddress(prop.address?.city ?? "");
         setCountry(prop.address?.country ?? "");
         setMaxGuests(prop.maxGuests ?? 1);
         setPricePerNight(prop.pricePerNight ?? 0);
@@ -378,17 +365,28 @@ const UpdateListingPage = () => {
             )}
           </UpdateListingsAmenityWrapper>
         </UpdateListingsFormContainer>
+
+              {error && <div className="error-msg">{error}</div>}
+          <div className="button-group">
+            <PillButton
+              className="post-btn"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Submit"}
+            </PillButton>
+
+            <PillButton
+              className="cancel-btn"
+              onClick={() => navigate("/host")}
+              disabled={loading}
+            >
+              Cancel
+            </PillButton>
+          </div>
       </div>
 
-      {/* </UpdateListingsFormContainer> */}
-      {error && <div className="error-msg">{error}</div>}
-      <PillButton
-        className="post-btn"
-        onClick={handleSubmit}
-        disabled={loading}
-      >
-        {loading ? "Submitting..." : "Submit"}
-      </PillButton>
+
     </UpdateListingContainer>
   );
 };
