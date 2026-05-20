@@ -24,7 +24,7 @@ justify-content: center;
 overflow: hidden;
 
 .grid-container {
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-left: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,6 +46,13 @@ overflow: hidden;
     justify-content: space-between;
     padding: 0 0.5rem;
   }
+  
+  .error-msg-upd {
+    display: flex;
+    position: absolute;
+    transform: translate(370%, 1500%);
+    color: red;
+  }
 `;
 
 export const UpdateListingsTitle = styled(PostBookingTitle)`
@@ -59,8 +66,7 @@ export const UpdateListingsFormContainer = styled.div`
   flex-direction: column;
   width: 80%;
 
-  .description {
-  }
+
 `;
 
 export const UpdateListingsTextArea = styled(PostBookingTextarea)`

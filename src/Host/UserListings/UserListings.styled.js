@@ -26,7 +26,7 @@ export const UserListingsReview = styled(LocationReview)`
 `;
 
 export const UserListingsContainer = styled(LocationsContainer)`
-
+padding: 5rem 2rem 2rem 2rem;
 
 .header {
     font-size: 2.5rem;

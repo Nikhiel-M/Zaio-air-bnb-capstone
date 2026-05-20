@@ -23,6 +23,7 @@ import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
 import { usePropertyForm } from "../../services/propertySubmit";
 import { TiDeleteOutline } from "react-icons/ti";
+import HostHeaderComponent from "../HostComponents/HostHeaderComponent";
 
 const PostBookingPage = () => {
   useHostGuard();
@@ -69,9 +70,6 @@ const PostBookingPage = () => {
       ))}
     </AmenityUL>
   );
-  
-
-  // navigation handled in hook
 
   const fileInputRef = useRef(null);
 
@@ -110,7 +108,9 @@ const PostBookingPage = () => {
   };
 
   return (
+
     <PostBookingContainer>
+      <HostHeaderComponent/>
       <PostBookingTitle>Please fill in these fields</PostBookingTitle>
 
       <PostBookingFormContainer>

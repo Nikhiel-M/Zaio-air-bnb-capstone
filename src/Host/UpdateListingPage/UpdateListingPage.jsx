@@ -16,6 +16,7 @@ import { usePropertyForm } from "../../services/propertySubmit";
 import { PostBookingSubtitle } from "../PostBookingPage/PostBookingPage.styled";
 import { TiDeleteOutline } from "react-icons/ti";
 import { AmenityUL, AmenityListItem } from "../PostBookingPage/PostBookingPage.styled";
+import HostHeaderComponent from "../HostComponents/HostHeaderComponent";
 
 const UpdateListingPage = () => {
   useHostGuard();
@@ -129,6 +130,7 @@ const UpdateListingPage = () => {
 
   return (
     <UpdateListingContainer>
+      <HostHeaderComponent />
       <UpdateListingsTitle>Update your listing here!</UpdateListingsTitle>
 
       <div className="grid-container">
@@ -302,7 +304,7 @@ const UpdateListingPage = () => {
               <div>{amenitiesList}</div>
             </UpdateListingsFormContainer>
 
-              {error && <div className="error-msg">{error}</div>}
+              {error && <div className="error-msg-upd">{error}</div>}
           <div className="button-group">
             <PillButton
               className="post-btn"
