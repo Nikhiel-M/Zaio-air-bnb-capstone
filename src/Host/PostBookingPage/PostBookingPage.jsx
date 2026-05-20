@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef} from "react";
+import { useNavigate } from "react-router-dom";
 import {
   PostBookingContainer,
   PostBookingTitle,
@@ -8,7 +9,6 @@ import {
   PostBookingForm,
   PostBookingSelector,
   HiddenFileInput,
-  ImagePickerButton,
   AmenityWrapper,
   AmenityToggle,
   AmenityMenu,
@@ -18,6 +18,8 @@ import {
   AmenityListItem,
   AmenityUL,
   CheckBoxesContainer,
+  ImageDisplayContainer,
+  ImagePreview
 } from "./PostBookingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
 import { useHostGuard } from "../../services/hooks";
@@ -35,6 +37,7 @@ const PostBookingPage = () => {
   const [address, setAddress] = useState("");
   const [pricePerNight, setPricePerNight] = useState("");
   const [images, setImages] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [country, setCountry] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [bedrooms, setBedrooms] = useState("");
@@ -54,6 +57,8 @@ const PostBookingPage = () => {
   const removeAmenity = (amenity, index) => {
     setAmenities((prev) => prev.filter((a, i) => i !== index));
   };
+
+  const navigate = useNavigate();
 
   const amenitiesList = (
     <AmenityUL>
@@ -81,6 +86,9 @@ const PostBookingPage = () => {
     const files = e.target.files ? Array.from(e.target.files) : [];
     const limited = files.slice(0, 5);
     setImages(limited);
+    // Generate preview URLs
+    const previews = limited.map((file) => URL.createObjectURL(file));
+    setImagePreviews(previews);
   };
 
   const handleSubmit = async (e) => {
@@ -249,20 +257,22 @@ const PostBookingPage = () => {
             onChange={handleChange}
           />
 
-          <ImagePickerButton
-            type="button"
+          <PillButton
+          className="upload-btn"
             onClick={handleClick}
-            aria-live="polite"
-            title={
-              images && images.length
-                ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
-                : "Click to select 5 images"
-            }
           >
-            {images && images.length > 0
-              ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
-              : "Click to select 5 images"}
-          </ImagePickerButton>
+            Upload Images
+          </PillButton>
+
+          <ImageDisplayContainer>
+            {imagePreviews && imagePreviews.length > 0 ? (
+              imagePreviews.map((preview, index) => (
+                <ImagePreview key={index} src={preview} alt={`Preview ${index + 1}`} />
+              ))
+            ) : (
+              <div className="no-images-message">No images uploaded</div>
+            )}
+          </ImageDisplayContainer>
 
           {error && <div className="error-msg">{error}</div>}
 

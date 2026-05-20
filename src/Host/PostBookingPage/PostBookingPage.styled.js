@@ -50,7 +50,7 @@ export const PostBookingContainer = styled.div`
   .error-msg {
     display: flex;
     position: absolute;
-    transform: translate(90%, 1550%);
+    transform: translate(15%, 1700%);
     color: red;
   }
 `;
@@ -104,6 +104,14 @@ export const PostBookingFormContainer = styled.div`
         color: white;
       }
     }
+  }
+
+  .upload-btn {
+    width: 35%;
+
+     &:hover{
+      color: white
+     }
   }
 `;
 
@@ -229,21 +237,42 @@ export const HiddenFileInput = styled.input`
   display: none;
 `;
 
-export const ImagePickerButton = styled.button`
-  border: 2px solid #372ee5;
-  padding: 4rem;
+
+export const ImageDisplayContainer = styled.div`
+box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 2px solid #000000;
+  padding: 0.1rem;
   width: 100%;
+  height: 8rem;
+  margin-top: 0.5rem;
   border-radius: 5px;
   background: transparent;
   cursor: pointer;
   font-size: 1rem;
-  color: black;
-  text-align: left;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 
-  &:hover {
-    background: #f4f3ff;
+    .no-images-message {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
-`;
+`
+
+export const ImagePreview = styled.img`
+  max-width: 10rem;
+  max-height: 10rem;
+  padding: 0.1rem;
+  border-radius: 5px;
+  object-fit: cover;
+`
 
 export const AmenityWrapper = styled.div`
   position: relative;

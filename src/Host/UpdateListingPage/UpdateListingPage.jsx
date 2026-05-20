@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   UpdateListingContainer,
   UpdateListingsTitle,
@@ -6,7 +7,6 @@ import {
   UpdateListingsForm,
   UpdateListingsSelector,
   UpdateListingsHiddenFileInput,
-  UpdateListingsImagePickerButton,
   UpdateListingsTextArea,
 } from "./UpdateListingPage.styled";
 import { PillButton } from "../../components/Buttons/PillButton.styled";
@@ -15,12 +15,19 @@ import { useHostGuard } from "../../services/hooks";
 import { usePropertyForm } from "../../services/propertySubmit";
 import { PostBookingSubtitle } from "../PostBookingPage/PostBookingPage.styled";
 import { TiDeleteOutline } from "react-icons/ti";
-import { AmenityUL, AmenityListItem } from "../PostBookingPage/PostBookingPage.styled";
+import {
+  AmenityUL,
+  AmenityListItem,
+  ImageDisplayContainer,
+  ImagePreview,
+} from "../PostBookingPage/PostBookingPage.styled";
 import HostHeaderComponent from "../HostComponents/HostHeaderComponent";
 
 const UpdateListingPage = () => {
   useHostGuard();
   const { id } = useParams();
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [existingImageUrls, setExistingImageUrls] = useState([]);
   const [title, setTitle] = useState("");
   const [long_description, setLong_description] = useState("");
   const [roomType, setRoomType] = useState("");
@@ -40,7 +47,7 @@ const UpdateListingPage = () => {
   const [fetchLoading, setFetchLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
 
-
+  const navigate = useNavigate();
   const addAmenity = (amenityItem) => {
     if (!amenityItem.trim()) return;
     setAmenities((prev) => [...prev, amenityItem]);
@@ -119,6 +126,14 @@ const UpdateListingPage = () => {
         setAmenities(Array.isArray(prop.amenities) ? prop.amenities : []);
         setAverage(prop.rating?.average ?? 0);
         setCount(prop.rating?.count ?? 0);
+        // If there are images from backend, set previews
+        if (Array.isArray(prop.images) && prop.images.length > 0) {
+          // If images are objects with a 'url' property, extract them
+          const urls = prop.images.map((img) =>
+            typeof img === "object" && img.url ? img.url : img,
+          );
+          setExistingImageUrls(urls);
+        }
       })
       .catch(() => {
         setFetchError("Failed to load listing");
@@ -134,7 +149,6 @@ const UpdateListingPage = () => {
       <UpdateListingsTitle>Update your listing here!</UpdateListingsTitle>
 
       <div className="grid-container">
-
         {/* Title */}
         <UpdateListingsFormContainer>
           <PostBookingSubtitle>Listing Title</PostBookingSubtitle>
@@ -146,41 +160,40 @@ const UpdateListingPage = () => {
             placeholder="Title"
             className="text-block"
           />
-
         </UpdateListingsFormContainer>
 
-          {/* price/type */}
-          <div className="alignment-div">
-            {/* Price */}
-            <UpdateListingsFormContainer>
-              <PostBookingSubtitle>Price</PostBookingSubtitle>
-              <UpdateListingsForm
-                type="number"
-                value={pricePerNight ?? ""}
-                onChange={(e) => setPricePerNight(Number(e.target.value) || "")}
-                required
-                placeholder="Price per night"
-                className="number-input"
-              />
-            </UpdateListingsFormContainer>
+        {/* price/type */}
+        <div className="alignment-div">
+          {/* Price */}
+          <UpdateListingsFormContainer>
+            <PostBookingSubtitle>Price</PostBookingSubtitle>
+            <UpdateListingsForm
+              type="number"
+              value={pricePerNight ?? ""}
+              onChange={(e) => setPricePerNight(Number(e.target.value) || "")}
+              required
+              placeholder="Price per night"
+              className="number-input"
+            />
+          </UpdateListingsFormContainer>
 
-            {/* Room Type */}
-            <UpdateListingsFormContainer>
-              <PostBookingSubtitle>Room Type</PostBookingSubtitle>
-              <UpdateListingsSelector
-                type="text"
-                value={roomType}
-                onChange={(e) => setRoomType(e.target.value)}
-                required
-                placeholder="Type of room"
-              >
-                <option value="">Select room type</option>
-                <option value="Entire place">Entire place</option>
-                <option value="Private room">Private room</option>
-                <option value="Shared room">Shared room</option>
-              </UpdateListingsSelector>
-            </UpdateListingsFormContainer>
-          </div>
+          {/* Room Type */}
+          <UpdateListingsFormContainer>
+            <PostBookingSubtitle>Room Type</PostBookingSubtitle>
+            <UpdateListingsSelector
+              type="text"
+              value={roomType}
+              onChange={(e) => setRoomType(e.target.value)}
+              required
+              placeholder="Type of room"
+            >
+              <option value="">Select room type</option>
+              <option value="Entire place">Entire place</option>
+              <option value="Private room">Private room</option>
+              <option value="Shared room">Shared room</option>
+            </UpdateListingsSelector>
+          </UpdateListingsFormContainer>
+        </div>
 
         {/* Location */}
         <UpdateListingsFormContainer>
@@ -196,50 +209,51 @@ const UpdateListingPage = () => {
 
         {/* GUESTS/BEDROOMS/BATHROOMS */}
         <div className="alignment-div">
+          {/* Guests */}
+          <UpdateListingsFormContainer>
+            <PostBookingSubtitle>Guests</PostBookingSubtitle>
+            <UpdateListingsForm
+              type="number"
+              value={maxGuests ?? ""}
+              onChange={(e) => setMaxGuests(Number(e.target.value) || "")}
+              required
+              placeholder="Amount of guests"
+              className="number-input"
+            />
+          </UpdateListingsFormContainer>
 
-        {/* Guests */}
-        <UpdateListingsFormContainer>
-          <PostBookingSubtitle>Guests</PostBookingSubtitle>
-          <UpdateListingsForm
-            type="number"
-            value={maxGuests ?? ""}
-            onChange={(e) => setMaxGuests(Number(e.target.value) || "")}
-            required
-            placeholder="Amount of guests"
-            className="number-input"
-          />
-        </UpdateListingsFormContainer>
+          {/* Bedrooms */}
+          <UpdateListingsFormContainer>
+            <PostBookingSubtitle>Bedrooms</PostBookingSubtitle>
+            <UpdateListingsForm
+              type="number"
+              value={bedrooms ?? ""}
+              onChange={(e) => setBedrooms(Number(e.target.value) || "")}
+              required
+              placeholder="Bedrooms"
+              className="number-input"
+            />
+          </UpdateListingsFormContainer>
 
-        {/* Bedrooms */}
-        <UpdateListingsFormContainer>
-          <PostBookingSubtitle>Bedrooms</PostBookingSubtitle>
-          <UpdateListingsForm
-            type="number"
-            value={bedrooms ?? ""}
-            onChange={(e) => setBedrooms(Number(e.target.value) || "")}
-            required
-            placeholder="Bedrooms"
-            className="number-input"
-          />
-        </UpdateListingsFormContainer>
-
-        {/* Bathrooms */}
-        <UpdateListingsFormContainer>
-          <PostBookingSubtitle>Bathrooms</PostBookingSubtitle>
-          <UpdateListingsForm
-            type="number"
-            value={bathrooms ?? ""}
-            onChange={(e) => setBathrooms(Number(e.target.value) || "")}
-            required
-            placeholder="Bathrooms"
-            className="number-input"
-          />
-        </UpdateListingsFormContainer>
+          {/* Bathrooms */}
+          <UpdateListingsFormContainer>
+            <PostBookingSubtitle>Bathrooms</PostBookingSubtitle>
+            <UpdateListingsForm
+              type="number"
+              value={bathrooms ?? ""}
+              onChange={(e) => setBathrooms(Number(e.target.value) || "")}
+              required
+              placeholder="Bathrooms"
+              className="number-input"
+            />
+          </UpdateListingsFormContainer>
         </div>
 
         {/* Description */}
         <UpdateListingsFormContainer>
-          <PostBookingSubtitle className="description">Description</PostBookingSubtitle>
+          <PostBookingSubtitle className="description">
+            Description
+          </PostBookingSubtitle>
           <UpdateListingsTextArea
             type="text"
             value={
@@ -262,10 +276,96 @@ const UpdateListingPage = () => {
             accept="image/*"
             onChange={(e) => {
               const files = e.target.files ? Array.from(e.target.files) : [];
-              setImages(files.slice(0, 5));
+              const limited = files.slice(0, 5);
+              setImages(limited);
+              // Generate preview URLs for new uploads
+              const previews = limited.map((file) => URL.createObjectURL(file));
+              setImagePreviews(previews);
+              // Clear out existing backend images when new images are uploaded
+              setExistingImageUrls([]);
             }}
           />
-          <UpdateListingsImagePickerButton
+          <PillButton
+            className="upload-btn"
+            onClick={() =>
+              document.querySelector('input[type="file"]')?.click()
+            }
+          >
+            Upload Images
+          </PillButton>
+
+          <ImageDisplayContainer>
+            {existingImageUrls.length > 0 || imagePreviews.length > 0 ? (
+              <>
+                {existingImageUrls.map((url, idx) => (
+                  <ImagePreview
+                    key={"existing-" + idx}
+                    src={url}
+                    alt={`Existing Preview ${idx + 1}`}
+                  />
+                ))}
+                {imagePreviews.map((preview, index) => (
+                  <ImagePreview
+                    key={"new-" + index}
+                    src={preview}
+                    alt={`Preview ${index + 1}`}
+                  />
+                ))}
+              </>
+            ) : (
+              <div className="no-images-message">No images uploaded</div>
+            )}
+          </ImageDisplayContainer>
+        </UpdateListingsFormContainer>
+
+        {/* Amenities */}
+        <UpdateListingsFormContainer>
+          <PostBookingSubtitle>Amenities</PostBookingSubtitle>
+          <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+            <UpdateListingsForm
+              type="text"
+              value={amenityItem}
+              onChange={(e) => setAmenityItem(e.target.value)}
+              placeholder="Add an amenity"
+            />
+            <PillButton
+              style={{ margin: "0 0 0.6rem 0" }}
+              type="button"
+              onClick={() => addAmenity(amenityItem)}
+            >
+              Add
+            </PillButton>
+          </div>
+          <div>{amenitiesList}</div>
+        </UpdateListingsFormContainer>
+
+        {error && <div className="error-msg-upd">{error}</div>}
+        <div className="button-group">
+          <PillButton
+            className="post-btn"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Submitting..." : "Submit"}
+          </PillButton>
+
+          <PillButton
+            className="cancel-btn"
+            onClick={() => navigate("/host")}
+            disabled={loading}
+          >
+            Cancel
+          </PillButton>
+        </div>
+      </div>
+    </UpdateListingContainer>
+  );
+};
+
+export default UpdateListingPage;
+
+{
+  /* <UpdateListingsImagePickerButton
             type="button"
             onClick={() =>
               document.querySelector('input[type="file"]')?.click()
@@ -280,53 +380,5 @@ const UpdateListingPage = () => {
             {images && images.length > 0
               ? `${images.length} ${images.length === 1 ? "image" : "images"} selected`
               : "Click to select 5 images"}
-          </UpdateListingsImagePickerButton>
-        </UpdateListingsFormContainer>
-
-                {/* Amenities */}
-                 <UpdateListingsFormContainer>
-              <PostBookingSubtitle>Amenities</PostBookingSubtitle>
-              <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                <UpdateListingsForm
-                  type="text"
-                  value={amenityItem}
-                  onChange={(e) => setAmenityItem(e.target.value)}
-                  placeholder="Add an amenity"
-                />
-                <PillButton
-                  style={{margin: "0 0 0.6rem 0"} }
-                  type="button"
-                  onClick={() => addAmenity(amenityItem)}
-                >
-                  Add
-                </PillButton>
-              </div>
-              <div>{amenitiesList}</div>
-            </UpdateListingsFormContainer>
-
-              {error && <div className="error-msg-upd">{error}</div>}
-          <div className="button-group">
-            <PillButton
-              className="post-btn"
-              onClick={handleSubmit}
-              disabled={loading}
-            >
-              {loading ? "Submitting..." : "Submit"}
-            </PillButton>
-
-            <PillButton
-              className="cancel-btn"
-              onClick={() => navigate("/host")}
-              disabled={loading}
-            >
-              Cancel
-            </PillButton>
-          </div>
-      </div>
-
-
-    </UpdateListingContainer>
-  );
-};
-
-export default UpdateListingPage;
+          </UpdateListingsImagePickerButton> */
+}

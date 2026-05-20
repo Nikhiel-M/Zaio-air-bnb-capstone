@@ -6,7 +6,6 @@ import {
   PostBookingForm,
   PostBookingSelector,
   HiddenFileInput,
-  ImagePickerButton,
   AmenityWrapper,
   AmenityToggle,
   AmenityMenu,
@@ -27,8 +26,8 @@ overflow: hidden;
   margin-top: 2rem;
   margin-left: 5%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.2rem 0;
   width: 60%;
   }
 
@@ -45,13 +44,21 @@ overflow: hidden;
     align-self: flex-start;
     justify-content: space-between;
     padding: 0 0.5rem;
+    margin-top: 0rem;
   }
   
   .error-msg-upd {
     display: flex;
     position: absolute;
-    transform: translate(370%, 1500%);
+    transform: translate(145%, 1500%);
     color: red;
+  }
+    .upload-btn {
+    width: 40%;
+
+     &:hover{
+      color: white
+     }
   }
 `;
 
@@ -101,8 +108,6 @@ export const UpdateListingsForm = styled(PostBookingForm)`
 export const UpdateListingsSelector = styled(PostBookingSelector)``;
 
 export const UpdateListingsHiddenFileInput = styled(HiddenFileInput)``;
-
-export const UpdateListingsImagePickerButton = styled(ImagePickerButton)``;
 
 export const UpdateListingsAmenityWrapper = styled(AmenityWrapper)``;
 

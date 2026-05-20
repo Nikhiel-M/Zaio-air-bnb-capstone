@@ -68,7 +68,7 @@ export function usePropertyForm() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || (mode === "update" ? "Failed to update property" : "Failed to create property"));
       if (mode === "update") {
-        navigate("/");
+        navigate("/host");
       } else {
         navigate("/host");
       }
