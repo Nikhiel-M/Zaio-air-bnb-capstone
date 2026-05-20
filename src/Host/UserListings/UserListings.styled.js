@@ -49,7 +49,6 @@ export const UserListingsDetails = styled.div`
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-evenly;
-  gap: 1rem;
   
   .review-price-container{
     width: 100%;

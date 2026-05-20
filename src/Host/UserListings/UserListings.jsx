@@ -30,7 +30,6 @@ const UserListings = () => {
   const [openOptionsId, setOpenOptionsId] = useState(null);
 
   useEffect(() => {
-    // Get user from localStorage or API (token-based)
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -129,18 +128,18 @@ const UserListings = () => {
           const details = [
             p.maxGuests ? `${p.maxGuests} guests` : null,
             p.bedrooms !== undefined ? `${p.bedrooms} bedrooms` : null,
-            p.bathrooms !== undefined ? `${p.bathrooms} bathrooms` : null,
+            p.bathrooms !== undefined ? `${p.bathrooms} bathrooms` : null, 
             ...(p.amenities || []).slice(0, 3),
           ]
             .filter(Boolean)
             .join(" · ");
 
           return (
-<UserListingsCard key={p._id || p.id || p.title}>
-  <UserListingsInformationContainer>
-               <UserListingsImageContainer>
-                   <UserListingsImage src={img} alt={p.title} />
-                   
+            <UserListingsCard key={p._id || p.id || p.title}>
+              <UserListingsInformationContainer>
+                <UserListingsImageContainer>
+                  <UserListingsImage src={img} alt={p.title} />
+
                   <UserListingsPillButton
                     onClick={() => navigate(`/host/user-listings/${p._id}`)}
                   >
@@ -156,31 +155,28 @@ const UserListings = () => {
                     Delete{" "}
                   </UserListingsPillButton>
                 </UserListingsImageContainer>
-    <UserListingsDetails>
-      <UserListingsTitle>
-        {p.title || p.address?.city || "Unknown location"}
-      </UserListingsTitle>
+                <UserListingsDetails>
+                  <UserListingsSubtitle>
+                    {p.roomType} - {p.address.country}
+                  </UserListingsSubtitle>
+                  <UserListingsTitle>
+                    {p.title || "Unknown location"}
+                  </UserListingsTitle>
+                  <UserListingsSubtitle>{details}</UserListingsSubtitle>
+                  <div className="review-price-container">
+                    <UserListingsReview>
+                      <FaStar /> {p.rating.average} ({p.rating?.count ?? 0}{" "}
+                      reviews)
+                    </UserListingsReview>
 
-      <UserListingsSubtitle>{p.description}</UserListingsSubtitle>
-
-      <UserListingsSubtitle>
-        {p.address.country}
-      </UserListingsSubtitle>
-
-      <UserListingsSubtitle>{details}</UserListingsSubtitle>
-
-<div className="review-price-container">
-      <UserListingsReview>
-        <FaStar /> {(p.rating.average)} (
-        {p.rating?.count ?? 0} reviews)
-      </UserListingsReview>
-
-         <UserListingsSubtitle className="price"> ${p.pricePerNight} / per night </UserListingsSubtitle>
-</div>
-     
-    </UserListingsDetails>
-  </UserListingsInformationContainer>
-</UserListingsCard>
+                    <UserListingsSubtitle className="price">
+                      {" "}
+                      ${p.pricePerNight} / per night{" "}
+                    </UserListingsSubtitle>
+                  </div>
+                </UserListingsDetails>
+              </UserListingsInformationContainer>
+            </UserListingsCard>
           );
         })
       )}
