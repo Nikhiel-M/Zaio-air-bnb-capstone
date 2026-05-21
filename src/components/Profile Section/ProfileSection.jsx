@@ -51,6 +51,21 @@ const ProfileSection = () => {
     setIsDropDownOpen(!isDropDownOpen);
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isDropDownOpen) return;
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById('profile-dropdown-container');
+      if (dropdown && !dropdown.contains(event.target)) {
+        setIsDropDownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropDownOpen]);
+
   const handleBecomeHost = async () => {
     navigate("/login-host");
   };
@@ -90,7 +105,7 @@ const ProfileSection = () => {
         )}
 
         <DropDown>
-          <ProfileContainer onClick={handleDropDown}>
+          <ProfileContainer onClick={handleDropDown} id="profile-dropdown-container">
             <PiList className="list-icon" />
             <CgProfile className="profile-icon" />
             {isDropDownOpen && (
