@@ -5,11 +5,13 @@ import {
   TitleOverlay,
   CardOrganizer,
 } from "./LargeCards.styled";
-import { Title } from "../../Styles/General.styled";
+import { CardTitle } from "../Cards/Cards.styled";
 import { PillButton } from "../Buttons/PillButton.styled";
+import { Title } from "../../Styles/General.styled";
 
 const LargeCards = () => {
-  return (
+  return (<>
+      <CardTitle>Discover Experiences</CardTitle>
     <CardOrganizer>
     <LargeCardsContainer>
       <ImageWrapper>
@@ -42,6 +44,7 @@ const LargeCards = () => {
       </LargeCardsContainer>
 
     </CardOrganizer>
+    </>
   );
 };
 

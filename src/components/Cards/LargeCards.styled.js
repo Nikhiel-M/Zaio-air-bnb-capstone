@@ -12,7 +12,7 @@ export const LargeCardsContainer = styled.div`
     justify-content: center;
     gap: 1rem;
     padding: 2rem;
-    height: 55rem;
+    height: 50rem;
     max-height: 60rem;
 `;
 
@@ -25,7 +25,7 @@ export const ImageWrapper = styled.div`
     .body-image{
         width: 100%;
         height: 100%;
-        max-height: 55rem;
+        max-height: 50rem;
         border-radius: 12px;
         object-fit: cover;
     }
