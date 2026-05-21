@@ -146,7 +146,7 @@ export const getHostBookings = async (req, res) => {
   }
 };
 
-// GET /bookings/:id - Get a single booking by ID (only guest or host can view)
+// GET /bookings/:id - Get a single booking by ID (only user or host can view)
 export const getBookingById = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id)

@@ -38,7 +38,6 @@ const UserListings = () => {
           setLoading(false);
           return;
         }
-        // Try to get user info from backend
         const res = await fetch(
           "https://zaio-air-bnb-capstone.onrender.com/api/auth/me",
           {
@@ -64,10 +63,8 @@ const UserListings = () => {
         if (!res.ok) throw new Error(`status ${res.status}`);
         const data = await res.json();
         if (!mounted) return;
-        // Only show properties where owner/host is the user
         const allProps = Array.isArray(data) ? data : data.properties || [];
         const userProps = allProps.filter((p) => {
-          // Try both _id and id for user, and host/owner fields for property
           const hostId = p.host?._id || p.host || p.owner?._id || p.owner;
           return hostId && userId && String(hostId) === String(userId);
         });

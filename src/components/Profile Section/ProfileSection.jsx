@@ -66,10 +66,6 @@ const ProfileSection = () => {
     navigate("/");
   };
 
-  // const handleBookingRoute = () => {
-  //   navigate("/post-booking");
-  // };
-
   const iconPaths = ["/", "/booking", "/locations"];
   const isIconsPage = iconPaths.some(
     (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
@@ -115,14 +111,6 @@ const ProfileSection = () => {
                     >
                       <div className="dropdown-login">View reservations</div>
                     </a>
-                    {isHost && (
-                      <a
-                        onClick={() => navigate("/user-listings")}
-                        className="dropdown-r-tag"
-                      >
-                        <div className="dropdown-login">Your listings</div>
-                      </a>
-                    )}
                     <a onClick={handleLogout} className="dropdown-r-tag">
                       <div className="dropdown-login">Logout</div>
                     </a>
@@ -138,28 +126,3 @@ const ProfileSection = () => {
 };
 
 export default ProfileSection;
-
-//  {user && isHost ? (
-//       <h2 className="host-title-booking" onClick={handleBookingRoute}>
-//         {" "}
-//         Welcome {user?.firstName} <br /> Post your homes Here!
-//       </h2>
-//     ) : (
-//       <h2
-//         className="host-title"
-//         onClick={handleBecomeHost}
-//         disabled={isBecomingHost}
-//         style={{ cursor: isBecomingHost ? "not-allowed" : "pointer" }}
-//       >
-//         {!user ? (
-//           <>
-//             Welcome guest <br /> please sign in
-//           </>
-//         ) : (
-//           <>
-//             Welcome {user?.firstName} <br /> Click here to become a
-//             host{" "}
-//           </>
-//         )}
-//       </h2>
-//     )}

@@ -43,7 +43,6 @@ const UpdateListingPage = () => {
   const [bathrooms, setBathrooms] = useState("");
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const { handlePropertyForm, loading, error } = usePropertyForm();
-  // Local loading and error for data fetching
   const [fetchLoading, setFetchLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
 
@@ -126,9 +125,7 @@ const UpdateListingPage = () => {
         setAmenities(Array.isArray(prop.amenities) ? prop.amenities : []);
         setAverage(prop.rating?.average ?? 0);
         setCount(prop.rating?.count ?? 0);
-        // If there are images from backend, set previews
         if (Array.isArray(prop.images) && prop.images.length > 0) {
-          // If images are objects with a 'url' property, extract them
           const urls = prop.images.map((img) =>
             typeof img === "object" && img.url ? img.url : img,
           );
@@ -278,10 +275,8 @@ const UpdateListingPage = () => {
               const files = e.target.files ? Array.from(e.target.files) : [];
               const limited = files.slice(0, 5);
               setImages(limited);
-              // Generate preview URLs for new uploads
               const previews = limited.map((file) => URL.createObjectURL(file));
               setImagePreviews(previews);
-              // Clear out existing backend images when new images are uploaded
               setExistingImageUrls([]);
             }}
           />

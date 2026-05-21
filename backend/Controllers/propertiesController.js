@@ -83,7 +83,6 @@ export const getPropertyById = async (req, res) => {
 };
 
 // Create new property (requires authentication)
-// Accept up to 5 images under the 'images' field
 export const createProperty = async (req, res) => {
   try {
     const propertyData = {
@@ -92,7 +91,6 @@ export const createProperty = async (req, res) => {
     };
 
 
-    // If addr was sent as JSON string (from multipart form), parse it
     if (propertyData.address && typeof propertyData.address === 'string') {
       try {
         propertyData.address = JSON.parse(propertyData.address);
@@ -101,7 +99,6 @@ export const createProperty = async (req, res) => {
       }
     }
 
-    // If amenities were sent as a JSON string, parse into array
     if (propertyData.amenities && typeof propertyData.amenities === 'string') {
       try {
         propertyData.amenities = JSON.parse(propertyData.amenities);
@@ -111,8 +108,6 @@ export const createProperty = async (req, res) => {
       }
     }
 
-    
-    // If rating was sent as JSON string, parse it into an object
     if (propertyData.rating && typeof propertyData.rating === 'string') {
       try {
         propertyData.rating = JSON.parse(propertyData.rating);
@@ -121,7 +116,6 @@ export const createProperty = async (req, res) => {
       }
     }
 
-    // coerce numeric fields
     ['bedrooms','bathrooms','maxGuests','pricePerNight'].forEach(k => {
       if (propertyData[k] !== undefined) {
         const n = Number(propertyData[k]);

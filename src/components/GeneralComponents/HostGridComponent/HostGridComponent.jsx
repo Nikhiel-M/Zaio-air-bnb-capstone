@@ -4,7 +4,7 @@ import {
   GridItem,
   GridTitle,
   GridText
-} from "./GridComponent.styled";
+} from "./HostGridComponent.styled";
 import { bookingsAPI } from "../../../services/api";
 
 const GridComponent = () => {
@@ -33,7 +33,6 @@ const GridComponent = () => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
       try {
         await bookingsAPI.cancelBooking(bookingId, "Cancelled by user");
-        // Refresh the bookings list
         fetchHostBookings();
         alert("Booking cancelled successfully");
       } catch (err) {

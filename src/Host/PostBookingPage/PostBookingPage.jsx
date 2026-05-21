@@ -86,7 +86,6 @@ const PostBookingPage = () => {
     const files = e.target.files ? Array.from(e.target.files) : [];
     const limited = files.slice(0, 5);
     setImages(limited);
-    // Generate preview URLs
     const previews = limited.map((file) => URL.createObjectURL(file));
     setImagePreviews(previews);
   };

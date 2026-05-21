@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "./api";
 
-// Custom hook to guard host-only routes
+// Custom hook for host-only routes
 export function useHostGuard(redirectPath = "/login-host") {
   const navigate = useNavigate();
   useEffect(() => {

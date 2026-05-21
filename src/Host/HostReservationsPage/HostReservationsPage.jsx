@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReservationsHeader, ReservationsListContainer, ReservationsContainer } from './HostReservationsPage.styled'
-import GridComponent from '../../components/GeneralComponents/GridComponent/GridComponent'
+import GridComponent from '../../components/GeneralComponents/HostGridComponent/HostGridComponent'
 import { useHostGuard } from '../../services/hooks'
 import HostHeaderComponent from '../HostComponents/HostHeaderComponent'
 
