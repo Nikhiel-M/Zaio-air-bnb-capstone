@@ -65,8 +65,7 @@ const ProfileSection = () => {
     setIsHost(false);
     navigate("/");
   };
-
-  const iconPaths = ["/", "/booking", "/locations"];
+  const iconPaths = ["/", "/booking", "/locations", "/host"];
   const isIconsPage = iconPaths.some(
     (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
   );
