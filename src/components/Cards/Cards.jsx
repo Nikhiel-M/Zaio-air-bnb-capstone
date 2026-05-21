@@ -8,11 +8,9 @@ import {
   CardBody,
   CardTitle,
 } from "../Cards/Cards.styled";
-import LargeCards from './LargeCards';
 
 const Cards = () => {
   return (
-    <>
     <CardBody>
       <CardTitle className='inspiration-title'>Inspiration for your next trip </CardTitle>
       <div className="cards">
@@ -70,10 +68,6 @@ const Cards = () => {
 
         </div>
       </CardBody>
-       
-       <CardTitle className='LrgCard-title'>Discover Experiences</CardTitle>
-      <LargeCards />
-      </>
 )
 }
 

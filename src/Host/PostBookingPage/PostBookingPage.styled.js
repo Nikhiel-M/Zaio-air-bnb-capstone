@@ -32,9 +32,6 @@ export const PostBookingContainer = styled.div`
     padding: 1rem 1rem;
     margin-top: 1rem;
     width: 45%;
-    &:hover {
-      color: white;
-    }
   }
 
   .cancel-btn {
@@ -42,7 +39,6 @@ export const PostBookingContainer = styled.div`
     margin-top: 1rem;
     width: 45%;
     &:hover {
-      color: white;
       background-color: #3734eb;
     }
   }

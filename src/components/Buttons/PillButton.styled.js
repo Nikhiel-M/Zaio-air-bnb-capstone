@@ -21,6 +21,7 @@ export const PillButton = styled.button`
     background-color: #e74a4aff;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: white;
   }
   
   &:active {

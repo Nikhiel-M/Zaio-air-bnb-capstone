@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Title } from "../../Styles/General.styled";
 
-
 export const CardBody = styled.div`
  
  .cards{

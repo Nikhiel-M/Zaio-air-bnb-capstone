@@ -1,32 +1,34 @@
 import styled from "styled-components";
 
-export const LargeCardsContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-gap: 1rem;
-padding: 2rem;
-`
-
 export const CardOrganizer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-evenly;
+display: grid;
+grid-template-columns: repeat(2, minmax(300px, 1fr));
 
 `;
 
-export const ImageWrapper = styled.div`
-position: relative;
-width: 100%;
-display: flex;
-justify-content: center;
+export const LargeCardsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    height: 55rem;
+    max-height: 60rem;
+`;
 
-.body-image{
-    width: 55rem;
-    height: 60rem;
-    border-radius: 12px;
-    object-fit: cover;
-}
+export const ImageWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .body-image{
+        width: 100%;
+        height: 100%;
+        max-height: 55rem;
+        border-radius: 12px;
+        object-fit: cover;
+    }
 `;
 
 export const TitleOverlay = styled.div`

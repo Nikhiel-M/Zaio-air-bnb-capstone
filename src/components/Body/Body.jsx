@@ -7,7 +7,6 @@ import { PillButton } from "../Buttons/PillButton.styled";
 const Body = () => {
   return (
     <BodyContainer>
-      {/* image */}
       <ImageWrapper>
         <img
           className="body-image"

@@ -8,14 +8,13 @@ align-items: center;
 width: 100%;
   background-color: black;
   color: white;
-  z-index: -1;
 
 .body-image{
     width: 100%;
     max-width: 100%;
     height: auto;
     margin-top: calc(20% - 20rem);
-    padding: 0 10% 5% 10%;
+    padding-top: 1%;
     z-index: 0;
 }
 
@@ -33,7 +32,6 @@ position: absolute;
 bottom: 10rem;
 left: 50%;
 transform: translateX(-50%);
-z-index: 1;
 text-align: center;
 padding: 1rem 2rem;
 border-radius: 8px;
