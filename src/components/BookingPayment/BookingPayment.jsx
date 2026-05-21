@@ -11,6 +11,7 @@ import {
   BookingTitle,
   BookingSubtitle,
 } from "./BookingPayment.styled";
+import { useNavigate } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 import GuestsSelector from "../GeneralComponents/GuestsSelector/GuestsSelector";
 import { PillButton } from "../Buttons/PillButton.styled";
@@ -22,12 +23,18 @@ const BookingPayment = ({ property }) => {
   if (!property) return null;
 
   const [guests, setGuests] = useState(1);
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
   const maxGuests = property.maxGuests || 1;
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const nights = checkIn && checkOut ? Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) : 0;
+  const nights =
+    checkIn && checkOut
+      ? Math.ceil(
+          (new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24),
+        )
+      : 0;
   const subtotal = nights * (property.pricePerNight ?? 0);
   const cleaningFee = 50;
   const serviceFee = Math.round(subtotal * 0.03);
@@ -35,12 +42,13 @@ const BookingPayment = ({ property }) => {
   const total = subtotal + cleaningFee + serviceFee + taxes;
 
   const handleReserve = async () => {
-    if (!localStorage.getItem('token')) {
-      alert('Please log in before making a reservation');
+    const token = localStorage.getItem("token");
+    if (!token || token === "undefined" || token === "null") {
+      alert("Please log in before making a reservation");
       return;
     }
     if (!checkIn || !checkOut || nights <= 0) {
-      alert('Please select valid check-in and check-out dates.');
+      alert("Please select valid check-in and check-out dates.");
       return;
     }
     try {
@@ -54,9 +62,10 @@ const BookingPayment = ({ property }) => {
         totalPrice: total,
       };
       await bookingsAPI.createBooking(bookingData);
-      alert('Booking created successfully!');
+      alert("Booking created successfully!");
+      navigate("/reservations");
     } catch (error) {
-      alert('Error creating booking: ' + error.message);
+      alert("Error creating booking: " + "Please log in");
     }
     setLoading(false);
   };
@@ -77,12 +86,20 @@ const BookingPayment = ({ property }) => {
         <BookingCalendarContainer>
           <BookingCheckIn>
             <h5 className="check">CHECK-IN</h5> <br />
-            <Form.Control type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
+            <Form.Control
+              type="date"
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+            />
           </BookingCheckIn>
 
           <BookingCheckOut>
             <h5 className="check">CHECK-OUT </h5> <br />
-            <Form.Control type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} />
+            <Form.Control
+              type="date"
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
+            />
           </BookingCheckOut>
         </BookingCalendarContainer>
 
@@ -97,13 +114,21 @@ const BookingPayment = ({ property }) => {
           </GuestsDropdown>
         </BookingGuests>
       </BookingContainer>
-      <PillButton className="reserve-button" onClick={handleReserve} disabled={loading}>
+      <PillButton
+        className="reserve-button"
+        onClick={handleReserve}
+        disabled={loading || !localStorage.getItem("token")}
+      >
         {loading ? "Reserving..." : "Reserve"}
       </PillButton>
       <BookingSubtitle className="guests-subtitle">
         you won't be charged yet
       </BookingSubtitle>
-      <GuestsPayment nights={nights} pricePerNight={property.pricePerNight ?? 0} guests={guests} />
+      <GuestsPayment
+        nights={nights}
+        pricePerNight={property.pricePerNight ?? 0}
+        guests={guests}
+      />
     </BookingPaymentContainer>
   );
 };
