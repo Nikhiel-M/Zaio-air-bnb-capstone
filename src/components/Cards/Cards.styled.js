@@ -45,7 +45,7 @@ export const CardContent = styled.div`
 `;
 
 export const CardTitle = styled(Title)`
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 600;
     margin: 1rem 0 1rem 2rem;
     color: #000;

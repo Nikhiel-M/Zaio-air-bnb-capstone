@@ -29,7 +29,8 @@ width: 100%;
 .host-title{
     font-weight: 700;
     white-space: normal;
-    font-size: 6rem;
+    margin-top: 2rem;
+    font-size: 5rem;
     line-height: 1.2;
     max-width: 500px;
     word-wrap: break-word;
