@@ -8,6 +8,8 @@ import {
   LoginTitle,
   LoginSubtitle,
   LoginButton,
+  LoginIcon,
+  LoginSubContainer,
 } from "../../Pages/LoginPage/LoginPage.styled";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/api";
@@ -35,10 +37,15 @@ const LoginHostPage = () => {
 
   return (
     <LoginContainer>
+      <LoginSubContainer>
+      <span className="icon-container">
+        <LoginIcon
+          src="https://www.vectorlogo.zone/logos/airbnb/airbnb-icon.svg"
+          alt="Airbnb Logo"
+        />
+      </span>
       <LoginHeader>
-        <LoginHeader>
-          <LoginTitle>Login Host</LoginTitle>
-        </LoginHeader>
+        <LoginTitle>Login Host</LoginTitle>
       </LoginHeader>
 
       <form onSubmit={handleSubmit}>
@@ -82,6 +89,7 @@ const LoginHostPage = () => {
           </LoginButton>
         </LoginFooter>
       </form>
+      </LoginSubContainer>
     </LoginContainer>
   );
 };
