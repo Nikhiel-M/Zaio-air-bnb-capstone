@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/api";
 import {
-  LoginContainer,
   LoginHeader,
   LoginBody,
   LoginFooter,
-  LoginForm,
   LoginTitle,
   LoginSubtitle,
   LoginButton,
+  LoginIcon,
 } from "../LoginPage/LoginPage.styled";
+import { RegisterContainer, RegisterBody, RegisterSubContainer, RegisterForm } from "./RegisterPage.styled";
 
-const RegisterPage = () => {
+const  RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +25,6 @@ const RegisterPage = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
       await authAPI.register({ firstName, lastName, email, password});
       navigate("/");
@@ -37,18 +36,20 @@ const RegisterPage = () => {
   };
 
   return (
-    <LoginContainer>
+    <RegisterContainer>
+      <RegisterSubContainer>
+         <span className="icon-container">
+                  <LoginIcon src="https://www.vectorlogo.zone/logos/airbnb/airbnb-tile.svg" alt="Airbnb Logo" />
+                </span>
       <LoginHeader>
-        <LoginHeader>
           <LoginTitle>Register</LoginTitle>
-        </LoginHeader>
       </LoginHeader>
 
       <form onSubmit={handleSubmit}>
-        <LoginBody>
+        <RegisterBody>
           <div className="form-container">
             <LoginSubtitle>First Name</LoginSubtitle>
-            <LoginForm
+            <RegisterForm
               type="text"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -58,7 +59,7 @@ const RegisterPage = () => {
 
           <div className="form-container">
             <LoginSubtitle>Last Name</LoginSubtitle>
-            <LoginForm
+            <RegisterForm
               type="text"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -68,7 +69,7 @@ const RegisterPage = () => {
 
           <div className="form-container">
             <LoginSubtitle>Email</LoginSubtitle>
-            <LoginForm
+            <RegisterForm
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +79,7 @@ const RegisterPage = () => {
 
           <div className="form-container">
             <LoginSubtitle>Password</LoginSubtitle>
-            <LoginForm
+            <RegisterForm
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -87,7 +88,7 @@ const RegisterPage = () => {
           </div>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
-        </LoginBody>
+        </RegisterBody>
 
         <LoginFooter>
 
@@ -96,7 +97,8 @@ const RegisterPage = () => {
           </LoginButton>
         </LoginFooter>
       </form>
-    </LoginContainer>
+      </RegisterSubContainer>
+    </RegisterContainer>
   );
 };
 

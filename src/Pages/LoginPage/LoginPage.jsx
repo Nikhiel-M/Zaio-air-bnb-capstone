@@ -10,6 +10,8 @@ import {
   LoginTitle,
   LoginSubtitle,
   LoginButton,
+  LoginIcon,
+  LoginSubContainer,
 } from "./LoginPage.styled";
 
 const LoginPage = () => {
@@ -36,51 +38,57 @@ const LoginPage = () => {
 
   return (
     <LoginContainer>
-      <LoginHeader>
+      <LoginSubContainer>
+        <span className="icon-container">
+          <LoginIcon src="https://www.vectorlogo.zone/logos/airbnb/airbnb-tile.svg" alt="Airbnb Logo" />
+        </span>
         <LoginHeader>
-          <LoginTitle>Login</LoginTitle>
+          <LoginHeader>
+            <LoginTitle>Login</LoginTitle>
+          </LoginHeader>
         </LoginHeader>
-      </LoginHeader>
 
-      <form onSubmit={handleSubmit}>
-        <LoginBody>
-          <div className="form-container">
-            <LoginSubtitle>Email</LoginSubtitle>
-            <LoginForm
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+        <form onSubmit={handleSubmit}>
+          <LoginBody>
+            <div className="form-container">
+              <LoginSubtitle>Email</LoginSubtitle>
+              <LoginForm
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-          <div className="form-container">
-            <LoginSubtitle>Password</LoginSubtitle>
-            <LoginForm
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+            <div className="form-container">
+              <LoginSubtitle>Password</LoginSubtitle>
+              <LoginForm
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-          {error && <p style={{ color: "red" }}>{error}</p>}
-        </LoginBody>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </LoginBody>
 
-        <LoginFooter>
-          <LoginSubtitle className="forgot-password">
-            {/* add Forgot password functionality */}
-            <a className="a-tag">Forgot password?</a>
-          </LoginSubtitle>
-          <LoginSubtitle className="forgot-password">
-            <a onClick={() => navigate("/register")} className="a-tag">Register here</a>
-          </LoginSubtitle>
+          <LoginFooter>
+            <LoginSubtitle className="forgot-password">
+              <a className="a-tag">Forgot password?</a>
+            </LoginSubtitle>
+            <LoginSubtitle className="forgot-password">
+              <a onClick={() => navigate("/register")} className="a-tag">
+                Register here
+              </a>
+            </LoginSubtitle>
 
-          <LoginButton type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </LoginButton>
-        </LoginFooter>
-      </form>
+            <LoginButton type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </LoginButton>
+          </LoginFooter>
+        </form>
+      </LoginSubContainer>
     </LoginContainer>
   );
 };
