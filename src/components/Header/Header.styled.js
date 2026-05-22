@@ -45,5 +45,7 @@ margin: 0 1rem;
 export const MainContainer = styled.div`
 display: flex;
 flex-direction: column;
+margin: 0 0 0 9rem;
 width: 100%;
 `
+
