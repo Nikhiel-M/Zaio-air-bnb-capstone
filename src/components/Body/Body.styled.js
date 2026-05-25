@@ -13,7 +13,7 @@ width: 100%;
     width: 100%;
     max-width: 100%;
     height: auto;
-    margin-top: calc(20% - 20rem);
+    margin-top: calc(20% - 22rem);
     padding-top: 1%;
     z-index: 0;
 }

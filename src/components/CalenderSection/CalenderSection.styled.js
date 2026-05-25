@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const CalenderContainer = styled.div`
-  height: fit-content;
-  width: 60%;
+  height: 100%;
+  width: 70%;
   background-color: white;
   color: black;
   font-size: 1rem;
@@ -28,19 +28,21 @@ export const CalenderContainer = styled.div`
 `;
 
 export const DateContainer = styled.div`
-  width: 25%;
+  width: 30%;
   height: fit-content;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 2rem;
   color: black;
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
 
   .calender-title {
     font-size: 1.2rem;
     margin-bottom: 0.2rem;
+    white-space: nowrap;
   }
 
   .subtitle {
@@ -49,6 +51,8 @@ export const DateContainer = styled.div`
     margin: 0 0 0 0.1rem;
     cursor: pointer;
     padding: 0.2rem 0;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:hover {
       color: #333;
