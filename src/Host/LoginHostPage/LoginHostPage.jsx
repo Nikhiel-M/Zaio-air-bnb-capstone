@@ -75,7 +75,6 @@ const LoginHostPage = () => {
 
         <LoginFooter>
           <LoginSubtitle className="forgot-password">
-            {/* add Forgot password functionality */}
             <a className="a-tag">Forgot password?</a>
           </LoginSubtitle>
           <LoginSubtitle className="forgot-password">

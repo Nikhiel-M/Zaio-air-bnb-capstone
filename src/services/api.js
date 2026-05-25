@@ -75,7 +75,6 @@ export const authAPI = {
       body: JSON.stringify(credentials),
     });
     
-    // Store token in localStorage
     if (response.token) {
       localStorage.setItem('token', response.token);
     }

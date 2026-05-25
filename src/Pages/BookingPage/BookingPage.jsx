@@ -131,7 +131,6 @@ const BookingPage = () => {
           alt={property.title}
           className="main-image"
           onClick={() => openImage(0)}
-          style={{ cursor: "pointer" }}
         />
         <SubImageContainer>
           {property.images?.slice(1, 5).map((img, idx) => (
@@ -141,7 +140,6 @@ const BookingPage = () => {
               alt={property.title}
               className="sub-image"
               onClick={() => openImage(idx + 1)}
-              style={{ cursor: "pointer" }}
             />
           ))}
         </SubImageContainer>

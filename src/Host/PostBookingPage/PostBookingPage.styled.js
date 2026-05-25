@@ -104,7 +104,7 @@ export const PostBookingFormContainer = styled.div`
 
   .upload-btn {
     width: 35%;
-
+    white-space: nowrap;
      &:hover{
       color: white
      }
