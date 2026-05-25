@@ -117,7 +117,7 @@ const BookingPayment = ({ property }) => {
       <PillButton
         className="reserve-button"
         onClick={handleReserve}
-        disabled={loading || !localStorage.getItem("token")}
+        disabled={loading}
       >
         {loading ? "Reserving..." : "Reserve"}
       </PillButton>
