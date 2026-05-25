@@ -66,6 +66,19 @@ const Cards = () => {
             </CardContent>
           </CardContainer>
 
+                    <CardContainer>
+            <CardImage
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPygByVCJyLXQ8IXNrEqtUrlwvDXU7Kly3hw&s"
+              alt="Card Image"
+            />
+            <CardContent>
+              <SmlCardTitle>Ethereal Glass Residence in Amagansett</SmlCardTitle>
+              <CardDescription>
+              Secluded dwelling in Amagansett
+              </CardDescription>
+            </CardContent>
+          </CardContainer>
+
         </div>
       </CardBody>
 )

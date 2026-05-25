@@ -27,7 +27,8 @@ export const CardContainer = styled.div`
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 3rem;
-  max-width: 400px;
+  max-width: 300px;
+  min-width: 300px;
   background-color: #f23030ff;
 
   
