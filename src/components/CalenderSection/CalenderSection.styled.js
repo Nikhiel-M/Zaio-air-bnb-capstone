@@ -36,7 +36,6 @@ export const DateContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 
 
   .calender-title {

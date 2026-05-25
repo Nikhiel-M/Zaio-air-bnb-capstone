@@ -55,7 +55,7 @@ const CalendarComponent = ({ onDateSelect, minDate, isCheckout }) => {
       const handleDateClick = () => {
         if (!isDisabled && onDateSelect) {
           const selectedDate = new Date(year, month, day);
-          onDateSelect(selectedDate.toISOString().split('T')[0]); // Format: YYYY-MM-DD
+          onDateSelect(selectedDate.toISOString().split('T')[0]); 
         }
       };
       

@@ -42,7 +42,6 @@ const CalenderSection = () => {
     location: null,
   });
 
-  // Toggle modal and close others
   const toggleModal = useCallback((modalName) => {
     setModals((prev) => ({
       checkin: false,
@@ -176,7 +175,7 @@ const CalenderSection = () => {
       {/* Locations */}
       <DateContainer>
         <h3 className="calender-title">Locations</h3>
-        <h2 className="subtitle" onClick={() => toggleModal("location")}>
+        <h2 className="subtitle" onClick={() => (toggleModal("location"))}>
           {selectedCountry}
         </h2>
         {modals.location && (

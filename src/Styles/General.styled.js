@@ -16,23 +16,22 @@ import styled from "styled-components";
 
 
 export const Title =  styled.h1`
+font-family: 'Arial', sans-serif;
 color: white;
-font-family: 'Mogra', system-ui;
 font-size: 4rem;
 background-color: transparent;
 
-
 `
 export const Subtitle = styled.h2`
+font-family: 'Arial', sans-serif;
 color: white;
-font-family: 'popins', sans-serif;
 font-size: 2rem;
 background-color: transparent;
 `
 
 export const Text = styled.p`
+font-family: 'Arial', sans-serif;
 color: white;
-font-family: 'popins', sans-serif;
 font-size: 1.5rem;
 background-color: transparent;
 `
