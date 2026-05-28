@@ -133,15 +133,24 @@ const BookingPage = () => {
           onClick={() => openImage(0)}
         />
         <SubImageContainer>
-          {property.images?.slice(1, 5).map((img, idx) => (
-            <img
-              key={idx}
-              src={img?.url || null}
-              alt={property.title}
-              className="sub-image"
-              onClick={() => openImage(idx + 1)}
-            />
-          ))}
+          {(() => {
+            const imgs = property.images || [];
+            const subImages = imgs.slice(1, 5);
+            const needed = 4 - subImages.length;
+            const filledImages = [
+              ...subImages,
+              ...Array(needed > 0 ? needed : 0).fill(imgs[0] || { url: null })
+            ];
+            return filledImages.map((img, idx) => (
+              <img
+                key={idx}
+                src={img?.url || null}
+                alt={property.title}
+                className="sub-image"
+                onClick={() => openImage(idx + 1)}
+              />
+            ));
+          })()}
         </SubImageContainer>
       </ImageContainer>
 
