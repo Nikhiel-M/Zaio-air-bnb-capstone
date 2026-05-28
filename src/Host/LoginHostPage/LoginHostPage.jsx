@@ -27,7 +27,14 @@ const LoginHostPage = () => {
     setError("");
     try {
       await authAPI.login({ email, password });
-      navigate("/host");
+      const response = await authAPI.getCurrentUser();
+      const user = response.user;
+      if (user && (user.isHost === true || user.role === "host")) {
+        navigate("/host");
+      } else {
+        setError("Access denied: Only hosts can log in here.");
+        if (authAPI.logout) await authAPI.logout();
+      }
     } catch (err) {
       setError(err.message || "Login failed");
     } finally {
