@@ -1,7 +1,7 @@
 import Booking from "../models/Booking.js";
 import Property from "../models/Property.js";
 
-// POST /bookings - Create a new booking
+// POST /bookings Create a new booking
 export const createBooking = async (req, res) => {
   try {
     const {
@@ -71,7 +71,7 @@ export const createBooking = async (req, res) => {
   }
 };
 
-// GET /bookings/my-bookings - Get bookings for the current user
+// GET /bookings/my-bookings Get bookings for the current user
 export const getMyBookings = async (req, res) => {
   try {
     const { status, page = 1, limit = 10 } = req.query;
@@ -108,7 +108,7 @@ export const getMyBookings = async (req, res) => {
   }
 };
 
-// GET /bookings/host-bookings - Get bookings for the current host
+// GET /bookings/host-bookings Get bookings for the current host
 export const getHostBookings = async (req, res) => {
   try {
     const { status, page = 1, limit = 10 } = req.query;
@@ -146,7 +146,7 @@ export const getHostBookings = async (req, res) => {
   }
 };
 
-// GET /bookings/:id - Get a single booking by ID (only user or host can view)
+// GET /bookings/:id Get a single booking by ID (only user or host can view)
 export const getBookingById = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id)
@@ -175,7 +175,7 @@ export const getBookingById = async (req, res) => {
 };
 
 // Update booking status
-// PATCH /bookings/:id/status - Update booking status (host only)
+// PATCH /bookings/:id/status Update booking status (host only)
 export const updateBookingStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -212,8 +212,7 @@ export const updateBookingStatus = async (req, res) => {
   }
 };
 
-// Cancel booking
-// PATCH /bookings/:id/cancel - Cancel (delete) a booking (guest or host)
+// PATCH /bookings/:id/cancel Cancel (delete) a booking (guest or host)
 export const cancelBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);

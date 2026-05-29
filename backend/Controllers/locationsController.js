@@ -77,7 +77,7 @@ export const getLocationsByCountry = async (req, res) => {
   }
 };
 
-// GET all unique locations (flat list)
+// GET all unique locations
 export const getAllUniqueLocations = async (req, res) => {
   try {
     const properties = await Property.find({});
