@@ -29,7 +29,7 @@ const RegisterHostPage = () => {
 
     try {
       await authAPI.registerHost({ firstName, lastName, email, password});
-      navigate("/");
+      navigate("/host");
     } catch (err) {
       setError(err.message || "Registration failed");
     } finally {
