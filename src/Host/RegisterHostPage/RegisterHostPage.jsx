@@ -11,7 +11,9 @@ import {
   LoginTitle,
   LoginSubtitle,
   LoginButton,
+  LoginIcon,
 } from "../../Pages/LoginPage/LoginPage.styled";
+import { RegisterBody, RegisterSubContainer } from '../../Pages/RegisterPage/RegisterPage.styled';
 
 const RegisterHostPage = () => {
     const [firstName, setFirstName] = useState("");
@@ -42,6 +44,10 @@ const RegisterHostPage = () => {
 
     <RegisterHostContainer>
          <LoginContainer>
+      <RegisterSubContainer>
+                 <span className="icon-container">
+                          <LoginIcon src="https://www.vectorlogo.zone/logos/airbnb/airbnb-tile.svg" alt="Airbnb Logo" />
+                        </span>
            <LoginHeader>
              <LoginHeader>
                <LoginTitle>Register as Host</LoginTitle>
@@ -49,7 +55,7 @@ const RegisterHostPage = () => {
            </LoginHeader>
      
            <form onSubmit={handleSubmit}>
-             <LoginBody>
+             <RegisterBody>
                <div className="form-container">
                  <LoginSubtitle>First Name</LoginSubtitle>
                  <LoginForm
@@ -91,7 +97,7 @@ const RegisterHostPage = () => {
                </div>
      
                {error && <p style={{ color: "red" }}>{error}</p>}
-             </LoginBody>
+             </RegisterBody>
      
              <LoginFooter>
      
@@ -100,6 +106,7 @@ const RegisterHostPage = () => {
                </LoginButton>
              </LoginFooter>
            </form>
+         </RegisterSubContainer>
          </LoginContainer>
     </RegisterHostContainer>
     
