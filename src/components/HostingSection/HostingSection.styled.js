@@ -24,6 +24,7 @@ width: 100%;
     top: 40%;
     left: 20%;
     transform: translate(-50%, -50%);
+    width: min(90%, 560px);
 }
 
 .host-title{
@@ -66,12 +67,14 @@ width: 100%;
     .host-image {
         height: clamp(16rem, 80vw, 24rem);
         border-radius: 9px;
+        filter: brightness(0.82);
     }
 
     .host-overlay {
-        top: 50%;
+        top: auto;
+        bottom: 1.2rem;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
         width: 100%;
         padding: 0 1rem;
     }
@@ -85,7 +88,8 @@ width: 100%;
 
     .host-button {
         margin-top: 0.7rem;
-        transform: scale(0.92);
+        padding: 0.65rem 1.15rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -95,6 +99,7 @@ width: 100%;
     .host-image {
         height: clamp(14rem, 86vw, 20rem);
         border-radius: 8px;
+        filter: brightness(0.8);
     }
 
     .host-title {
@@ -103,7 +108,9 @@ width: 100%;
     }
 
     .host-button {
-        transform: scale(0.85);
+        margin-top: 0.55rem;
+        padding: 0.55rem 0.95rem;
+        font-size: 0.82rem;
     }
 }
 `;
