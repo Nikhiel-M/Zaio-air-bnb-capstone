@@ -79,7 +79,7 @@ margin: 0 1rem;
     width: 100%;
     overflow-x: auto;
     justify-content: flex-start;
-    margin-bottom: 0.4rem;
+    margin: 0 0 0.4rem 15%;
     padding-bottom: 0.15rem;
   }
 
