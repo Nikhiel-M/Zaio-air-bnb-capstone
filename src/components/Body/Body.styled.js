@@ -18,6 +18,13 @@ width: 100%;
     z-index: 0;
 }
 
+@media (max-width: 992px) {
+    .body-image {
+        margin-top: 0;
+        padding-top: 0;
+    }
+}
+
 `;
 
 export const ImageWrapper = styled.div`
@@ -50,5 +57,11 @@ gap: 1rem;
 
 .img-button{
     margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    bottom: 2.5rem;
+    width: 100%;
+    padding: 0 1rem;
 }
 `;

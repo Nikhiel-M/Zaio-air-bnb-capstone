@@ -22,6 +22,26 @@ export const ProfileSectionContainer = styled.div`
     cursor: pointer;
 }
 
+@media (max-width: 992px) {
+    .profile-section {
+        padding: 0 0.8rem;
+    }
+
+    .host-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-section {
+        padding: 0 0.2rem;
+    }
+
+    .host-title {
+        display: none;
+    }
+}
+
 `
 
 export const ProfileContainer = styled.div`
@@ -59,6 +79,20 @@ export const WorldIconContainer = styled.div`
     font-size: 4rem;
     cursor: pointer;
 
+}
+
+@media (max-width: 992px) {
+    .world-icon {
+        margin: 0.4rem 0.5rem 0 0.8rem;
+        height: 1.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .world-icon {
+        margin: 0.25rem 0.4rem 0 0.4rem;
+        height: 1.7rem;
+    }
 }
 `
 

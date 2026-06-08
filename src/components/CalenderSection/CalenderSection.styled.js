@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CalenderContainer = styled.div`
   height: 100%;
   width: 70%;
+  min-width: 0;
   background-color: white;
   color: black;
   font-size: 1rem;
@@ -10,9 +11,15 @@ export const CalenderContainer = styled.div`
   padding: 0 0.5rem;
   display: flex;
   flex-direction: row;
+  align-items: center;
   position: relative;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .search-icon {
     margin: 0.6rem 0.5rem 0 3rem;
@@ -25,10 +32,66 @@ export const CalenderContainer = styled.div`
     border-radius: 50%;
     cursor: pointer;
   }
+
+  @media (max-width: 1200px) {
+    width: 85%;
+
+    .search-icon {
+      margin-left: 1rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: 100%;
+    border-radius: 22px;
+    padding: 0.1rem 0.4rem;
+
+    .search-icon {
+      margin: 0.4rem 0 0 0.4rem;
+      width: 2.5rem;
+      height: 2.4rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: nowrap;
+    border-radius: 16px;
+    gap: 0;
+    padding: 0.2rem 0.3rem;
+    overflow: hidden;
+
+    .search-button {
+      width: auto;
+      flex: 0 0 auto;
+      justify-content: center;
+      margin-top: 0;
+      margin-left: 0.1rem;
+    }
+
+    .search-icon {
+      margin: 0;
+      width: 1.95rem;
+      height: 1.95rem;
+      padding: 0.38rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 14px;
+    padding: 0.15rem 0.2rem;
+
+    .search-icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      padding: 0.32rem;
+    }
+  }
 `;
 
 export const DateContainer = styled.div`
-  width: 30%;
+  width: 100%;
+  flex: 1 1 0;
+  min-width: 0;
   height: fit-content;
   padding: 0.5rem 1rem;
   font-size: 2rem;
@@ -61,6 +124,49 @@ export const DateContainer = styled.div`
   .locations {
     text-decoration: none;
   }
+
+  @media (max-width: 992px) {
+    padding: 0.45rem 0.65rem;
+
+    .calender-title {
+      font-size: 1rem;
+    }
+
+    .subtitle {
+      font-size: 0.78rem;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex: 1 1 0;
+    width: auto;
+    padding: 0.32rem 0.24rem;
+    border-right: 1px solid #eee;
+
+    .calender-title {
+      font-size: 0.72rem;
+    }
+
+    .subtitle {
+      font-size: 0.62rem;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex: 1 1 0;
+    width: auto;
+    padding: 0.25rem 0.2rem;
+
+    .calender-title {
+      font-size: 0.65rem;
+    }
+
+    .subtitle {
+      font-size: 0.56rem;
+    }
+  }
 `;
 
 export const CalendarModal = styled.div`
@@ -69,6 +175,22 @@ export const CalendarModal = styled.div`
   left: 0;
   width: max-content;
   min-width: 350px;
+  max-width: calc(100vw - 2rem);
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    top: 6.5rem;
+    width: auto;
+    min-width: 0;
+    max-height: 75vh;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+    padding: 0.4rem;
+  }
 `;
 
 export const GuestDropdownModal = styled.div`
@@ -86,6 +208,19 @@ export const GuestDropdownModal = styled.div`
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
   min-width: 320px;
   max-width: 400px;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 6.5rem;
+    left: 1rem;
+    right: 1rem;
+    margin-top: 0;
+    min-width: 0;
+    max-width: none;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 16px;
+  }
 `;
 
 export const GuestSection = styled.div`
@@ -171,8 +306,12 @@ export const CountrySelector = styled.div`
   cursor: pointer;
 `;
 export const CountryOption = styled.div`
-font-size: 1.5rem;
+font-size: 1.1rem;
   padding: 0.5rem;
   cursor: pointer;
   border-bottom: 1px solid #ddd;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
