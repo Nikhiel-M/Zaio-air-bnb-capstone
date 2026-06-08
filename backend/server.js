@@ -35,7 +35,7 @@ const connectDB = async () => {
 };
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Airbnb Clone Backend API' });
+  res.json({ message: 'Booking hub Backend API' });
 });
 
 app.use('/api/auth', authRoutes);

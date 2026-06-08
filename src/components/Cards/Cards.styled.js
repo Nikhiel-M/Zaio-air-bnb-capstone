@@ -35,8 +35,6 @@ export const CardBody = styled.div`
     background-color: #8e2f5f;
   }
 
-
-
   @media (max-width: 992px) {
     .cards {
       gap: 0.9rem;
@@ -61,7 +59,7 @@ export const CardBody = styled.div`
   }
 
   @media (max-width: 480px) {
-    #glass-house{
+    #glass-house {
       display: none;
     }
     .cards {
@@ -73,9 +71,6 @@ export const CardBody = styled.div`
       margin: 0.85rem 0.5rem 0.75rem;
     }
   }
-
-
-
 `;
 
 export const CardContainer = styled.div`
@@ -89,7 +84,9 @@ export const CardContainer = styled.div`
   min-width: 300px;
   width: 300px;
   background-color: #de3151;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
@@ -113,8 +110,6 @@ export const CardContainer = styled.div`
     width: calc(50% - 0.35rem);
     border-radius: 10px;
   }
-
-  
 `;
 
 export const CardImage = styled.img`
@@ -145,24 +140,24 @@ export const CardContent = styled.div`
   @media (max-width: 480px) {
     padding: 0.65rem;
   }
-
 `;
 
 export const CardTitle = styled(Title)`
   font-size: 2.45rem;
   font-weight: 700;
-  margin: 1rem 0 1rem 0.5rem;
+  margin: 1rem 0 1rem 2rem;
   color: #121212;
 
-    @media (max-width: 992px) {
-      font-size: 1.85rem;
-    }
+  @media (max-width: 992px) {
+    font-size: 1.85rem;
+    margin: 1rem 0 1rem 0.5rem;
+  }
 
-    @media (max-width: 480px) {
-      font-size: 1.45rem;
-    }
-
-`
+  @media (max-width: 480px) {
+    font-size: 1.45rem;
+    margin: 1rem 0 1rem 0.5rem;
+  }
+`;
 
 export const SmlCardTitle = styled.h2`
   font-size: 1.1rem;
@@ -184,7 +179,6 @@ export const SmlCardTitle = styled.h2`
   }
 `;
 
-
 export const CardDescription = styled.p`
   font-size: 0.9rem;
   color: white;
@@ -203,5 +197,3 @@ export const CardDescription = styled.p`
     font-size: 0.72rem;
   }
 `;
-
-

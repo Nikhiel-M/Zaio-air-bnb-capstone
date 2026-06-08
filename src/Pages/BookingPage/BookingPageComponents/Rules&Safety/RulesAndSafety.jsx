@@ -17,8 +17,8 @@ const RulesAndSafetyContainer = () => {
       </div>
       <div className="safety">
         <BookingTitle className="rules-title">🛡️ Health & Safety</BookingTitle>
-        <RulesSubtitle>• Committed to Airbnb's enhanced cleaning process</RulesSubtitle>
-        <RulesSubtitle>• Airbnb's social-distancing and other COVID-19-related guidelines apply</RulesSubtitle>
+        <RulesSubtitle>• Committed to BookingHub's enhanced cleaning process</RulesSubtitle>
+        <RulesSubtitle>• BookingHub's social-distancing and other COVID-19-related guidelines apply</RulesSubtitle>
         <RulesSubtitle>• Carbon monoxide alarm</RulesSubtitle>
         <RulesSubtitle>• Smoke alarm</RulesSubtitle>
         <RulesSubtitle>• Security Deposit - if you damage the home, you may be charged up to $566</RulesSubtitle>

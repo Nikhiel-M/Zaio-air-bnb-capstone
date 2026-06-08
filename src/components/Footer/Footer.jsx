@@ -27,7 +27,7 @@ const Footer = () => {
 
         <FooterSection>
           <FooterTitle>Community</FooterTitle>
-          <FooterSubtitle>Airbnb.org: disaster relief housing</FooterSubtitle>
+          <FooterSubtitle>BookingHub.org: disaster relief housing</FooterSubtitle>
           <FooterSubtitle>Support: Afghan refugees</FooterSubtitle>
           <FooterSubtitle>Celebrating diversity & belonging</FooterSubtitle>
           <FooterSubtitle>Combating discrimination</FooterSubtitle>
@@ -49,11 +49,11 @@ const Footer = () => {
           <FooterSubtitle>Learn from our founders</FooterSubtitle>
           <FooterSubtitle>Careers</FooterSubtitle>
           <FooterSubtitle>Investors</FooterSubtitle>
-          <FooterSubtitle>Airbnb Luxe</FooterSubtitle>
+          <FooterSubtitle>BookingHub Luxe</FooterSubtitle>
         </FooterSection>
       </FooterContainer>
       <Kicker>
-        <div className="left"> © 2026 Airbnb, Inc. Privacy Terms Sitemap </div>
+        <div className="left"> © 2026 BookingHub, Inc. Privacy Terms Sitemap </div>
         <div className="right">
           {" "}
           <TbWorld className="icon" /> English <FiDollarSign className="icon" />{" "}

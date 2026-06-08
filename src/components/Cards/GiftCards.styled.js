@@ -38,7 +38,7 @@ export const GiftCardsContainer = styled.div`
 
     .gift-image {
         object-fit: cover;
-        object-position: center;
+        object-position: center ;
         width: 100%;
         height: 100%;
         aspect-ratio: 16 / 10;
