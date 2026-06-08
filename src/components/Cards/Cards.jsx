@@ -66,7 +66,7 @@ const Cards = () => {
             </CardContent>
           </CardContainer>
 
-                    <CardContainer>
+                    <CardContainer id='glass-house'>
             <CardImage
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPygByVCJyLXQ8IXNrEqtUrlwvDXU7Kly3hw&s"
               alt="Card Image"
