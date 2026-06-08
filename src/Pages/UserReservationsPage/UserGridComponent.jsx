@@ -48,14 +48,14 @@ const UserGridComponent = () => {
     
       if (loading) {
         return <GridContainer>Loading your reservations...</GridContainer>;
-      }
+      // }
     
-      if (error) {
-        return <GridContainer>Error loading reservations: {error}</GridContainer>;
-      }
+      // if (error) {
+      //   return <GridContainer>Error loading reservations: {error}</GridContainer>;
+      // }
     
-      if (bookings.length === 0) {
-        return <GridContainer>No reservations found.</GridContainer>;
+      // if (bookings.length === 0) {
+      //   return <GridContainer>No reservations found.</GridContainer>;
       }
     
   return (

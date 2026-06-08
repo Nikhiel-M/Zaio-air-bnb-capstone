@@ -49,10 +49,6 @@ const GridComponent = () => {
     return <GridContainer>Loading your reservations...</GridContainer>;
   }
 
-  if (error) {
-    return <GridContainer>Error loading reservations: {error}</GridContainer>;
-  }
-
   if (bookings.length === 0) {
     return <GridContainer>No reservations found.</GridContainer>;
   }

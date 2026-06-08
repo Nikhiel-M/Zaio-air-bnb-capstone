@@ -46,7 +46,7 @@ const Locations = () => {
     };
   }, []);
   if (loading) return <LocationsContainer>Loading...</LocationsContainer>;
-  if (error) return <LocationsContainer>{error}</LocationsContainer>;
+  // if (error) return <LocationsContainer>{error}</LocationsContainer>;
 
   const searchParams = new URLSearchParams(location.search);
   const countryParam = searchParams.get("country");

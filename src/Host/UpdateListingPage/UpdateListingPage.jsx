@@ -138,7 +138,7 @@ const UpdateListingPage = () => {
       .finally(() => setFetchLoading(false));
   }, [id]);
   if (fetchLoading) return <div>Loading listing data...</div>;
-  if (fetchError) return <div className="error-msg">{fetchError}</div>;
+  // if (fetchError) return <div className="error-msg">{fetchError}</div>;
 
   return (
     <UpdateListingContainer>

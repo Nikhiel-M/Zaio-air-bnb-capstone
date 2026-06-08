@@ -107,7 +107,7 @@ const UserListings = () => {
   };
 
   if (loading) return <UserListingsContainer>Loading...</UserListingsContainer>;
-  if (error) return <UserListingsContainer>{error}</UserListingsContainer>;
+  // if (error) return <UserListingsContainer>{error}</UserListingsContainer>;
 
   return (
     <UserListingsContainer>
