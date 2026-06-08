@@ -12,6 +12,23 @@ export const RulesSubtitle = styled(Subtitle)`
   &:before {
     content: attr(data-icon);
   }
+
+  @media (max-width: 1024px) {
+    font-size: 1rem;
+    padding: 0.45rem 0;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.88rem;
+    padding: 0.35rem 0;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
 `;
 
 export const RulesAndSafety = styled.div`
@@ -43,15 +60,56 @@ export const RulesAndSafety = styled.div`
     font-weight: 600;
   }
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2rem 0;
-    margin: 2rem 0;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0 0 0 ;
+    margin: 1rem 0 0 0 ;
+
+    > div {
+      padding: 1rem;
+      border-radius: 10px;
+    }
 
     .rules-title {
-      font-size: 1.5rem;
-      margin: 0 0 1rem 0;
+      font-size: 1.15rem;
+      margin: 0 0 0.7rem 0;
+      padding-bottom: 0.55rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding-top: 1rem ;
+    margin-top: 1rem ;
+
+    > div {
+      padding: 0.8rem;
+
+      &:hover {
+        background: #fafafa;
+        box-shadow: none;
+      }
+    }
+
+    .rules-title {
+      font-size: 1rem;
+      margin: 0 0 0.5rem 0;
+      padding-bottom: 0.4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.55rem;
+
+    > div {
+      padding: 0.65rem;
+      border-radius: 8px;
+    }
+
+    .rules-title {
+      font-size: 0.9rem;
     }
   }
 `;
