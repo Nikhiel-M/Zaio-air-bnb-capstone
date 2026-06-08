@@ -17,8 +17,8 @@ export const HeaderContainer = styled.div`
   z-index: 9000;
   
   .logo {
-    margin-top: 1%;
-    height: 2rem;
+    margin-top: 0;
+    height: 5rem;
     width: auto;
     margin-left: 1rem;
     cursor: pointer;
@@ -117,4 +117,3 @@ width: 100%;
   order: 3;
 }
 `
-

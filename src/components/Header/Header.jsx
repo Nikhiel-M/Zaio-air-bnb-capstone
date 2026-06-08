@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ProfileSection from "../Profile Section/ProfileSection";
-import { HeaderContainer, MainContainer } from "./Header.styled";
+import { HeaderContainer, MainContainer} from "./Header.styled";
 import CalenderSection from "../CalenderSection/CalenderSection";
 import { useLocation, useNavigate } from "react-router-dom";
+import BlackLogo from "../../assets/BookingHubBlack.png";
+import WhiteLogo from "../../assets/BookingHubWhite.png"; 
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const Header = () => {
     (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
   );
 
+
   return (
     <HeaderContainer $isColorChange={isColorChange}>
       <a
@@ -33,8 +36,8 @@ const Header = () => {
           className="logo"
           src={
             isColorChange
-              ? "https://cdn.brandfetch.io/idkuvXnjOH/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1717146469893"
-              : "https://cdn.brandfetch.io/idkuvXnjOH/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1717146469893"
+            ? BlackLogo
+              : WhiteLogo
           }
           alt="logo"
         />
