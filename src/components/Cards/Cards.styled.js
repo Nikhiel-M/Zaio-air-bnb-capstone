@@ -151,7 +151,7 @@ export const CardContent = styled.div`
 export const CardTitle = styled(Title)`
   font-size: 2.45rem;
   font-weight: 700;
-  margin: 1rem 0 1rem 2rem;
+  margin: 1rem 0 1rem 0.5rem;
   color: #121212;
 
     @media (max-width: 992px) {

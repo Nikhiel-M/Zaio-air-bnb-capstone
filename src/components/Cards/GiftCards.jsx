@@ -7,7 +7,7 @@ import { PillButton } from "../Buttons/PillButton.styled";
 export const GiftCards = () => {
   return (
     <GiftCardsContainer>
-      <div>
+      <div className="gift-copy">
         <Title className="gift-title">Shop Airbnb gift cards</Title>
         <PillButton className="gift-button">Learn more</PillButton>
       </div>
