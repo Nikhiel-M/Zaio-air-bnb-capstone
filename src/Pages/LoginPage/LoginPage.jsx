@@ -13,6 +13,8 @@ import {
   LoginIcon,
   LoginSubContainer,
 } from "./LoginPage.styled";
+import HouseLogoPink from "../../assets/HouseLogoPink.png";
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -40,7 +42,7 @@ const LoginPage = () => {
     <LoginContainer>
       <LoginSubContainer>
         <span className="icon-container">
-          <LoginIcon src="https://www.vectorlogo.zone/logos/airbnb/airbnb-tile.svg" alt="Airbnb Logo" />
+          <LoginIcon src={HouseLogoPink} alt="House Logo Pink" />
         </span>
         <LoginHeader>
           <LoginHeader>

@@ -14,6 +14,7 @@ import {
   LoginIcon,
 } from "../../Pages/LoginPage/LoginPage.styled";
 import { RegisterBody, RegisterSubContainer } from '../../Pages/RegisterPage/RegisterPage.styled';
+import PlainHouseLogo from "../../assets/PlainHouseLogoPink.png";
 
 const RegisterHostPage = () => {
     const [firstName, setFirstName] = useState("");
@@ -46,7 +47,7 @@ const RegisterHostPage = () => {
          <LoginContainer>
       <RegisterSubContainer>
                  <span className="icon-container">
-                          <LoginIcon src="https://www.vectorlogo.zone/logos/airbnb/airbnb-tile.svg" alt="Airbnb Logo" />
+                          <LoginIcon src={PlainHouseLogo} alt="Plain House Logo" />
                         </span>
            <LoginHeader>
              <LoginHeader>

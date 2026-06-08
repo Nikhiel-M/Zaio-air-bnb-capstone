@@ -13,6 +13,8 @@ import {
 } from "../../Pages/LoginPage/LoginPage.styled";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/api";
+import PlainHouseLogo from "../../assets/PlainHouseLogoPink.png";
+
 
 const LoginHostPage = () => {
   const [email, setEmail] = useState("");
@@ -47,8 +49,8 @@ const LoginHostPage = () => {
       <LoginSubContainer>
       <span className="icon-container">
         <LoginIcon
-          src="https://www.vectorlogo.zone/logos/airbnb/airbnb-icon.svg"
-          alt="Airbnb Logo"
+          src={PlainHouseLogo}
+          alt="Plain House Logo"
         />
       </span>
       <LoginHeader>
