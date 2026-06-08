@@ -26,7 +26,7 @@ import UserReservationsPage from "./Pages/UserReservationsPage/UserReservationsP
 
 function AppContent() {
   const location = useLocation();
-  const hiddenPaths = ["/login", "/register", "/post-booking", "/user-listings", "/login-host", "/register-host","/reservations", "/host"];
+  const hiddenPaths = ["/login", "/register", "/post-booking", "/user-listings", "/login-host", "/register-host","/reservations", "/host", "/locations"];
   const hideLayout = hiddenPaths.some(
     (p) => location.pathname === p || location.pathname.startsWith(p + "/"),
   );
@@ -35,7 +35,7 @@ function AppContent() {
     <div className="app-container">
       <GlobalStyles />
       <Header />
-      <div>
+      <div className="main-content">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/locations" element={<Locations />} />
