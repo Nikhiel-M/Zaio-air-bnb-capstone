@@ -15,7 +15,7 @@ export const GuestUL = styled.ul`
 export const GuestLI = styled.li`
   padding: 10px;
   cursor: pointer;
-  background: #f0f0f0;
+  background-color: white;
 
   &:hover {
     background: #cdcdcdff;
@@ -25,5 +25,7 @@ export const GuestButton = styled.button`
   width: 100%;
   padding: 10px;
   cursor: pointer;
-
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 `;

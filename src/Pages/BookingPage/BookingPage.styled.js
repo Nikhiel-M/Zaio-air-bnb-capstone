@@ -150,7 +150,7 @@ flex-direction: column;
 `
 export const InformationBody = styled.div`
 display: flex;
-padding: 0 1rem 1.1rem 0 ;
+padding: 0 5rem 2rem 0 ;
 flex-direction: row;
 border-bottom: 1px solid lightgray;
 
@@ -160,11 +160,11 @@ border-bottom: 1px solid lightgray;
     flex-direction: column;
 }
 .information-body-title{
-  font-size: 1.8rem;
+  font-size: 3rem;
 }
 
 .information-body-subtitle{
-  font-size: 1.15rem;
+  font-size: 2rem;
     color: gray;
 }
 
@@ -374,6 +374,12 @@ export const ModalOverlay = styled.div`
   background: rgba(0,0,0,0.75);
   z-index: 10000;
   padding: 1rem;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    align-items: center;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -381,23 +387,37 @@ export const ModalContent = styled.div`
   max-width: 1100px;
   max-height: 90vh;
   width: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    max-height: 94vh;
+    padding: 0.2rem;
+  }
 `;
 
 export const ModalImage = styled.img`
+  width: 100%;
   max-width: 100%;
   max-height: 100%;
   border-radius: 8px;
   object-fit: contain;
   box-shadow: 0 18px 48px rgba(0,0,0,0.6);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+  }
 `;
 
 export const ModalClose = styled.button`
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: 0.5rem;
+  right: 0.5rem;
   background: rgba(255, 255, 255, 0.88);
   border-radius: 50%;
   width: 40px;
@@ -406,6 +426,18 @@ export const ModalClose = styled.button`
   cursor: pointer;
   font-size: 1.5rem;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    top: 0.35rem;
+    right: 0.35rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+    z-index: 2;
+  }
 `;
 
 export const ModalNav = styled.button`
@@ -426,15 +458,38 @@ export const ModalNav = styled.button`
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 
   &.left {
-    left: -56px;
+    left: 0.5rem;
   }
   &.right {
-    right: -56px;
+    right: 0.5rem;
+  }
+
+  @media (max-width: 1200px) {
+    &.left {
+      left: 0.4rem;
+    }
+
+    &.right {
+      right: 0.4rem;
+    }
   }
 
   @media (max-width: 900px) {
     &.left, &.right {
-      display: none;
+      display: flex;
+      width: 2.1rem;
+      height: 3.2rem;
+      font-size: 1.55rem;
+      border-radius: 8px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    &.left,
+    &.right {
+      width: 1.9rem;
+      height: 2.8rem;
+      font-size: 1.35rem;
     }
   }
 `;

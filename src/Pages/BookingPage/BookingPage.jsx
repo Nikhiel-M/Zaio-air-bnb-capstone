@@ -162,7 +162,7 @@ const BookingPage = () => {
               alt={`${property.title} - image ${selectedIndex + 1}`}
             />
             <ModalClose onClick={closeModal} aria-label="Close image">
-              
+              ×
             </ModalClose>
 
             {images.length > 1 && (
