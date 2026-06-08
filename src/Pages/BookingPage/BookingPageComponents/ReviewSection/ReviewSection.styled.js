@@ -23,8 +23,40 @@ export const ReviewSection = styled.div`
     width: 100%;
   }
 
+  @media (max-width: 1024px) {
+    gap: 1.2rem;
+    padding: 1.2rem 0;
+    margin: 1rem 0;
+
+    .reviewContainer {
+      gap: 0.55rem;
+    }
+
+    .reviewContainer > div:first-child {
+      font-size: 0.92rem;
+    }
+  }
+
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    padding: 0.75rem 0;
+    margin: 0.6rem 0;
+
+    .reviewContainer {
+      gap: 0.4rem;
+    }
+
+    .reviewContainer > div:first-child {
+      font-size: 0.86rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.7rem;
+
+    .reviewContainer > div:first-child {
+      font-size: 0.8rem;
+    }
   }
 `
