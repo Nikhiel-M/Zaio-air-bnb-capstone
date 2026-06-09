@@ -3,8 +3,8 @@ import ProfileSection from "../Profile Section/ProfileSection";
 import { HeaderContainer, MainContainer} from "./Header.styled";
 import CalenderSection from "../CalenderSection/CalenderSection";
 import { useLocation, useNavigate } from "react-router-dom";
-import BlackLogo from "../../assets/BookingHubBlack.png";
-import WhiteLogo from "../../assets/BookingHubWhite.png"; 
+import BlackLogo from "../../assets/BookingHubBlack-Photoroom.png";
+import WhiteLogo from "../../assets/BookingHubWhite-Photoroom.png"; 
 
 const Header = () => {
   const navigate = useNavigate();
